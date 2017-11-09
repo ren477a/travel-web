@@ -2,11 +2,15 @@
 
 ### Authentication
 
+
 * **POST** /auth/register  
 
 Register a user account  
 
 Returns: {success: boolean, msg: String}
+
+Status: *Completed*
+
 
 * **POST** /auth/authenticate
 
@@ -14,14 +18,20 @@ Authenticate a user
 
 Returns: {jwt: String, user: }
 
+Status: *Completed*
+
 
 ### Users
 
+
 * **GET** /users
-> List of all users
+
+List of all users
+
 
 * **GET** /users/:id/profile
-> Gets the profile of the user
+
+Gets the profile of the user
 
 
 
