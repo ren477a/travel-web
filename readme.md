@@ -2,12 +2,16 @@
 
 ### Authentication
 
-* **POST** /auth/register
-Register a user account
+* **POST** /auth/register  
+
+Register a user account  
+
 Returns: {success: boolean, msg: String}
 
 * **POST** /auth/authenticate
-Authenticate a user a 
+
+Authenticate a user
+
 Returns: {jwt: String, user: }
 
 
