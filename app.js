@@ -21,6 +21,7 @@ mongoose.connection.on('error', (err) => {
 const app = express();
 
 const authRoutes = require('./routes/auth-routes');
+const toursRoutes = require('./routes/tour-routes');
 
 const port = 3000;
 
@@ -42,6 +43,7 @@ require('./config/passport')(passport);
 
 // ROUTES
 app.use('/auth', authRoutes);
+app.use('/tours', toursRoutes);
 
 app.get('/', (req, res) => {
   res.send('Invalid Endpoint');
