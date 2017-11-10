@@ -7,6 +7,7 @@ const User = require('../models/user');
 
 router.post('/register', (req, res, next) => {
   console.log('register');
+  //TODO check first if user already exists before registering
   let newUser = new User({
     firstname: req.body.firstname,
     lastname: req.body.lastname,
