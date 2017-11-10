@@ -47,6 +47,10 @@ const TourSchema = mongoose.Schema({
           persons: Number,
           price: Number
         }]
+  },
+  status: {
+    approved: Boolean,
+    onSale: Boolean
   }
 });
 

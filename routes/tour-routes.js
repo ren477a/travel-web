@@ -27,7 +27,11 @@ router.post('/', (req, res, next) => {
             persons: req.body.pricing.persons,
             price: req.body.pricing.price
           }]
-      }
+      },
+    status: {
+      approved: false,
+      onSale: false
+    }
   });
 
   Tour.addTour(newTour, (err, tour) => {
