@@ -23,7 +23,7 @@ const app = express();
 const authRoutes = require('./routes/auth-routes');
 const toursRoutes = require('./routes/tour-routes');
 
-const port = 3000;
+const port = process.env.PORT || 8080;
 
 
 // MIDDLEWARES
