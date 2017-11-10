@@ -3,23 +3,36 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 
-const User = require('../models/user');
+const Tour = require('../models/tour');
 
 router.post('/', (req, res, next) => {
   // Edit this
-  console.log('register');
-  let newUser = new User({
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    email: req.body.email,
-    password: req.body.password
+  console.log('post tour');
+  let newTour = new Tour({
+    title: req.body.title,
+    agency: req.body.agency,
+    description: req.body.description,
+    itinerary: req.body.itinerary,
+    inclusions: req.body.inclusions,
+    exclusions: req.body.exclusions,
+    notes: req.body.notes,
+    terms: req.body.terms,
+    validityInSeconds: req.body.validityInSeconds,
+    pricing: {
+      ptype: req.body.pricing.ptype,
+      fixed: req.body.pricing.fixed,
+      group: [{
+            persons: req.body.pricing.persons,
+            price: req.body.pricing.price
+          }]
+      }
   });
 
-  User.addUser(newUser, (err, user) => {
+  Tour.addTour(newTour, (err, tour) => {
     if(err) {
-      res.json({success: false, msg:'Failed to register user'});
+      res.json({success: false, msg:'Failed to add tour'});
     } else {
-      res.json({success: true, msg:'User registered'});
+      res.json({success: true, msg:'New tour added to database'});
     }
   });
 });

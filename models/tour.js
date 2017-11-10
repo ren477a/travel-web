@@ -6,11 +6,19 @@ const TourSchema = mongoose.Schema({
   title: {
     type: String
   },
-  lastname: {
+  agency: {
     type: String
   },
   description: {
     type: String,
+    required: true
+  },
+  duration: {
+    type: Number,
+    required: true
+  },
+  isInternational: {
+    type: Boolean,
     required: true
   },
   itinerary: {
@@ -26,7 +34,7 @@ const TourSchema = mongoose.Schema({
     required: true
   },
   validityInSeconds: {
-    type: number,
+    type: Number,
     required: true
   },
   pricing: {
@@ -34,15 +42,38 @@ const TourSchema = mongoose.Schema({
       type: String,
       required: true
     },
-    fixed: number,
+    fixed: Number,
     group: [{
-          persons: number,
-          price: number
+          persons: Number,
+          price: Number
         }]
   }
 });
 
 const Tour = module.exports = mongoose.model('Tour', TourSchema);
+
+
+
+module.exports.getAllTours = function() {
+
+};
+
+module.exports.getMostRecent = function(resultCount, pageNum) {
+
+};
+
+module.exports.getFeatured = function() {
+
+};
+
+module.exports.getTours = function(query, resultCount, pageNum) {
+  // query can have:
+  // price range
+  // destination
+  // duration
+
+};
+
 
 // module.exports.getUserById = function(id, callback) {
 //   User.findById(id, callback);
