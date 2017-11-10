@@ -33,7 +33,7 @@ const TourSchema = mongoose.Schema({
     type: [String],
     required: true
   },
-  validityInSeconds: {
+  validityInDays: {
     type: Number,
     required: true
   },
@@ -52,7 +52,9 @@ const TourSchema = mongoose.Schema({
 
 const Tour = module.exports = mongoose.model('Tour', TourSchema);
 
-
+module.exports.addTour = function(newTour, callback) {
+  newTour.save(callback);
+};
 
 module.exports.getAllTours = function() {
 
@@ -84,15 +86,7 @@ module.exports.getTours = function(query, resultCount, pageNum) {
 //   User.findOne(query, callback);
 // };
 
-// module.exports.addUser = function(newUser, callback) {
-//   bcrypt.genSalt(10, (err, salt) => {
-//     bcrypt.hash(newUser.password, salt, (err, hash) => {
-//       if(err) throw err;
-//       newUser.password = hash;
-//       newUser.save(callback);
-//     });
-//   });
-// };
+
 
 // module.exports.comparePassword = function(candidatePassword, hash, callback) {
 //   bcrypt.compare(candidatePassword, hash, (err, isMatch) => {

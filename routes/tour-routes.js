@@ -30,9 +30,9 @@ router.post('/', (req, res, next) => {
 
   Tour.addTour(newTour, (err, tour) => {
     if(err) {
-      res.json({success: false, msg:'Failed to add tour'});
+      res.json({success: false, tour: null});
     } else {
-      res.json({success: true, msg:'New tour added to database'});
+      res.json({success: true, tour: tour});
     }
   });
 });
