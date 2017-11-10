@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const config = require('../config/database');
 
 const User = require('../models/user');
 
@@ -40,7 +39,7 @@ router.post('/authenticate', (req, res, next) => {
     User.comparePassword(password, user.password, (err, isMatch) => {
       if(err) throw err;
       if(isMatch) {
-        const token = jwt.sign({data:user}, config.secret, {
+        const token = jwt.sign({data:user}, process.env.JWT_SECRET, {
           // Token will expire in 3 days
           expiresIn: 259200
         });

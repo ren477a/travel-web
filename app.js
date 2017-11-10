@@ -4,13 +4,15 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
-const config = require('./config/database');
 
-mongoose.connect(config.database);
+// Environment Variables
+require('dotenv').config();
+
+mongoose.connect(process.env.DB_CONN_STRING);
 
 // On Connection
 mongoose.connection.on('connected', () => {
-  console.log('Connected to database ' + config.database);
+  console.log('Connected to database ' + process.env.DB_CONN_STRING);
 });
 
 // On Error
