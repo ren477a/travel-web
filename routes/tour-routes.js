@@ -12,12 +12,14 @@ router.post('/', (req, res, next) => {
     title: req.body.title,
     agency: req.body.agency,
     description: req.body.description,
+    duration: req.body.duration,
+    isInternational: req.body.isInternational,
     itinerary: req.body.itinerary,
     inclusions: req.body.inclusions,
     exclusions: req.body.exclusions,
     notes: req.body.notes,
     terms: req.body.terms,
-    validityInSeconds: req.body.validityInSeconds,
+    validityInDays: req.body.validityInDays,
     pricing: {
       ptype: req.body.pricing.ptype,
       fixed: req.body.pricing.fixed,
@@ -30,6 +32,7 @@ router.post('/', (req, res, next) => {
 
   Tour.addTour(newTour, (err, tour) => {
     if(err) {
+      console.log(err);
       res.json({success: false, tour: null});
     } else {
       res.json({success: true, tour: tour});
