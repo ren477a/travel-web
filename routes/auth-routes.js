@@ -10,6 +10,7 @@ router.post('/register', (req, res, next) => {
   let newUser = new User({
     firstname: req.body.firstname,
     lastname: req.body.lastname,
+    mobileNumber: req.body.mobileNumber,
     email: req.body.email,
     password: req.body.password
   });
@@ -50,6 +51,7 @@ router.post('/authenticate', (req, res, next) => {
             id: user._id,
             firstname: user.firstname,
             lastname: user.lastname,
+            mobileNumber: user.mobileNumber,
             email: user.email
           }
         });
