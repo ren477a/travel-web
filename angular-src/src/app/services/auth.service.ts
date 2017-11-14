@@ -21,6 +21,19 @@ export class AuthService {
       .map(res => res.json());
   }
 
+  authenticateUser(user) {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint('auth/authenticate');
+    return this.http.post(ep, user,{headers: headers})
+      .map(res => res.json());
+  }
+
+  storeUserData(token, user) {
+    localStorage.setItem('id_token', token);
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
   prepEndpoint(ep) {
   	if(!this.isDev)
   		return ep;
