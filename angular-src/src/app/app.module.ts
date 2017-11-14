@@ -12,6 +12,8 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 
+import { ValidateService } from './services/validate.service';
+
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
@@ -34,7 +36,9 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     AlertModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    ValidateService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
