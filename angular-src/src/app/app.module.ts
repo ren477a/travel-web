@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AlertModule } from 'ngx-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 
 import { AppComponent } from './app.component';
@@ -13,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 
 import { ValidateService } from './services/validate.service';
+import { AuthService } from './services/auth.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -33,11 +35,13 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
+    HttpModule,
     RouterModule.forRoot(appRoutes),
     AlertModule.forRoot()
   ],
   providers: [
-    ValidateService
+    ValidateService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
