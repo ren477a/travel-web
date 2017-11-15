@@ -15,8 +15,10 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
+
         <li [routerLinkActive]="['active']"><a [routerLink]="['/login']">Login</a></li>
         <li [routerLinkActive]="['active']"><a [routerLink]="['/register']">Register</a></li>
+        <li><a (click)="onLogoutClick()" href="#">Logout</a></li>
       </ul>
     </div>
     <!--/.nav-collapse -->
