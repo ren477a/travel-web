@@ -32,7 +32,7 @@ const port = process.env.PORT || 8080;
 // Allow requests from other domain
 app.use(cors());
 
-// Path
+// Path static pages / front end routes
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.json());
@@ -44,12 +44,17 @@ app.use(passport.session());
 require('./config/passport')(passport);
 
 // ROUTES
-app.use('/auth', authRoutes);
-app.use('/tours', toursRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/tours', toursRoutes);
+
+app.use(function(req, res, next) {
+	res.redirect('/#' + req.originalUrl);
+});
 
 app.get('/', (req, res) => {
   res.send('Invalid Endpoint');
 });
+
 // Start Server
 app.listen(port, () => {
   console.log('Server started at port ' + port);

@@ -16,7 +16,7 @@ export class AuthService {
   registerUser(user){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('auth/register');
+    let ep = this.prepEndpoint('api/auth/register');
     return this.http.post(ep, user,{headers: headers})
       .map(res => res.json());
   }
@@ -24,11 +24,12 @@ export class AuthService {
   authenticateUser(user) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('auth/authenticate');
+    let ep = this.prepEndpoint('api/auth/authenticate');
     return this.http.post(ep, user,{headers: headers})
       .map(res => res.json());
   }
 
+  // Store token and userID
   storeUserData(token, user) {
     localStorage.setItem('id_token', token);
     localStorage.setItem('user', JSON.stringify(user));
