@@ -47,9 +47,9 @@ require('./config/passport')(passport);
 app.use('/api/auth', authRoutes);
 app.use('/api/tours', toursRoutes);
 
-app.use(function(req, res, next) {
-	res.redirect('/#' + req.originalUrl);
-});
+// app.use(function(req, res, next) {
+// 	res.redirect('/#' + req.originalUrl);
+// });
 
 app.get('/', (req, res) => {
   res.send('Invalid Endpoint');
