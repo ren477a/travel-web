@@ -1,5 +1,5 @@
-<nav class="navbar navbar-inverse">
-  <div class="container">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -17,8 +17,8 @@
 
       <ul class="nav navbar-nav navbar-right">
 
-        <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']"><a [routerLink]="['/login']">Login</a></li>
-        <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']"><a [routerLink]="['/register']">Register</a></li>
+        <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']"><a [routerLink]="['/login']"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']"><a [routerLink]="['/register']"><span class="glyphicon glyphicon-user"></span> Register</a></li>
         <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']"><a [routerLink]="['/user/account']">My Account</a></li>
         <li *ngIf="authService.loggedIn()" ><a (click)="onLogoutClick()" href="#">Logout</a></li>
       </ul>
