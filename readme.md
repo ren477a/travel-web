@@ -1,9 +1,11 @@
+# Travel Deals App [![Build Status](https://travis-ci.com/alcren/travel-web.svg?token=EtuYzuT6sbxmdz1nQqeR&branch=master)](https://travis-ci.com/alcren/travel-web)
+
 # API Endpoints
 
 ### Authentication
 
 
-* **POST** /auth/register  
+* **POST** api/auth/register  
 
 Register a user account  
 
@@ -12,7 +14,7 @@ Returns: {success: boolean, msg: String}
 Status: *Completed*
 
 
-* **POST** /auth/authenticate
+* **POST** api/auth/authenticate
 
 Authenticate a user
 
@@ -24,12 +26,12 @@ Status: *Completed*
 ### Users
 
 
-* **GET** /users
+* **GET** api/users
 
 List of all users
 
 
-* **GET** /users/:id/profile
+* **GET** api/users/:id/profile
 
 Gets the profile of the user
 
