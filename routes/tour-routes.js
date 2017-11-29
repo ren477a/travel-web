@@ -45,7 +45,10 @@ router.post('/', (req, res, next) => {
 
 router.get('/', (req, res, next) => {
   // Edit this
-  res.send('get tour')
+  console.log('get tours');
+  Tour.find({}).then(ninjas => {
+    res.send(ninjas);
+  });
 });
 
 

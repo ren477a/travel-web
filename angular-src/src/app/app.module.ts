@@ -12,10 +12,11 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
-import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { ToursService } from './services/tours.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -44,7 +45,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     ValidateService,
-    AuthService
+    AuthService,
+    ToursService
   ],
   bootstrap: [AppComponent]
 })

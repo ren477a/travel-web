@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToursService } from '../../services/tours.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  tours: Array<any>;
+
+  constructor(private toursService: ToursService) {
+   }
 
   ngOnInit() {
+    this.toursService.findTours().subscribe(res => {
+      this.tours = res;
+      console.log(this.tours[0].title);
+    });
   }
 
 }
