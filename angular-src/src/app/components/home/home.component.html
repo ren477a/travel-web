@@ -1,26 +1,25 @@
 <div class="container-fluid">
   <div class="row">
-
-    <div class="col-md-8">
+    <div class="col-md-3">
+      <!-- Search goes here -->
+    </div>
+    <div class="col-md-9">
       <div class="container">
         <div class="row">
-
-          <div *ngFor="let tour of tours" class="col-md-4">
-            <h2>{{ tour.title }}</h2>
-            <div class="card" style="width: 20rem;">
+          <div *ngFor="let tour of tours" class="col-lg-4 col-md-6 p-0">
+            <div class="card  mb-2 mt-2 ml-1 mr-1" style="max-width: 40rem;">
               <img class="card-img-top" src="http://via.placeholder.com/300x200">
               <div class="card-body">
+                <h4 class="card-title">
+                  <a class="card-link" href="#">{{ tour.title }}</a>
+                </h4>
+                <h6 class="card-subtitle mb-2 text-muted">{{ tour.agency }}</h6>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
               </div>
             </div>
           </div>
-          
         </div>
       </div>
-    </div>
-
-    <div class="col-md-4">
-
     </div>
 
   </div>
