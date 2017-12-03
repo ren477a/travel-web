@@ -17,12 +17,14 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { ToursService } from './services/tours.service';
+import { TourComponent } from './components/tour/tour.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'register', component: RegisterComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
+  { path: 'tour', component: TourComponent, pathMatch: 'full' },
   { path: '**', component: PagenotfoundComponent, pathMatch: 'full' }
 ];
 
@@ -34,7 +36,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     HomeComponent,
     ProfileComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    TourComponent
   ],
   imports: [
     BrowserModule,
