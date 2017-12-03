@@ -19,11 +19,11 @@ import { AuthService } from './services/auth.service';
 import { ToursService } from './services/tours.service';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: '**', component: PagenotfoundComponent }
+  { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'register', component: RegisterComponent, pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
+  { path: '**', component: PagenotfoundComponent, pathMatch: 'full' }
 ];
 
 @NgModule({
