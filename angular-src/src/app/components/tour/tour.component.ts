@@ -21,9 +21,14 @@ export class TourComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(
-      params => this.tourId = params.get('id')
+      params => {
+        this.tourId = params.get('id');
+        this.toursService.findTourById(this.tourId).subscribe(res => {
+          this.tour = res;
+        });
+      }
     );
-    this.tour = this.toursService.findTourById(this.tourId);
+    
   }
 
 }

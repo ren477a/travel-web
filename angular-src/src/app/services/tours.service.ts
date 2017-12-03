@@ -20,7 +20,11 @@ export class ToursService {
   }
 
   findTourById(id) {
-    console.log(id);
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint('api/tours/' + id);
+    return this.http.get(ep, {headers: headers})
+      .map(res => res.json());
   }
 
   prepEndpoint(ep) {

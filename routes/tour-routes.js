@@ -46,8 +46,15 @@ router.post('/', (req, res, next) => {
 router.get('/', (req, res, next) => {
   // Edit this
   console.log('get tours');
-  Tour.find({}).then(ninjas => {
-    res.send(ninjas);
+  Tour.find({}).then(tours => {
+    res.send(tours);
+  });
+});
+
+router.get('/:id', (req, res, next) => {
+  console.log(req.params.id)
+  Tour.findOne({_id: req.params.id}).then(tour => {
+    res.send(tour);
   });
 });
 
