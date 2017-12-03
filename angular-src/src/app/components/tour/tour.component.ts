@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
+import { ToursService } from '../../services/tours.service';
 
 @Component({
   selector: 'app-tour',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TourComponent implements OnInit {
 
-  constructor() { }
+  tour: any;
+  tourId: String;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private toursService: ToursService
+  ) { }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(
+      params => this.tourId = params.get('id')
+    );
+    this.tour = this.toursService.findTourById(this.tourId);
   }
 
 }

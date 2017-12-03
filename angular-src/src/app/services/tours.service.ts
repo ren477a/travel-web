@@ -19,6 +19,10 @@ export class ToursService {
       .map(res => res.json());
   }
 
+  findTourById(id) {
+    console.log(id);
+  }
+
   prepEndpoint(ep) {
   	if(!this.isDev)
   		return ep;

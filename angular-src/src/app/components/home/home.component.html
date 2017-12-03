@@ -15,7 +15,7 @@
                 </h4>
                 <h6 class="card-subtitle mb-2 text-muted">{{ tour.agency }}</h6>
                 <p class="card-text">{{ tour.description.substring(0, 120) + "..." }}</p>
-                <button (click)="onReadMoreClick(tour)" class="btn btn-sm btn-primary">Read More</button>
+                <button [routerLink]="['/tour', tour._id]" class="btn btn-sm btn-primary">Read More</button>
                 <h4 class="float-right">{{ "P" + tour.pricing.fixed }}</h4>
               </div>
             </div>

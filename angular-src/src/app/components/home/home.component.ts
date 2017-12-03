@@ -22,10 +22,4 @@ export class HomeComponent implements OnInit {
       this.tours = res;
     });
   }
-
-  onReadMoreClick(tour) {
-    console.log(tour.title);
-    this.router.navigate(['/tour']);
-  }
-
 }

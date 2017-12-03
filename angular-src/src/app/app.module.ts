@@ -24,7 +24,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
-  { path: 'tour', component: TourComponent, pathMatch: 'full' },
+  { path: 'tour/:id', component: TourComponent, pathMatch: 'full' },
   { path: '**', component: PagenotfoundComponent, pathMatch: 'full' }
 ];
 
