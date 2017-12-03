@@ -14,7 +14,7 @@
                   <a class="card-link" href="#">{{ tour.title }}</a>
                 </h4>
                 <h6 class="card-subtitle mb-2 text-muted">{{ tour.agency }}</h6>
-                <p class="card-text">{{ tour.subtitle }}</p>
+                <p class="card-text">{{ tour.description.substring(0, 150) + "..." }}</p>
               </div>
             </div>
           </div>
