@@ -9,6 +9,7 @@ router.post('/', (req, res, next) => {
   console.log('post tour');
   let newTour = new Tour({
     title: req.body.title,
+    subtitle: req.body.subtitle,
     agency: req.body.agency,
     description: req.body.description,
     duration: req.body.duration,

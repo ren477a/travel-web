@@ -5,6 +5,9 @@ const TourSchema = mongoose.Schema({
   title: {
     type: String
   },
+  subtitle: {
+    type: String
+  },
   agency: {
     type: String
   },
