@@ -32,6 +32,10 @@ const TourSchema = mongoose.Schema({
     type: [String],
     required: true
   },
+  terms: {
+    type: String,
+    required: true
+  },
   validityInDays: {
     type: Number,
     required: true
