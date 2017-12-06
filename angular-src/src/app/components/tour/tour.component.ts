@@ -10,7 +10,7 @@ import { ToursService } from '../../services/tours.service';
 })
 export class TourComponent implements OnInit {
 
-  tour: any;
+  tour: Object;
   tourId: String;
 
   constructor(
@@ -23,11 +23,16 @@ export class TourComponent implements OnInit {
     this.route.paramMap.subscribe(
       params => {
         this.tourId = params.get('id');
-        this.toursService.findTourById(this.tourId).subscribe(res => {
-          this.tour = res;
-        });
+        
       }
     );
+    this.toursService.findTourById(this.tourId).subscribe(res => {
+      this.tour = res;
+    },
+    err => {
+      console.log(err);
+      return false;
+    });
     
   }
 
