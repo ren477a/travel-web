@@ -18,6 +18,7 @@ import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { ToursService } from './services/tours.service';
 import { TourComponent } from './components/tour/tour.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
   { path: 'tour/:id', component: TourComponent, pathMatch: 'full' },
+  { path: 'checkout', component: CheckoutComponent, pathMatch: 'full' },
   { path: '**', component: PagenotfoundComponent, pathMatch: 'full' }
 ];
 
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     HomeComponent,
     ProfileComponent,
     PagenotfoundComponent,
-    TourComponent
+    TourComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
