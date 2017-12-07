@@ -1,5 +1,5 @@
 const braintree = require('braintree');
-const router = express.Router(); // eslint-disable-line new-cap
+const router = require('express').Router(); // eslint-disable-line new-cap
 const gateway = require('../config/gateway');
 
 const TRANSACTION_SUCCESS_STATUSES = [
@@ -12,7 +12,7 @@ const TRANSACTION_SUCCESS_STATUSES = [
     braintree.Transaction.Status.SubmittedForSettlement
 ];
 
-app.get("/client_token", function (req, res) {
+router.get("/client_token", function (req, res) {
     gateway.clientToken.generate({}, function (err, response) {
         res.send(response.clientToken);
     });

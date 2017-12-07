@@ -1,5 +1,5 @@
 const braintree = require('braintree');
-const environment, gateway;
+var environment, gateway;
 
 require('dotenv').config();
 environment = process.env.BT_ENVIRONMENT.charAt(0).toUpperCase() + process.env.BT_ENVIRONMENT.slice(1);
