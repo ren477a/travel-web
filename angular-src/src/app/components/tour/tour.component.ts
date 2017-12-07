@@ -33,7 +33,10 @@ export class TourComponent implements OnInit {
       console.log(err);
       return false;
     });
-    
+  }
+
+  onPurchaseClick() {
+    this.router.navigate(['/checkout']);
   }
 
 }

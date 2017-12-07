@@ -29,7 +29,7 @@
               <strong>P{{ tour?.pricing.fixed }}</strong>
               <small>per person</small>
             </h5>
-            <form>
+            <form (submit)="onPurchaseClick()">
               <div class="form-group">
                 <input type="number" [(ngModel)]="email" name="email" class="form-control" id="quantity" placeholder="Enter quantity">
               </div>
