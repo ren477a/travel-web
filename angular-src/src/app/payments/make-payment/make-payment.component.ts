@@ -19,6 +19,8 @@ export class MakePaymentComponent implements OnInit {
       key: this.stripeKey,
       currency: 'php',
       locale: 'auto',
+      email: 'asd@asd.com',
+      allowRememberMe: false,
       token: token => {
         this.paymentService.processPayment(token, this.amount)
         console.log(token);
@@ -28,8 +30,8 @@ export class MakePaymentComponent implements OnInit {
 
   handlePayment() {
     this.handler.open({
-      name: 'FireStarter',
-      excerpt: 'Deposit Funds to Account',
+      name: 'Travel Catalog',
+      excerpt: 'Pay with Card',
       amount: this.amount
     });
   }
