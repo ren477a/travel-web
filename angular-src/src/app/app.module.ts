@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AlertModule } from 'ngx-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { NgxStripeModule } from 'ngx-stripe';
+import { PaymentModule } from './payments/payment/payment.module';
 
 
 import { AppComponent } from './app.component';
@@ -18,7 +20,6 @@ import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { ToursService } from './services/tours.service';
 import { TourComponent } from './components/tour/tour.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -26,7 +27,6 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
   { path: 'tour/:id', component: TourComponent, pathMatch: 'full' },
-  { path: 'checkout', component: CheckoutComponent, pathMatch: 'full' },
   { path: '**', component: PagenotfoundComponent, pathMatch: 'full' }
 ];
 
@@ -39,15 +39,15 @@ const appRoutes: Routes = [
     HomeComponent,
     ProfileComponent,
     PagenotfoundComponent,
-    TourComponent,
-    CheckoutComponent
+    TourComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    PaymentModule
   ],
   providers: [
     ValidateService,
