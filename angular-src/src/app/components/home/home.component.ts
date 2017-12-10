@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToursService } from '../../services/tours.service';
 import { Router } from '@angular/router';
-import { MakePaymentComponent } from '../../payments/make-payment/make-payment.component';
 
 @Component({
   selector: 'app-home',
