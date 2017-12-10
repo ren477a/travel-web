@@ -47,7 +47,7 @@ require('./config/passport')(passport);
 // ROUTES
 app.use('/api/auth', authRoutes);
 app.use('/api/tours', toursRoutes);
-app.use('/api/payment', paymentRoutes)
+app.use('/api/payment', paymentRoutes);
 
 // app.use(function(req, res, next) {
 // 	res.redirect('/#' + req.originalUrl);

@@ -45,7 +45,7 @@ export class MakePaymentComponent implements OnInit {
       allowRememberMe: false,
       token: token => {
         this.paymentService.processPayment(token, this.amount)
-        this.chargeClient(token);
+        
       }
     });
   }
@@ -57,16 +57,6 @@ export class MakePaymentComponent implements OnInit {
     });
   }
 
-  chargeClient(token: any) {
-    let headers = new Headers();
-    const data = {
-      name: "asd",
-      num: 10
-    }
-    headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/payment/charge');
-    this.http.post(ep, data, {headers: headers});
-  }
 
   @HostListener('window:popstate')
   onPopstate() {

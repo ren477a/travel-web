@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AlertModule } from 'ngx-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { PaymentModule } from './payments/payment/payment.module';
 
 
@@ -47,6 +48,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes),
     AlertModule.forRoot(),
     PaymentModule

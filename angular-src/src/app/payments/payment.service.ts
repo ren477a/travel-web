@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { AuthService } from '../services/auth.service';
 
@@ -7,14 +7,17 @@ import { AuthService } from '../services/auth.service';
 export class PaymentService {
 
 
-  isDev = false;
-  user: Object;
-  tour: Object;
+  isDev: boolean;
+  user: any;
+  tour: any;
   quantity: number;
 
   constructor(
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+    private http: HttpClient
+  ) { 
+    this.isDev = true;
+  }
 
   submitPayment(tour: any, user: Object, quantity: number) {
     this.tour = tour;
@@ -24,11 +27,17 @@ export class PaymentService {
 
   processPayment(token: any, amount: number) {
     const payment = { token, amount };
-    // let headers = new Headers();
-    // headers.append('Content-Type','application/json');
-    // let ep = this.prepEndpoint('api/auth/register');
-    // return this.http.post(ep, user,{headers: headers})
-    //   .map(res => res.json());
+    console.log(token);
+    const data = {
+      token: token,
+      quantity: this.quantity,
+      userId: this.user.id,
+      tour: this.tour,
+      amount: amount
+    }
+    //headers.set('Content-Type','application/json');
+    let ep = this.prepEndpoint('api/payment/charge');
+    this.http.post(ep, data).subscribe();
   }
 
   prepEndpoint(ep) {

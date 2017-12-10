@@ -1,14 +1,14 @@
 const router = require('express').Router(); // eslint-disable-line new-cap
 
 
-router.post("/checkout", function (req, res) {
-    
+router.post('/charge', (req, res, next) => {
+    console.log(req.body);
 });
 
 
 
-router.post('/', (req, res, next) => {
-
+router.get('/', (req, res, next) => {
+    console.log('asdasd');
 });
 
 module.exports = router;
