@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { AlertModule } from 'ngx-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { NgxStripeModule } from 'ngx-stripe';
 import { PaymentModule } from './payments/payment/payment.module';
 
 
