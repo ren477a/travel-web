@@ -7,7 +7,7 @@ import { AuthService } from '../services/auth.service';
 export class PaymentService {
 
 
-  isDev = true;
+  isDev = false;
   user: Object;
   tour: Object;
   quantity: number;

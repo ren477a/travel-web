@@ -8,7 +8,7 @@ export class ToursService {
   isDev: boolean;
 
   constructor(private http: Http) { 
-    this.isDev = true;
+    this.isDev = false;
   }
 
   findTours() {
