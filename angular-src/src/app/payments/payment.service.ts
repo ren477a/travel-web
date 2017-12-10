@@ -16,7 +16,7 @@ export class PaymentService {
     private authService: AuthService,
     private http: HttpClient
   ) { 
-    this.isDev = true;
+    this.isDev = false;
   }
 
   submitPayment(tour: any, user: Object, quantity: number) {
