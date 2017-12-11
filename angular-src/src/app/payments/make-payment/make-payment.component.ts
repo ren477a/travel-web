@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener, Input } from '@angular/core';
 import { PaymentService } from '../payment.service';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-make-payment',
@@ -30,7 +31,8 @@ export class MakePaymentComponent implements OnInit {
 
   constructor(
     private paymentService: PaymentService,
-    private http: Http
+    private http: Http,
+    private router: Router
   ) {
   }
 
@@ -46,6 +48,7 @@ export class MakePaymentComponent implements OnInit {
       allowRememberMe: false,
       token: token => {
         this.paymentService.processPayment(token, this.amount);
+        this.router.navigate(['/']);
       }
     });
   }
