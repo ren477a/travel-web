@@ -26,6 +26,7 @@ export class MakePaymentComponent implements OnInit {
   @Input() quantity: number;
   @Input() tour: any;
   @Input() user: any;
+  result: any;
 
   constructor(
     private paymentService: PaymentService,
@@ -44,8 +45,7 @@ export class MakePaymentComponent implements OnInit {
       email: this.user.email,
       allowRememberMe: false,
       token: token => {
-        this.paymentService.processPayment(token, this.amount)
-        
+        this.paymentService.processPayment(token, this.amount);
       }
     });
   }
