@@ -6,7 +6,6 @@ const Tour = require('../models/tour');
 
 router.post('/', (req, res, next) => {
   // Edit this
-  console.log('post tour');
   let newTour = new Tour({
     title: req.body.title,
     agency: req.body.agency,
@@ -45,14 +44,12 @@ router.post('/', (req, res, next) => {
 
 router.get('/', (req, res, next) => {
   // Edit this
-  console.log('get tours');
   Tour.find({}).then(tours => {
     res.send(tours);
   });
 });
 
 router.get('/:id', (req, res, next) => {
-  console.log(req.params.id)
   Tour.findOne({_id: req.params.id}).then(tour => {
     res.send(tour);
   });
