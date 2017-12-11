@@ -53,6 +53,10 @@ app.use('/api/payment', paymentRoutes);
 // 	res.redirect('/#' + req.originalUrl);
 // });
 
+app.get('*', (req,res) => {
+  res.sendFile(__dirname + '/public/index.html');
+});
+
 app.get('/', (req, res) => {
   res.send('Invalid Endpoint');
 });
