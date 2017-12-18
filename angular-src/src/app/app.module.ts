@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { PaymentModule } from './payments/payment/payment.module';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 import { AppComponent } from './app.component';
@@ -21,11 +22,13 @@ import { AuthService } from './services/auth.service';
 import { ToursService } from './services/tours.service';
 import { TourComponent } from './components/tour/tour.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { BrowseComponent } from './components/browse/browse.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'browse', component: BrowseComponent },
   { path: 'register', component: RegisterComponent, pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
   { path: 'tour/:id', component: TourComponent, pathMatch: 'full' },
   { path: 'checkout', component: CheckoutComponent, pathMatch: 'full' },
@@ -42,7 +45,8 @@ const appRoutes: Routes = [
     ProfileComponent,
     PagenotfoundComponent,
     TourComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    BrowseComponent
   ],
   imports: [
     BrowserModule,
