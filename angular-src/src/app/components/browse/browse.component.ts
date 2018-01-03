@@ -10,21 +10,28 @@ import { Router } from '@angular/router';
 export class BrowseComponent implements OnInit {
 
   tours: Array<any>;
-  
-    constructor(
-      private toursService: ToursService,
-      private router: Router
-    ) {
-     }
-  
-    ngOnInit() {
-      this.toursService.findTours().subscribe(res => {
-        this.tours = res;
-      });
-    }
+  keyword: String;
+  minPrice: Number;
+  maxPrice: Number;
+  sortBy: String;
 
-    onSearch() {
-      console.log("search");
-    }
+  constructor(
+    private toursService: ToursService,
+    private router: Router
+  ) {
+  }
+
+  ngOnInit() {
+    this.toursService.findTours().subscribe(res => {
+      this.tours = res;
+    });
+  }
+
+  onSearch() {
+    console.log("search");
+    console.log(this.keyword);
+    console.log(this.minPrice);
+    console.log(this.maxPrice);
+  }
 
 }

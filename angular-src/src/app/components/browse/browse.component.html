@@ -5,29 +5,29 @@
         <div class="card-body">
           <form (submit)="onSearch()">
             <h4 class="card-title">Advanced Search</h4>
-            <input type="text" class="form-control" placeholder="Keyword">
+            <input [(ngModel)]="keyword" name="keyword" type="text" class="form-control" placeholder="Keyword">
             <p class="card-text">Price Range</p>
-            <input type="text" class="form-control" placeholder="From">
-            <input type="text" class="form-control" placeholder="To">
+            <input [(ngModel)]="minPrice" name="minPrice" type="number" class="form-control" placeholder="Minimum">
+            <input [(ngModel)]="maxPrice" name="maxPrice" type="number" class="form-control" placeholder="Maximum">
             <p class="card-text">Sort By</p>
             <div class="form-check">
               <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked> Lowest Price&mdash;Highest Price
+                <input class="form-check-input" [ngModel]="sortBy" type="radio" name="sortBy" id="exampleRadios1" value="option1" checked> Lowest Price&mdash;Highest Price
               </label>
             </div>
             <div class="form-check">
               <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"> Highest Price&mdash;Lowest Price
+                <input class="form-check-input" [ngModel]="sortBy" type="radio" name="sortBy" id="exampleRadios2" value="option2"> Highest Price&mdash;Lowest Price
               </label>
             </div>
             <div class="form-check">
               <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"> Alphabetical Order
+                <input class="form-check-input" [ngModel]="sortBy" type="radio" name="sortBy" id="exampleRadios2" value="option2"> Alphabetical Order
               </label>
             </div>
             <div class="form-check">
               <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"> Newest First
+                <input class="form-check-input" [ngModel]="sortBy" type="radio" name="sortBy" id="exampleRadios2" value="option2"> Newest First
               </label>
             </div>
 
