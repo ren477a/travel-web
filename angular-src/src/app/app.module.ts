@@ -23,10 +23,13 @@ import { ToursService } from './services/tours.service';
 import { TourComponent } from './components/tour/tour.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { BrowseComponent } from './components/browse/browse.component';
+import { UseraccountComponent } from './components/useraccount/useraccount.component';
+import { TransactionService } from './services/transaction.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'browse', component: BrowseComponent },
+  { path: 'useraccount', component: UseraccountComponent },
   { path: 'register', component: RegisterComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
@@ -46,7 +49,8 @@ const appRoutes: Routes = [
     PagenotfoundComponent,
     TourComponent,
     CheckoutComponent,
-    BrowseComponent
+    BrowseComponent,
+    UseraccountComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +64,8 @@ const appRoutes: Routes = [
   providers: [
     ValidateService,
     AuthService,
-    ToursService
+    ToursService,
+    TransactionService
   ],
   bootstrap: [AppComponent]
 })
