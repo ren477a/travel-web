@@ -34,6 +34,10 @@ const TransactionSchema = mongoose.Schema({
   },
   claimed: {
       type: Boolean
+  },
+  date: {
+    type: Date,
+    default: Date.now
   }
 });
 
