@@ -52,16 +52,65 @@ export class AuthService {
   }
 
   // Looks for a token in local storage and checks if expired
-  loggedInUser() {
-    if(tokenNotExpired() && this.userType === 'user') {
+  getUserType() {
+    this.loadToken();
+    let headers = new Headers();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    let ep = this.prepEndpoint('api/auth/getusertype');
+    return this.http.get(ep, { headers: headers })
+      .map(res => res.json())
+
+  }
+
+  programmingFail() {
+    let obs = this.getUserType();
+    if (obs) {
+      obs.subscribe(res => {
+        this.userType = res.type;
+        console.log(this.userType);
+      });
+    }
+  }
+
+  loggedOut() {
+    this.programmingFail();
+    if(this.userType === undefined) {
       return true;
     }
     return false;
   }
 
+  userLoggedIn() {
+    if(tokenNotExpired()) {
+      this.programmingFail();
+      if (this.userType === 'user') {
+        return true;
+      }
+    }
+    
+    return false;
+  }
+
+  agencyLoggedIn() {
+    if(tokenNotExpired()) {
+      this.programmingFail();
+      if (this.userType === 'agency') {
+        return true;
+      }
+    }
+    
+    return false;
+  }
+
+  loggedIn() {
+    return tokenNotExpired();
+  }
+
   logout() {
     this.authToken = null;
     this.user = null;
+    this.userType = undefined;
     localStorage.clear();
   }
 

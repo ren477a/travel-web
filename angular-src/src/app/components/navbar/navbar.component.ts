@@ -15,10 +15,11 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
   }
 
   onLogoutClick() {
-  	this.authService.logout();
+    this.authService.logout();
   	console.log("You are logged out");
   	this.router.navigate(['/login']);
   	return false;
