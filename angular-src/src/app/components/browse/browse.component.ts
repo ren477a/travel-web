@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToursService } from '../../services/tours.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-browse',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BrowseComponent implements OnInit {
 
-  constructor() { }
+  tours: Array<any>;
+  
+    constructor(
+      private toursService: ToursService,
+      private router: Router
+    ) {
+     }
+  
+    ngOnInit() {
+      this.toursService.findTours().subscribe(res => {
+        this.tours = res;
+      });
+    }
 
-  ngOnInit() {
-  }
+    onSearch() {
+      console.log("search");
+    }
 
 }

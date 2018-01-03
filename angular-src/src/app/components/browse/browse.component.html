@@ -1,3 +1,62 @@
-<p>
-  browse works!
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card text-justify mb-2 mt-2 ml-1 mr-1" style="max-width: 40rem;">
+        <div class="card-body">
+          <form (submit)="onSearch()">
+            <h4 class="card-title">Advanced Search</h4>
+            <input type="text" class="form-control" placeholder="Keyword">
+            <p class="card-text">Price Range</p>
+            <input type="text" class="form-control" placeholder="From">
+            <input type="text" class="form-control" placeholder="To">
+            <p class="card-text">Sort By</p>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked> Lowest Price&mdash;Highest Price
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"> Highest Price&mdash;Lowest Price
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"> Alphabetical Order
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"> Newest First
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-sm btn-primary">Search</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="container m-2">
+        <div class="row">
+          <div *ngFor="let tour of tours" class="col-lg-4 col-md-6 p-0">
+            <div class="card text-justify mb-2 mt-2 ml-1 mr-1" style="max-width: 40rem;">
+              <img class="card-img-top" src="http://via.placeholder.com/300x200">
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a class="card-link" href="#">{{ tour.title }}</a>
+                </h4>
+                <h6 class="card-subtitle mb-2 text-muted">{{ tour.agency }}</h6>
+                <p class="card-text">{{ tour.description.substring(0, 120) + "..." }}</p>
+                <button [routerLink]="['/tour', tour._id]" class="btn btn-sm btn-primary">Read More</button>
+                <h4 class="float-right">{{ "P" + tour.pricing.fixed }}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
