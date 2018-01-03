@@ -8,7 +8,8 @@ export class AuthService {
 
 	authToken: any;
 	user: any;
-	isDev: boolean;
+  isDev: boolean;
+  userType: String;
 
   constructor(private http: Http) {
   	this.isDev = false; //change to false before deploying
@@ -40,7 +41,9 @@ export class AuthService {
 
   getLoggedInUser() {
     const user = JSON.parse(localStorage.getItem('user'))
-    return user;
+    if(tokenNotExpired())
+      return user;
+    return undefined;
   }
 
   loadToken() {
@@ -49,8 +52,11 @@ export class AuthService {
   }
 
   // Looks for a token in local storage and checks if expired
-  loggedIn() {
-    return tokenNotExpired();
+  loggedInUser() {
+    if(tokenNotExpired() && this.userType === 'user') {
+      return true;
+    }
+    return false;
   }
 
   logout() {
