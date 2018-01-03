@@ -39,7 +39,7 @@ router.post('/authenticate', (req, res, next) => {
     User.comparePassword(password, user.password, (err, isMatch) => {
       if(err) throw err;
       if(isMatch) {
-        const token = jwt.sign({data:user, type:"user"}, process.env.JWT_SECRET, {
+        const token = jwt.sign({data:{user:user, type:'user'}}, process.env.JWT_SECRET, {
           // Token will expire in 3 days
           expiresIn: 3600
         });
@@ -65,8 +65,10 @@ router.post('/authenticate', (req, res, next) => {
   });
 });
 
-router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-  res.json({user: req.user});
+router.get('/getusertype', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+  res.json({
+    type: req.user.type
+  });
 });
 
 router.get('/validate', (req, res, next) => {
