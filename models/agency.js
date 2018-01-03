@@ -37,7 +37,6 @@ const AgencySchema = mongoose.Schema({
   bir: {
     type: String,
     required:true
-    
   }
   
 });
