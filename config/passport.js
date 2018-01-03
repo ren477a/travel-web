@@ -8,9 +8,9 @@ module.exports = function (passport) {
   console.log(opts.jwtFromRequest);
   opts.secretOrKey = process.env.JWT_SECRET;
   passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
-    console.log(jwt_payload.type);
-    if (jwt_payload.type === 'user') {
-      User.getUserById(jwt_payload.data._id, (err, user) => {
+    console.log(jwt_payload.data.type);
+    if (jwt_payload.data.type === 'user') {
+      User.getUserById(jwt_payload.data.user._id, (err, user) => {
         // Check for errors
         if (err) {
           return done(err, false);
