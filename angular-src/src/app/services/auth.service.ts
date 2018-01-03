@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/first';
 import { tokenNotExpired } from 'angular2-jwt';
 
 @Injectable()
@@ -59,17 +60,21 @@ export class AuthService {
     headers.append('Content-Type', 'application/json');
     let ep = this.prepEndpoint('api/auth/getusertype');
     return this.http.get(ep, { headers: headers })
-      .map(res => res.json())
-
+      .map(res => res.json());
   }
 
   programmingFail() {
-    let obs = this.getUserType();
+    let obs = this.getUserType().first((val) => {
+      if(val)
+        return true;
+    }, (value, index) => {
+      return value;
+    });
     if (obs) {
       obs.subscribe(res => {
         this.userType = res.type;
         console.log(this.userType);
-      });
+      }).unsubscribe();
     }
   }
 

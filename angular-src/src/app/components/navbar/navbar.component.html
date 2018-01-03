@@ -22,7 +22,7 @@
           <a class="nav-link" [routerLink]="['/register']">Register</a>
       </li>
       <li class="nav-item" *ngIf="authService.userLoggedIn()" [routerLinkActive]="['active']">
-          <a class="nav-link" [routerLink]="['/user/account']">My Account</a>
+          <a class="nav-link" [routerLink]="['/useraccount']">My Account</a>
       </li>
       <li class="nav-item">
           <a class="nav-link" *ngIf="authService.loggedIn()" (click)="onLogoutClick()">Logout</a>
