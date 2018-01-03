@@ -39,7 +39,7 @@ router.post('/authenticate', (req, res, next) => {
     User.comparePassword(password, user.password, (err, isMatch) => {
       if(err) throw err;
       if(isMatch) {
-        const token = jwt.sign({data:user}, process.env.JWT_SECRET, {
+        const token = jwt.sign({data:user, type:"user"}, process.env.JWT_SECRET, {
           // Token will expire in 3 days
           expiresIn: 3600
         });
