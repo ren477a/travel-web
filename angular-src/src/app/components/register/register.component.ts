@@ -15,10 +15,11 @@ export class RegisterComponent implements OnInit {
   mobileNumber: String;
   email: String;
   password: String;
+  msg: String;
 
 
   constructor(
-    private validateService: ValidateService, 
+    private validateService: ValidateService,
     private authService: AuthService,
     private router: Router) { }
 
@@ -34,26 +35,36 @@ export class RegisterComponent implements OnInit {
       password: this.password
     }
 
-  	if(!this.validateService.validateRegister(user)) {
-      console.log("Please fill in all the fields.");
+    if (!this.validateService.validateRegister(user)) {
+      this.msg = "Please fill in all the fields.";
       return false;
     }
-
-    if(!this.validateService.validateEmail(user.email)) {
-      console.log("Please use a valid email.");
-      return false;
+    let v = this.validateService.validation(user);
+    console.log(v);
+    console.log(user);
+    if (v === "success") {
+      this.authService.registerUser(user).subscribe(data => {
+        if (data.success) {
+          console.log("User registered");
+          this.router.navigate(['/login']);
+        } else {
+          console.log("Something went wrong");
+          this.router.navigate(['/register']);
+        }
+      });
+    } else {
+      this.msg = v;
     }
 
-    this.authService.registerUser(user).subscribe(data => {
-      if(data.success) {
-        console.log("User registered");
-        this.router.navigate(['/login']);
-      } else {
-        console.log("Something went wrong");
-        this.router.navigate(['/register']);
-      }
-    });
-    
+
+
+    // if (!this.validateService.validateEmail(user.email)) {
+    //   this.msg = "Ivalid email address."
+    //   return false;
+    // }
+
+
+
   }
 
 }
