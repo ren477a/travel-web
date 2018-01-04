@@ -4,6 +4,12 @@ const TransactionSchema = mongoose.Schema({
   tourId: {
     type: String
   },
+  tourTitle: {
+    type: String
+  },
+  agency: {
+    type: String
+  },
   quantity: {
     type: Number,
     required: true

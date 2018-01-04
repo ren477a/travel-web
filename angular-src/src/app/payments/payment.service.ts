@@ -43,6 +43,8 @@ export class PaymentService {
         console.log(this.tour);
         let data = {
           tourId: this.tour._id,
+          tourTitle: this.tour.title,
+          agency: this.tour.agency,
           quantity: this.quantity,
           pricePerItem: this.tour.pricing.fixed,
           total: resultObj.charge.amount / 100,
