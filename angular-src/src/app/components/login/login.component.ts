@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 	email: String;
 	password: String;
-
+	msg: String;
   constructor(
   	private authService: AuthService,
   	private router: Router
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   			console.log(data.msg);
   			this.router.navigate(['/']);
   		} else {
-  			console.log(data.msg);
+  			this.msg = data.msg;
   			this.router.navigate(['login']);
   		}
   	});
