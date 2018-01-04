@@ -1,9 +1,10 @@
 <div class="containter text-center" style="margin-top:20%">
   <h2>Purchase successful. Thank you!</h2>
   <form (submit)="onClickHere()">
-    <h6>
-      <button class="btn btn-primary" type="submit">Click Here to see your vouchers</button>
-    </h6>
+
+    <h6 *ngIf="!this.canProceed">Please wait...</h6>
+    <button *ngIf="this.canProceed" class="btn btn-primary" type="submit">Click Here to see your vouchers</button>
+
   </form>
 
 </div>
