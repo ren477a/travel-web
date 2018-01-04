@@ -48,7 +48,7 @@ export class MakePaymentComponent implements OnInit {
       allowRememberMe: false,
       token: token => {
         this.paymentService.processPayment(token, this.amount);
-        this.router.navigate(['/']);
+        this.router.navigate(['/useraccount']);
       }
     });
   }
