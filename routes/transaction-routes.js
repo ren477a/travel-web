@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const Transaction = require('../models/transaction');
 
 router.get('/customer/:id', (req, res, next) => {
-  Transaction.find({customerId: req.params.id}).then(transactions => {
+  Transaction.find({customerId: req.params.id}).sort({date:-1}).then(transactions => {
     res.send(transactions);
   });
 });
