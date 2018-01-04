@@ -1,4 +1,21 @@
 <div class="container">
-  <h2>Purchase History</h2>
-  
+  <h3 class="page-header mt-5">Transaction History</h3>
+  <div *ngFor="let tr of userTransactions" class="list-group">
+    <div href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{tr.tourTitle}}</h5>
+        <small>{{stringAsDate(tr.date) | date:'dd-MM-yy HH:mm:ss'}}</small>
+      </div>
+      <p class="mb-1">{{tr.agency}}</p>
+      <p class="mb-1">Voucher Codes:</p>
+      <small *ngFor=" let v of tr.voucherCodes">
+        <span>{{v}} &nbsp;&nbsp;&nbsp;</span>
+      </small>
+      <div class="d-flex w-100 justify-content-between">
+        <small *ngIf="tr.claimed" class="mb-1 text-muted">Claimed</small>
+        <small *ngIf="!tr.claimed" class="mb-1 text-success">Not yet claimed</small>
+        <small>{{'Total Price: PHP' + tr.total}}</small>
+      </div>
+    </div>
+  </div>
 </div>
