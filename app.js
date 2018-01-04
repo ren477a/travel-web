@@ -25,6 +25,7 @@ const app = express();
 const authRoutes = require('./routes/auth-routes');
 const toursRoutes = require('./routes/tour-routes');
 const paymentRoutes = require('./routes/payment-routes');
+const transactionRoutes = require('./routes/transaction-routes');
 
 const port = process.env.PORT || 8080;
 
@@ -48,6 +49,7 @@ require('./config/passport')(passport);
 app.use('/api/auth', authRoutes);
 app.use('/api/tours', toursRoutes);
 app.use('/api/payment', paymentRoutes);
+app.use('/api/transaction', transactionRoutes);
 
 // app.use(function(req, res, next) {
 // 	res.redirect('/#' + req.originalUrl);
