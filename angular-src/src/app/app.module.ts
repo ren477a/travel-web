@@ -25,12 +25,14 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { BrowseComponent } from './components/browse/browse.component';
 import { UseraccountComponent } from './components/useraccount/useraccount.component';
 import { TransactionService } from './services/transaction.service';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'browse', component: BrowseComponent },
   { path: 'useraccount', component: UseraccountComponent },
   { path: 'register', component: RegisterComponent, pathMatch: 'full' },
+  { path: 'confirmation', component: ConfirmationComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
   { path: 'tour/:id', component: TourComponent, pathMatch: 'full' },
@@ -50,7 +52,8 @@ const appRoutes: Routes = [
     TourComponent,
     CheckoutComponent,
     BrowseComponent,
-    UseraccountComponent
+    UseraccountComponent,
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule,
