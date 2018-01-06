@@ -42,6 +42,14 @@ export class AuthService {
       .map(res => res.json());
   }
 
+  authenticateAgency(agency) {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint('api/auth/authenticate/agency');
+    return this.http.post(ep, agency,{headers: headers})
+      .map(res => res.json());
+  }
+
   // Store token and userID
   storeUserData(token, user) {
     localStorage.setItem('token', token);
