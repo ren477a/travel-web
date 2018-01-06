@@ -2,7 +2,12 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const AgencySchema = mongoose.Schema({
-  owner: {
+  
+  agencyName: {
+    type: String,
+    required: true
+  },
+  ownedBy: {
     type: String,
     required: true
   },
@@ -15,10 +20,6 @@ const AgencySchema = mongoose.Schema({
     required: true
   },
   password: {
-    type: String,
-    required: true
-  },
-  agency: {
     type: String,
     required: true
   },
