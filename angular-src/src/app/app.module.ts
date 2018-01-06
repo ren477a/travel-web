@@ -26,14 +26,22 @@ import { BrowseComponent } from './components/browse/browse.component';
 import { UseraccountComponent } from './components/useraccount/useraccount.component';
 import { TransactionService } from './services/transaction.service';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ManagetoursComponent } from './components/managetours/managetours.component';
+import { RegisteragencyComponent } from './components/registeragency/registeragency.component';
+import { LoginagencyComponent } from './components/loginagency/loginagency.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'browse', component: BrowseComponent },
   { path: 'useraccount', component: UseraccountComponent },
-  { path: 'register', component: RegisterComponent, pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'manage', component: ManagetoursComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'register/agency', component: RegisteragencyComponent },
   { path: 'confirmation', component: ConfirmationComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'login/agency', component: LoginagencyComponent },
   { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
   { path: 'tour/:id', component: TourComponent, pathMatch: 'full' },
   { path: 'checkout', component: CheckoutComponent, pathMatch: 'full' },
@@ -53,7 +61,11 @@ const appRoutes: Routes = [
     CheckoutComponent,
     BrowseComponent,
     UseraccountComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    DashboardComponent,
+    ManagetoursComponent,
+    RegisteragencyComponent,
+    LoginagencyComponent
   ],
   imports: [
     BrowserModule,
