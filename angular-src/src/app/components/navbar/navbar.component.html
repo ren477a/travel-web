@@ -21,7 +21,7 @@
       <li class="nav-item" *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']">
           <a class="nav-link" [routerLink]="['/register']">Register</a>
       </li>
-      <li class="nav-item" *ngIf="authService.loggedIn()" [routerLinkActive]="['active']">
+      <li class="nav-item" *ngIf="authService.userLoggedIn()" [routerLinkActive]="['active']">
           <a class="nav-link" [routerLink]="['/useraccount']">My Account</a>
       </li>
       <li class="nav-item">
