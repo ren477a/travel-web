@@ -1,60 +1,62 @@
 <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
-  <a class="navbar-brand" href="#">TravelCatalog</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true"
-    aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <!-- items on left side -->
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item" *ngIf="!authService.agencyLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-        <a class="nav-link" [routerLink]="['/']" style="font-size:13px;">Home
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="nav-item" *ngIf="!authService.agencyLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-        <a class="nav-link" [routerLink]="['/browse']" style="font-size:13px;">Browse
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="nav-item" *ngIf="authService.agencyLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-        <a class="nav-link" [routerLink]="['/dashboard']">Dashboard
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="nav-item" *ngIf="authService.agencyLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-        <a class="nav-link" [routerLink]="['/manage']">Manage Tours
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-    </ul>
+  <div class="container">
+    <a class="navbar-brand" href="#">TravelCatalog</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- items on left side -->
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" *ngIf="!authService.agencyLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a class="nav-link" [routerLink]="['/']" style="font-size:13px;">Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="!authService.agencyLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a class="nav-link" [routerLink]="['/browse']" style="font-size:13px;">Browse
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="authService.agencyLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a class="nav-link" [routerLink]="['/dashboard']">Dashboard
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="authService.agencyLoggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a class="nav-link" [routerLink]="['/manage']">Manage Tours
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+      </ul>
 
-    <!-- items on right side -->
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item" *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']">
-        <div class="dropdown">
-          <button class="dropbtn">Login</button>
-          <div class="dropdown-content">
-            <a class="nav-link" [routerLink]="['/login']">as Customer</a>
-            <a class="nav-link" [routerLink]="['/login/agency']">as Travel Agency</a>
+      <!-- items on right side -->
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item" *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']">
+          <div class="dropdown">
+            <button class="dropbtn">Login</button>
+            <div class="dropdown-content">
+              <a class="nav-link" [routerLink]="['/login']">as Customer</a>
+              <a class="nav-link" [routerLink]="['/login/agency']">as Travel Agency</a>
+            </div>
           </div>
-        </div>
-      </li>
-      <li class="nav-item" *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']">
-        <div class="dropdown">
-          <button class="dropbtn">Register</button>
-          <div class="dropdown-content">
-            <a class="nav-link" [routerLink]="['/register']">as Customer</a>
-            <a class="nav-link" [routerLink]="['/register/agency']">as Travel Agency</a>
+        </li>
+        <li class="nav-item" *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']">
+          <div class="dropdown">
+            <button class="dropbtn">Register</button>
+            <div class="dropdown-content">
+              <a class="nav-link" [routerLink]="['/register']">as Customer</a>
+              <a class="nav-link" [routerLink]="['/register/agency']">as Travel Agency</a>
+            </div>
           </div>
-        </div>
-      </li>
-      <li class="nav-item" *ngIf="authService.userLoggedIn()" [routerLinkActive]="['active']">
-        <a class="nav-link" [routerLink]="['/user/account']">My Account</a>
-      </li>
-      <li class="nav-item" *ngIf="authService.loggedIn()">
-        <a class="nav-link" (click)="onLogoutClick()">Logout</a>
-      </li>
-    </ul>
+        </li>
+        <li class="nav-item" *ngIf="authService.userLoggedIn()" [routerLinkActive]="['active']">
+          <a class="nav-link" [routerLink]="['/user/account']">My Account</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.loggedIn()">
+          <a class="nav-link" (click)="onLogoutClick()">Logout</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
