@@ -59,9 +59,9 @@
             <div class="card text-justify mb-2 mt-2 ml-1 mr-1" style="max-width: 40rem;">
               <img class="card-img-top" src="http://via.placeholder.com/300x200">
               <div class="card-body">
-                <h4 class="card-title">
-                  <a class="card-link title" href="#">{{ tour.title }}</a>
-                </h4>
+                <h5 class="card-title">
+                  <a class="card-link title" [routerLink]="['/tour', tour._id]">{{ tour.title }}</a>
+                </h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{ tour.agency }}</h6>
                 <p class="card-text desc">{{ tour.description.substring(0, 120) + "..." }}</p>
                 <button [routerLink]="['/tour', tour._id]" class="btn btn-sm btn-primary button">Read More</button>
