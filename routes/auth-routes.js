@@ -90,6 +90,46 @@ router.post('/authenticate', (req, res, next) => {
   });
 });
 
+router.post('/authenticate/agency', (req, res, next) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  // Check is User exists in the database
+  Agency.getAgencyByEmail(email, (err, agency) => {
+    if(err) throw err;
+    if(!agency) {
+      return res.json({succes:false, msg:'Agency not found'});
+    }
+    // If user is found
+    // Check if password is correct
+    Agency.comparePassword(password, agency.password, (err, isMatch) => {
+      if(err) throw err;
+      if(isMatch) {
+        const token = jwt.sign({data:{agency:agency, type:'agency'}}, process.env.JWT_SECRET, {
+          // Token will expire in 3 days
+          expiresIn: 3600
+        });
+
+        res.json({
+          success: true,
+          token: 'JWT ' + token,
+          agency: {
+            id: agency._id,
+            agencyName: agency.agencyName,
+            ownedBy: agency.ownedBy,
+            email: agency.email
+          }
+        });
+      } else {
+        return res.json({
+          success: false,
+          msg: 'Wrong password'
+        });
+      }
+    });
+  });
+});
+
 router.get('/getusertype', passport.authenticate('jwt', {session:false}), (req, res, next) => {
   res.json({
     type: req.user.type

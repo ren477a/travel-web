@@ -49,3 +49,15 @@ module.exports.addAgency = function(newAgency, callback) {
     });
   });
 };
+
+module.exports.getAgencyByEmail = function(email, callback) {
+  const query = { email: email };
+  Agency.findOne(query, callback);
+};
+
+module.exports.comparePassword = function(candidatePassword, hash, callback) {
+  bcrypt.compare(candidatePassword, hash, (err, isMatch) => {
+    if(err) throw err;
+    callback(null, isMatch);
+  });
+};
