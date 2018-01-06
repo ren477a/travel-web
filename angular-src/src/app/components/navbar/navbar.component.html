@@ -51,7 +51,7 @@
           </div>
         </li>
         <li class="nav-item" *ngIf="authService.userLoggedIn()" [routerLinkActive]="['active']">
-          <a class="nav-link" [routerLink]="['/user/account']">My Account</a>
+          <a class="nav-link" [routerLink]="['/useraccount']">My Account</a>
         </li>
         <li class="nav-item" *ngIf="authService.loggedIn()">
           <a class="nav-link" (click)="onLogoutClick()">Logout</a>
