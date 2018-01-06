@@ -69,11 +69,12 @@ export class AuthService {
   // }
 
   userLoggedIn() {
-    return tokenNotExpired && this.userType === 'user';
+    console.log()
+    return tokenNotExpired() && this.getUserType() === 'user';
   }
 
   agencyLoggedIn() {
-    return tokenNotExpired && this.userType === 'agency';    
+    return tokenNotExpired() && this.getUserType() === 'agency';    
   }
 
   loggedIn() {
