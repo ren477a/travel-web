@@ -43,20 +43,20 @@ export class ValidateService {
     }
     //validation lastname
     var lastname = user.lastname;
-    var y = true;
-    if (firstname.length <= 30) {
+    var z = true;
+    if (lastname.length <= 30) {
       for (let x = 0; x < lastname.length; x++) {
-        if (!(firstname.charAt(x).match(isLetter))) {
-          y = false;
+        if (!(lastname.charAt(x).match(isLetter))) {
+          z = false;
         }
       }
     }
     else {
-      y = false;
+      z = false;
     }
 
-    if (!y) {
-      return "lastname must be Letters only and maximum of 30 letters only";
+    if (!z) {
+      return "Lastname must be Letters only and maximum of 30 letters only";
     }
     
     //validation email
