@@ -1,62 +1,109 @@
-<div class="container-fluid">
+<div class="container-fluid fonty pt-5 pb-5" style="margin-top: 50px;">
   <div class="row">
-    <div class="col-md-3">
-      <div class="card text-justify mb-2 mt-2 ml-1 mr-1" style="max-width: 40rem;">
+    <div class="col-lg-4 col-md-3 col-sm-4 col-xs-2">
+      <div class="card text-justify mb-2 mt-3 ml-1 mr-1" style="max-width: 40rem;" id="sidebar">
         <div class="card-body">
           <form (submit)="onSearch()">
-            <h4 class="card-title">Advanced Search</h4>
-            <input [(ngModel)]="keyword" name="keyword" type="text" class="form-control" placeholder="Keyword">
-            <p class="card-text">Price Range</p>
-            <input [(ngModel)]="minPrice" name="minPrice" type="number" class="form-control" placeholder="Minimum">
-            <input [(ngModel)]="maxPrice" name="maxPrice" type="number" class="form-control" placeholder="Maximum">
-            <p class="card-text">Sort By</p>
-            <div class="form-check">
-              <label class="form-check-label">
-                <input class="form-check-input" [ngModel]="sortBy" type="radio" name="sortBy" id="exampleRadios1" value="option1" checked> Lowest Price&mdash;Highest Price
-              </label>
+            <h4 class="card-title">Custom search:</h4>
+            <img align="center" src="../../../assets/logo.png" alt="">
+            <div class="input-group">
+              <input [(ngModel)]="keyword" name="keyword" type="text" class="form-control" placeholder="Keyword">
             </div>
-            <div class="form-check">
-              <label class="form-check-label">
-                <input class="form-check-input" [ngModel]="sortBy" type="radio" name="sortBy" id="exampleRadios2" value="option2"> Highest Price&mdash;Lowest Price
-              </label>
+            <hr>
+            <label for="minPrice" class="mt-2 mb-0">Price Range</label>
+            <div class="row">
+              <div class="col place">
+                <input [(ngModel)]="minPrice" name="minPrice" type="number" class=" form-control" placeholder="Minimum">
+              </div>
+              <div class="col place">
+                <input [(ngModel)]="maxPrice" name="maxPrice" type="number" class=" form-control" placeholder="Maximum">
+              </div>
             </div>
+            <hr>
+            <p class="card-text mt-2 mb-0">Sort By</p>
+
             <div class="form-check">
-              <label class="form-check-label">
-                <input class="form-check-input" [ngModel]="sortBy" type="radio" name="sortBy" id="exampleRadios2" value="option2"> Alphabetical Order
-              </label>
-            </div>
-            <div class="form-check">
-              <label class="form-check-label">
-                <input class="form-check-input" [ngModel]="sortBy" type="radio" name="sortBy" id="exampleRadios2" value="option2"> Newest First
-              </label>
+              <div>
+                <label class="form-check-label mb-1">
+                  <input class="form-check-input mb-1" [ngModel]="sortBy" type="radio" name="sortBy" id="exampleRadios1" value="option1" checked> Price lowest to Highest
+                </label>
+              </div>
+              <div>
+                <label class="form-check-label mb-1">
+                  <input class="form-check-input mb-1" [ngModel]="sortBy" type="radio" name="sortBy" id="exampleRadios2" value="option2"> Price highest to lowest
+                </label>
+              </div>
+              <div>
+                <label class="form-check-label mb-1">
+                  <input class="form-check-input mb-1" [ngModel]="sortBy" type="radio" name="sortBy" id="exampleRadios3" value="option3"> Alphabetical Order
+                </label>
+              </div>
+              <div>
+                <label class="form-check-label mb-1">
+                  <input class="form-check-input mb-1" [ngModel]="sortBy" type="radio" name="sortBy" id="exampleRadios4" value="option4"> Newest First
+                </label>
+              </div>
             </div>
 
-            <button type="submit" class="btn btn-sm btn-primary">Search</button>
+
+            <button type="submit" class="btn btn-lg btn-primary btn-block button">Search</button>
           </form>
 
         </div>
       </div>
     </div>
-    <div class="col-md-9">
+    <div class="col-lg-8 col-md-9 col-sm-8 col-xs-10">
       <div class="container m-2">
         <div class="row">
-          <div *ngFor="let tour of tours" class="col-lg-4 col-md-6 p-0">
+          <div *ngFor="let tour of tours" class="col-lg-4 col-md-6 p-0 titulo">
             <div class="card text-justify mb-2 mt-2 ml-1 mr-1" style="max-width: 40rem;">
               <img class="card-img-top" src="http://via.placeholder.com/300x200">
               <div class="card-body">
                 <h4 class="card-title">
-                  <a class="card-link" href="#">{{ tour.title }}</a>
+                  <a class="card-link title" href="#">{{ tour.title }}</a>
                 </h4>
                 <h6 class="card-subtitle mb-2 text-muted">{{ tour.agency }}</h6>
-                <p class="card-text">{{ tour.description.substring(0, 120) + "..." }}</p>
-                <button [routerLink]="['/tour', tour._id]" class="btn btn-sm btn-primary">Read More</button>
+                <p class="card-text desc">{{ tour.description.substring(0, 120) + "..." }}</p>
+                <button [routerLink]="['/tour', tour._id]" class="btn btn-sm btn-primary button">Read More</button>
                 <h4 class="float-right">{{ "P" + tour.pricing.fixed }}</h4>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="center-div anchor">
+          <br>
+          <ul class="pagination pagination-md">
+            <li class="page-item">
+              <a class="page-link" href="#">Previous</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link active" href="#">1</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+          <br>
+        </div>
+      </div>
+
     </div>
   </div>
+</div>
 
+<div id="footer" class="container-fluid">
+  <div class="container">
+    <footer>
+      <p>© 2017 Travel Catalog Philippines
+      </p>
+    </footer>
+  </div>
 </div>
