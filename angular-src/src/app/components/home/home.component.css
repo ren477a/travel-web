@@ -173,6 +173,10 @@ header.masthead h1 {
     font-size: 2rem;
 }
 
+header.masthead h1 h3 {
+  color: #FEF8F2;
+}
+
 @media (min-width: 768px) {
     header.masthead {
         padding-top: 12rem;
