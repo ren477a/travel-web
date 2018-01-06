@@ -5,9 +5,10 @@ body {
 }
 
 #banner {
-  padding: 0px;
-  margin: 0px;
+    padding: 0px;
+    margin: 0px;
 }
+
 .center-div {
     margin: 0 auto;
 }
@@ -84,6 +85,10 @@ body {
 
 /* Center align the text within the three columns below the carousel */
 
+.marketing {
+    padding-top: 3rem;
+}
+
 .marketing .col-lg-4 {
     margin-bottom: 1.5rem;
     text-align: center;
@@ -102,10 +107,10 @@ body {
 /* Featurettes
   ------------------------- */
 
-.featurette-divider {
+
+/* .featurette-divider {
     margin: 5rem 0;
-    /* Space out the Bootstrap <hr> more */
-}
+} */
 
 
 /* Thin out the marketing headings */
@@ -176,4 +181,41 @@ header.masthead h1 {
     header.masthead h1 {
         font-size: 3rem;
     }
+}
+
+.features-icons {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+}
+
+.features-icons .features-icons-item {
+    max-width: 20rem;
+}
+
+.features-icons .features-icons-item .features-icons-icon {
+    height: 7rem;
+}
+
+.features-icons .features-icons-item .features-icons-icon i {
+    font-size: 4.5rem;
+}
+
+.features-icons .features-icons-item:hover .features-icons-icon i {
+    font-size: 5rem;
+}
+
+/* FEATURED ITEMS */
+
+#featured {
+  background-color: #F5F5F4;
+}
+
+/*footer*/
+
+#footer {
+  padding-top: 3rem;
+  background-color: #4F83C6;
+  height: 7rem;
+  text-align: center;
+  color: #F5F5F4;
 }
