@@ -3,6 +3,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
+const Agency = require('../models/agency');
 
 router.post('/register', (req, res, next) => {
   console.log('register');
@@ -20,6 +21,30 @@ router.post('/register', (req, res, next) => {
       res.json({success: false, msg:'Failed to register user'});
     } else {
       res.json({success: true, msg:'User registered'});
+    }
+  });
+});
+
+router.post('/register/agency', (req, res, next) => {
+  console.log('register agency');
+  //TODO check first if user already exists before registering
+  let newAgency = new Agency({
+    agencyName: req.body.agencyName,
+    ownedBy: req.body.ownedBy,
+    mobileNumber: req.body.mobileNumber,
+    email: req.body.email,
+    password: req.body.password,
+    address: req.body.address,
+    dti: req.body.dti,
+    business: req.body.business,
+    bir: req.body.bir
+  });
+
+  Agency.addAgency(newAgency, (err, user) => {
+    if(err) {
+      res.json({success: false, msg:'Failed to register agency'});
+    } else {
+      res.json({success: true, msg:'Agency registered'});
     }
   });
 });

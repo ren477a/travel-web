@@ -12,4 +12,8 @@ export class RegisteragencyComponent implements OnInit {
   ngOnInit() {
   }
 
+  onRegisterClick() {
+    console.log("register btn pressed");
+  }
+
 }

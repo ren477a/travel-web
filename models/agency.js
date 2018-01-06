@@ -28,17 +28,24 @@ const AgencySchema = mongoose.Schema({
     required: true
   },
   dti: {
-    type: String,
-    required: true
+    type: String
   },
   business: {
-    type: String,
-    required: true
+    type: String
   },
   bir: {
-    type: String,
-    required:true
+    type: String
   }
 });
 
 const Agency = module.exports = mongoose.model('Agency', AgencySchema);
+
+module.exports.addAgency = function(newAgency, callback) {
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(newAgency.password, salt, (err, hash) => {
+      if(err) throw err;
+      newAgency.password = hash;
+      newAgency.save(callback);
+    });
+  });
+};
