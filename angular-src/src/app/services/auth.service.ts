@@ -26,6 +26,14 @@ export class AuthService {
       .map(res => res.json());
   }
 
+  registerAgency(agency){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint('api/auth/register/agency');
+    return this.http.post(ep, agency,{headers: headers})
+      .map(res => res.json());
+  }
+
   authenticateUser(user) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');

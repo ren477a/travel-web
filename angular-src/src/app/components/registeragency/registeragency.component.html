@@ -2,28 +2,28 @@
   <form (submit)="onRegisterClick()">
     <div class="form-group">
       <label for="agencyName">Agency Name</label>
-      <input type="text" class="form-control" id="agencyName" aria-describedby="agencyName" placeholder="Jonas Travel and Tours">
+      <input type="text" [(ngModel)]="agencyName" name="agencyName" class="form-control" id="agencyName" aria-describedby="agencyName" placeholder="Jonas Travel and Tours">
     </div>
     <div class="form-group">
       <label for="businessAddress">Address</label>
-      <input type="text" class="form-control" id="businessAddress" aria-describedby="businessAddress" placeholder="52 Sample St., Cubao, Quezon City">
+      <input type="text" [(ngModel)]="address" name="address" class="form-control" id="businessAddress" aria-describedby="businessAddress" placeholder="52 Sample St., Cubao, Quezon City">
     </div>
     <div class="form-group">
       <label for="owner">Name of Owner</label>
-      <input type="text" class="form-control" id="owner" aria-describedby="owner" placeholder="Juan Dela Cruz">
+      <input type="text" [(ngModel)]="ownedBy" name="ownedBy" class="form-control" id="owner" aria-describedby="owner" placeholder="Juan Dela Cruz">
     </div>
     <div class="form-group">
       <label for="contact-number">Contact Number</label>
-      <input type="text" class="form-control" id="contact-number" aria-describedby="contact-number" placeholder="+639991234567">
+      <input type="text" [(ngModel)]="mobileNumber" name="mobileNumber" class="form-control" id="contact-number" aria-describedby="contact-number" placeholder="+639991234567">
     </div>
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="yourbusiness@email.com">
+      <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email" aria-describedby="email" placeholder="yourbusiness@email.com">
       <small>Your email will serve as your username.</small>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      <input type="password" [(ngModel)]="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
     </div>
 
     <div class="form-group">
