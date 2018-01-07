@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { ToursService } from '../../services/tours.service';
 import { Router } from '@angular/router';
@@ -12,6 +12,7 @@ declare var $ :any;   // not required
   styleUrls: ['./managetours.component.css']
 })
 export class ManagetoursComponent implements OnInit {
+  @ViewChild('btnAddTour') btnAddTour: ElementRef;
 
   title: String;
   agency: String;
@@ -32,12 +33,7 @@ export class ManagetoursComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-  }
-
-  testMethod() {
-    console.log(1);
-    $("h1").css("color:#123456");
-    this.router.navigate(['/manage']);
+    
   }
 
   onClickAddTour() {
@@ -64,11 +60,26 @@ export class ManagetoursComponent implements OnInit {
     this.toursService.addTour(tour).subscribe(data => {
       if(data.success) {
         console.log("Submit success");
-        $("#addTourModal").modal("hide");
+        this.clearData();
+        this.btnAddTour.nativeElement.click();
         this.router.navigate['/manage'];
       } else {
         console.log("Something went wrong")
       }
     });
+  }
+
+  clearData() {
+    this.title = "";
+    this.agency = "";
+    this.description = "";
+    this.duration = "";
+    this.type = "";
+    this.itinerary = "";
+    this.inclusions = "";
+    this.exclusions = "";
+    this.terms = "";
+    this.validityInDays = "";
+    this.price = "";
   }
 }
