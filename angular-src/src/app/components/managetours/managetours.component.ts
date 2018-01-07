@@ -26,6 +26,8 @@ export class ManagetoursComponent implements OnInit {
   validityInDays: String;
   price: String;
 
+  tours: Array<any>;
+
   constructor(
     private authService: AuthService,
     private toursService: ToursService,
@@ -33,7 +35,10 @@ export class ManagetoursComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+    const query = JSON.stringify({  agency: this.authService.getLoggedInAgency().agencyName });
+    this.toursService.findTours(query).subscribe(res => {
+      this.tours = res;
+    });
   }
 
   onClickAddTour() {

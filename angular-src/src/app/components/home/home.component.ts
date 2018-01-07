@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.toursService.findTours().subscribe(res => {
+    this.toursService.findTours({ limit: 9 }).subscribe(res => {
       this.tours = res;
     });
   }

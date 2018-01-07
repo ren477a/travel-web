@@ -44,7 +44,21 @@ router.post('/', (req, res, next) => {
 
 router.get('/', (req, res, next) => {
   // Edit this
-  Tour.find({}).then(tours => {
+  //let query = JSON.parse(req.query.q);
+  console.log(req.query.q);
+  Tour.find().then(tours => {
+    res.send(tours);
+  });
+});
+
+router.post('/search', (req, res, next) => {
+  let query = req.body;
+  if(req.body.limit) {
+    Tour.find().limit(req.body.limit).then(tours => {
+      res.send(tours);
+    });
+  }
+  Tour.find().then(tours => {
     res.send(tours);
   });
 });

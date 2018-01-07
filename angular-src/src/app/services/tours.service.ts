@@ -15,15 +15,15 @@ export class ToursService {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     let ep = this.prepEndpoint('api/tours/');
-    return this.http.post(ep, tour,{headers: headers})
+    return this.http.post(ep, tour, {headers: headers})
       .map(res => res.json());
   }
 
-  findTours() {
+  findTours(query) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/tours');
-    return this.http.get(ep, {headers: headers})
+    let ep = this.prepEndpoint('api/tours/search');
+    return this.http.post(ep, query, {headers: headers})
       .map(res => res.json());
   }
 
