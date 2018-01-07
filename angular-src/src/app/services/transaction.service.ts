@@ -8,7 +8,7 @@ export class TransactionService {
   isDev: boolean;
 
   constructor(private http: Http) {
-    this.isDev = false; //false when deployed
+    this.isDev = true; //false when deployed
   }
 
   findTransactionsByCustomerId(customerId) {

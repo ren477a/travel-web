@@ -11,6 +11,14 @@ export class ToursService {
     this.isDev = false;
   }
 
+  addTour(tour){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint('api/tours/');
+    return this.http.post(ep, tour,{headers: headers})
+      .map(res => res.json());
+  }
+
   findTours() {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
