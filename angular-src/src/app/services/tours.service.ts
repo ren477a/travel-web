@@ -27,6 +27,14 @@ export class ToursService {
       .map(res => res.json());
   }
 
+  findFeatured() {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint('api/tours/featured');
+    return this.http.get(ep, {headers: headers})
+      .map(res => res.json());
+  }
+
   findTourById(id) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');

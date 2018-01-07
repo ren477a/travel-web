@@ -63,6 +63,12 @@ router.post('/search', (req, res, next) => {
   });
 });
 
+router.get('/featured', (req, res, next) => {
+  Tour.find().limit(9).then(tours => {
+    res.send(tours);
+  });
+});
+
 router.get('/:id', (req, res, next) => {
   Tour.findOne({_id: req.params.id}).then(tour => {
     res.send(tour);

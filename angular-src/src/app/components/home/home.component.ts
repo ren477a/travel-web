@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ISubscription } from "rxjs/Subscription";
 import { ToursService } from '../../services/tours.service';
 import { Router } from '@angular/router';
 
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   tours: Array<any>;
+  private subscription: ISubscription;
 
   constructor(
     private toursService: ToursService,
@@ -18,8 +20,12 @@ export class HomeComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.toursService.findTours({ limit: 9 }).subscribe(res => {
+    this.subscription = this.toursService.findFeatured().subscribe(res => {
       this.tours = res;
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
