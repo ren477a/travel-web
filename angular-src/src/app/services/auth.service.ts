@@ -76,6 +76,12 @@ export class AuthService {
     return token.data.type;
   }
 
+  getLoggedInAgency() {
+    this.loadToken();
+    let token = this.jwtHelper.decodeToken(this.authToken);
+    return token.data.agency;
+  }
+
   // loggedOut() {
   //   this.programmingFail();
   //   if(this.userType === undefined) {
