@@ -11,7 +11,7 @@ router.post('/', (req, res, next) => {
     agency: req.body.agency,
     description: req.body.description,
     duration: req.body.duration,
-    isInternational: req.body.isInternational,
+    type: req.body.type,
     itinerary: req.body.itinerary,
     inclusions: req.body.inclusions,
     exclusions: req.body.exclusions,
@@ -26,10 +26,7 @@ router.post('/', (req, res, next) => {
             price: req.body.pricing.price
           }]
       },
-    status: {
-      approved: false,
-      onSale: false
-    }
+    status: 'pending'
   });
 
   Tour.addTour(newTour, (err, tour) => {
@@ -53,12 +50,8 @@ router.get('/', (req, res, next) => {
 
 router.post('/search', (req, res, next) => {
   let query = req.body;
-  if(req.body.limit) {
-    Tour.find().limit(req.body.limit).then(tours => {
-      res.send(tours);
-    });
-  }
-  Tour.find().then(tours => {
+  console.log(query);
+  Tour.find(query).then(tours => {
     res.send(tours);
   });
 });

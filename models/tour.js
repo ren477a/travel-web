@@ -16,8 +16,8 @@ const TourSchema = mongoose.Schema({
     type: Number,
     required: true
   },
-  isInternational: {
-    type: Boolean,
+  type: { // Local International
+    type: String,
     required: true
   },
   itinerary: {
@@ -52,8 +52,12 @@ const TourSchema = mongoose.Schema({
         }]
   },
   status: {
-    approved: Boolean,
-    onSale: Boolean
+    type: String,
+    default: 'pending'
+  }, // onsale pending notonsale
+  sold: {
+    type: Number,
+    default: 0
   }
 });
 
