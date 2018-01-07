@@ -27,6 +27,7 @@ export class ManagetoursComponent implements OnInit {
   price: String;
 
   tours: Array<any>;
+  selectedTour: any;
 
   constructor(
     private authService: AuthService,
@@ -35,21 +36,22 @@ export class ManagetoursComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const query = JSON.stringify({  agency: this.authService.getLoggedInAgency().agencyName });
+    this.selectedTour = {}
+    const query = {  agency: this.authService.getLoggedInAgency().agencyName };
     this.toursService.findTours(query).subscribe(res => {
       this.tours = res;
+      console.log(this.tours);
     });
   }
 
   onClickAddTour() {
     //TODO validation
-    let isInternational: Boolean = this.type === 'International';
     const tour = {
       title: this.title,
       agency: this.authService.getLoggedInAgency().agencyName,
       description: this.description,
       duration: +this.duration,
-      isInternational: isInternational,
+      type: this.type,
       itinerary: this.itinerary,
       inclusions: this.inclusions,
       exclusions: this.exclusions,
@@ -72,6 +74,10 @@ export class ManagetoursComponent implements OnInit {
         console.log("Something went wrong")
       }
     });
+  }
+
+  onItemClick(tour) {
+    this.selectedTour = tour;
   }
 
   clearData() {
