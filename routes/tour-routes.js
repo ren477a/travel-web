@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 
 const Tour = require('../models/tour');
 
-router.post('/',bodyParser.urlencoded({ extended: true }), (req, res, next) => {
+router.post('/', (req, res, next) => {
   // Edit this
   let newTour = new Tour({
     title: req.body.title,
