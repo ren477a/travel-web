@@ -86,7 +86,7 @@
 
             <div class="form-group">
               <label for="exampleInputFile">Tour Photo</label>
-              <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+              <input (change)="getFiles($event)" name="photo" accept="image/*" type="file" class="form-control-file" id="photo" aria-describedby="fileHelp">
               <small id="fileHelp" class="form-text text-muted">This photo will be used as thumbnail and banner for your tour package.</small>
             </div>
           </div>

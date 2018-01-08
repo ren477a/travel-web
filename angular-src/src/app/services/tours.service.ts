@@ -11,6 +11,14 @@ export class ToursService {
     this.isDev = false;
   }
 
+  uploadPhoto(photo: File) {
+    let data = new FormData();
+    data.append('photo', photo);
+    let ep = this.prepEndpoint('api/tours/upload');
+    return this.http.post(ep, data,)
+      .map(res => res.json());
+  }
+
   addTour(tour){
     let headers = new Headers();
     headers.append('Content-Type','application/json');

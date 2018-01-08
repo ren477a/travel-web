@@ -3,8 +3,8 @@ import { AuthService } from '../../services/auth.service';
 import { ToursService } from '../../services/tours.service';
 import { Router } from '@angular/router';
 
-declare var jquery:any;   // not required
-declare var $ :any;   // not required
+declare var jquery: any;   // not required
+declare var $: any;   // not required
 
 @Component({
   selector: 'app-managetours',
@@ -26,8 +26,12 @@ export class ManagetoursComponent implements OnInit {
   validityInDays: String;
   price: String;
 
+  photo: File;
+
   tours: Array<any>;
   selectedTour: any;
+
+  msg: String;
 
   constructor(
     private authService: AuthService,
@@ -36,44 +40,58 @@ export class ManagetoursComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.selectedTour = {pricing: {fixed: 0 }};
-    const query = {  agency: this.authService.getLoggedInAgency().agencyName };
+    this.selectedTour = { pricing: { fixed: 0 } };
+    const query = { agency: this.authService.getLoggedInAgency().agencyName };
     this.toursService.findTours(query).subscribe(res => {
       this.tours = res;
       console.log(this.tours);
     });
   }
 
+  getFiles(event) {
+    this.photo = event.target.files[0];
+  }
+
   onClickAddTour() {
     //TODO validation
-    const tour = {
-      title: this.title,
-      agency: this.authService.getLoggedInAgency().agencyName,
-      description: this.description,
-      duration: +this.duration,
-      type: this.type,
-      itinerary: this.itinerary,
-      inclusions: this.inclusions,
-      exclusions: this.exclusions,
-      terms: this.terms,
-      validityInDays: +this.validityInDays,
-      pricing: {
-        ptype: "fixed",
-        fixed: +this.price,
-        group: []
-      }
-    }
 
-    this.toursService.addTour(tour).subscribe(data => {
-      if(data.success) {
-        console.log("Submit success");
-        this.clearData();
-        this.btnAddTour.nativeElement.click();
-        this.router.navigate['/manage'];
-      } else {
-        console.log("Something went wrong")
+    let imgLoc: String;
+    this.toursService.uploadPhoto(this.photo).subscribe(res => {
+      if (res.file) {
+        imgLoc = res.file;
+        const tour = {
+          title: this.title,
+          agency: this.authService.getLoggedInAgency().agencyName,
+          description: this.description,
+          duration: +this.duration,
+          type: this.type,
+          itinerary: this.itinerary,
+          inclusions: this.inclusions,
+          exclusions: this.exclusions,
+          terms: this.terms,
+          validityInDays: +this.validityInDays,
+          pricing: {
+            ptype: "fixed",
+            fixed: +this.price,
+            group: []
+          },
+          img: imgLoc
+        }
+
+        this.toursService.addTour(tour).subscribe(data => {
+          if (data.success) {
+            console.log("Submit success");
+            this.clearData();
+            this.btnAddTour.nativeElement.click();
+            this.router.navigate['/manage'];
+          } else {
+            console.log("Something went wrong")
+          }
+        });
       }
+
     });
+
   }
 
   onItemClick(tour) {
