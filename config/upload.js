@@ -12,14 +12,14 @@ AWS.config.update({
 
 const s3 = new AWS.S3();
 
-const storage = multerS3({
+var storage = multerS3({
     s3: s3,
     bucket: 'travelcatalog',
     metadata: function (req, file, cb) {
         cb(null, { fieldName: file.fieldname });
     },
     key: function (req, file, cb) {
-        let fullPath = dest + '/' + Date.now().toString() + '-' + file.originalname;
+        let fullPath = dest + '/' + Date.now().toString();
         cb(null, fullPath)
     }
 });
@@ -51,6 +51,20 @@ function checkFileType(file, cb) {
 //var upload = multer({ dest: 'uploads/' });
 module.exports = upload;
 
+module.exports.setFileName = function(fileName) {
+    this.fileName = fileName;
+}
+
 module.exports.setDestination = function(dest) {
-    this.dest = dest;
+    this.storage = multerS3({
+        s3: s3,
+        bucket: 'travelcatalog',
+        metadata: function (req, file, cb) {
+            cb(null, { fieldName: file.fieldname });
+        },
+        key: function (req, file, cb) {
+            let fullPath = dest + '/' + Date.now().toString();
+            cb(null, fullPath)
+        }
+    });
 }
