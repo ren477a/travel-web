@@ -2,6 +2,17 @@
 
   <!-- ADD TOUR -->
   <!-- Button trigger modal -->
+  <div class="btn-group" data-toggle="buttons">
+    <label (click)="onChangeTab('onsale')" class="btn btn-primary active">
+      <input type="radio" name="options" id="option1" autocomplete="off" checked> On Sale
+    </label>
+    <label (click)="onChangeTab('pending')" class="btn btn-primary">
+      <input type="radio" name="options" id="option2" autocomplete="off"> For Approval
+    </label>
+    <label (click)="onChangeTab('notonsale')" class="btn btn-primary">
+      <input type="radio" name="options" id="option3" autocomplete="off"> Archived
+    </label>
+  </div>
   <button type="button" #btnAddTour class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
     Add Tours
   </button>

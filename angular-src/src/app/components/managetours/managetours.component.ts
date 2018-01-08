@@ -14,6 +14,8 @@ declare var $: any;   // not required
 export class ManagetoursComponent implements OnInit {
   @ViewChild('btnAddTour') btnAddTour: ElementRef;
 
+  showWithStatus: String;
+
   title: String;
   agency: String;
   description: String;
@@ -40,16 +42,22 @@ export class ManagetoursComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.showWithStatus = 'onsale';
     this.selectedTour = { pricing: { fixed: 0 } };
     this.reload();
   }
 
   reload() {
-    const query = { agency: this.authService.getLoggedInAgency().agencyName };
+    const query = { agency: this.authService.getLoggedInAgency().agencyName, status: this.showWithStatus };
     this.toursService.findTours(query).subscribe(res => {
       this.tours = res;
       console.log(this.tours);
     });
+  }
+
+  onChangeTab(status) {
+    this.showWithStatus = status;
+    this.reload();
   }
 
   getFiles(event) {
