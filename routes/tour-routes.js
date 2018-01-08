@@ -1,10 +1,11 @@
 const router = require('express').Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const bodyParser = require('body-parser');
 
 const Tour = require('../models/tour');
 
-router.post('/', (req, res, next) => {
+router.post('/',bodyParser.urlencoded({ extended: true }), (req, res, next) => {
   // Edit this
   let newTour = new Tour({
     title: req.body.title,
@@ -26,7 +27,8 @@ router.post('/', (req, res, next) => {
             price: req.body.pricing.price
           }]
       },
-    status: 'pending'
+    status: 'pending',
+    img: req.body.img
   });
 
   Tour.addTour(newTour, (err, tour) => {
@@ -35,6 +37,29 @@ router.post('/', (req, res, next) => {
       res.json({success: false, tour: null});
     } else {
       res.json({success: true, tour: tour});
+    }
+  });
+});
+
+const upload = require('../config/upload');
+router.post('/upload', (req, res) => {
+  upload.setDestination('tours');
+  upload.single('photo')(req, res, (err) => {
+    if(err){
+      res.json({
+        msg: err
+      });
+    } else {
+      if(req.file == undefined){
+        res.json({
+          msg: 'Error: No File Selected!'
+        });
+      } else {
+        res.json({
+          msg: 'File Uploaded!',
+          file: `${req.file.location}`
+        });
+      }
     }
   });
 });
