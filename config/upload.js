@@ -3,7 +3,7 @@ const path = require('path');
 var AWS = require('aws-sdk');
 var multerS3 = require('multer-s3');
 
-
+var dest = '';
 AWS.config.update({
     region: 'ap-southeast-1',
     accessKeyId: process.env.S3_KEY_ID,
@@ -19,7 +19,7 @@ const storage = multerS3({
         cb(null, { fieldName: file.fieldname });
     },
     key: function (req, file, cb) {
-        let fullPath = 'tours/' + Date.now().toString() + '-' + file.originalname;
+        let fullPath = dest + '/' + Date.now().toString() + '-' + file.originalname;
         cb(null, fullPath)
     }
 });
@@ -50,3 +50,7 @@ function checkFileType(file, cb) {
 
 //var upload = multer({ dest: 'uploads/' });
 module.exports = upload;
+
+module.exports.setDestination = function(dest) {
+    this.dest = dest;
+}
