@@ -50,6 +50,10 @@ module.exports.addAgency = function(newAgency, callback) {
   });
 };
 
+module.exports.getAgencyById = function(id, callback) {
+  Agency.findById(id, callback);
+};
+
 module.exports.getAgencyByEmail = function(email, callback) {
   const query = { email: email };
   Agency.findOne(query, callback);
