@@ -52,6 +52,15 @@ function checkFileType(file, cb) {
 module.exports.s3 = this.s3;
 module.exports = upload;
 
+module.exports.getUrl = function(key) {
+    const signedUrlExpireSeconds = 60 * 5;
+    return url = s3.getSignedUrl('getObject', {
+        Bucket: 'travelcatalog',
+        Key: key,
+        Expires: signedUrlExpireSeconds
+    });
+}
+
 module.exports.setFileName = function(fileName) {
     this.fileName = fileName;
 }
