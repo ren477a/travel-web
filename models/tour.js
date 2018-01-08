@@ -58,6 +58,10 @@ const TourSchema = mongoose.Schema({
   sold: {
     type: Number,
     default: 0
+  },
+  img:  {
+    type: String,
+    required: true
   }
 });
 
