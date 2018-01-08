@@ -117,6 +117,13 @@
             </div>
             <div class="modal-body">
               <!-- IMAGE -->
+              
+              <p><strong>Status</strong></p>
+              <p *ngIf="selectedTour.status === 'onsale'" class="text-success">On Sale</p>
+              <p *ngIf="selectedTour.status === 'pending'" class="text-warning">Pending</p>
+              <p *ngIf="selectedTour.status === 'notonsale'" class="text-danger">Not on sale</p>
+              <hr>
+
               <p><strong>Type</strong></p>
               <p>{{selectedTour.type}}</p>
               <hr>
@@ -163,7 +170,9 @@
         <small>{{tour.sold}} vouchers sold</small>
       </div>
       <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-      <small>{{tour.status}}</small>
+      <small *ngIf="tour.status === 'onsale'" class="text-success">On Sale</small>
+      <small *ngIf="tour.status === 'pending'" class="text-warning">Pending</small>
+      <small *ngIf="tour.status === 'notonsale'" class="text-muted">Not on sale</small>
     </a>
   </div>
 

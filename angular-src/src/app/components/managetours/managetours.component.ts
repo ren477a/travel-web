@@ -36,7 +36,7 @@ export class ManagetoursComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.selectedTour = {}
+    this.selectedTour = {pricing: {fixed: 0 }};
     const query = {  agency: this.authService.getLoggedInAgency().agencyName };
     this.toursService.findTours(query).subscribe(res => {
       this.tours = res;
