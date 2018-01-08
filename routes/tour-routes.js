@@ -103,6 +103,15 @@ router.get('/:id', (req, res, next) => {
   });
 });
 
+router.put('/archive/:id', (req, res, next) => {
+  var conditions = { _id: req.params.id }
+  , update = { status: 'notonsale' }
+  , options = { multi: true };
 
+  Tour.update(conditions, update, options, (err, numAffected) => {
+    // numAffected is the number of updated documents
+    res.json({numAffected: numAffected});
+  });
+});
 
 module.exports = router;
