@@ -63,7 +63,7 @@ module.exports.setDestination = function(dest) {
             cb(null, { fieldName: file.fieldname });
         },
         key: function (req, file, cb) {
-            let fullPath = dest + '/' + Date.now().toString();
+            let fullPath = dest + '/' + Date.now().toString() + '.' + path.extname;
             cb(null, fullPath)
         }
     });
