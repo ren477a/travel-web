@@ -42,6 +42,7 @@ router.post('/', (req, res, next) => {
 });
 
 const upload = require('../config/upload');
+const s3 = upload.s3;
 router.post('/upload', (req, res) => {
   upload.setDestination('tours');
   upload.single('photo')(req, res, (err) => {
@@ -57,7 +58,7 @@ router.post('/upload', (req, res) => {
       } else {
         res.json({
           msg: 'File Uploaded!',
-          file: `${req.file.location}`
+          file: `${req.file.key}`
         });
       }
     }
@@ -67,6 +68,11 @@ router.post('/upload', (req, res) => {
 router.get('/', (req, res, next) => {
   // Edit this
   //let query = JSON.parse(req.query.q);
+//   const url = s3.getSignedUrl('getObject', {
+//     Bucket: 'travelcatalog',
+//     Key: myKey,
+//     Expires: signedUrlExpireSeconds
+// })
   console.log(req.query.q);
   Tour.find().then(tours => {
     res.send(tours);

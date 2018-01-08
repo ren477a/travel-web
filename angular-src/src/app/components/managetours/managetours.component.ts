@@ -57,6 +57,7 @@ export class ManagetoursComponent implements OnInit {
 
     let imgLoc: String;
     this.toursService.uploadPhoto(this.photo).subscribe(res => {
+      console.log(res.msg);
       if (res.file) {
         imgLoc = res.file;
         const tour = {
@@ -77,7 +78,7 @@ export class ManagetoursComponent implements OnInit {
           },
           img: imgLoc
         }
-
+        console.log(imgLoc)
         this.toursService.addTour(tour).subscribe(data => {
           if (data.success) {
             console.log("Submit success");

@@ -19,7 +19,7 @@ var storage = multerS3({
         cb(null, { fieldName: file.fieldname });
     },
     key: function (req, file, cb) {
-        let fullPath = dest + '/' + Date.now().toString();
+        let fullPath = dest + '/' + Date.now().toString() + path.extname(file.originalname);
         cb(null, fullPath)
     }
 });
@@ -49,6 +49,7 @@ function checkFileType(file, cb) {
 }
 
 //var upload = multer({ dest: 'uploads/' });
+module.exports.s3 = this.s3;
 module.exports = upload;
 
 module.exports.setFileName = function(fileName) {
@@ -63,7 +64,7 @@ module.exports.setDestination = function(dest) {
             cb(null, { fieldName: file.fieldname });
         },
         key: function (req, file, cb) {
-            let fullPath = dest + '/' + Date.now().toString() + '.' + path.extname;
+            let fullPath = dest + '/' + Date.now().toString() + path.extname(file.originalname);
             cb(null, fullPath)
         }
     });
