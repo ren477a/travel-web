@@ -41,6 +41,10 @@ export class ManagetoursComponent implements OnInit {
 
   ngOnInit() {
     this.selectedTour = { pricing: { fixed: 0 } };
+    this.reload();
+  }
+
+  reload() {
     const query = { agency: this.authService.getLoggedInAgency().agencyName };
     this.toursService.findTours(query).subscribe(res => {
       this.tours = res;
@@ -83,8 +87,12 @@ export class ManagetoursComponent implements OnInit {
           if (data.success) {
             console.log("Submit success");
             this.clearData();
-            this.btnAddTour.nativeElement.click();
-            this.router.navigate['/manage'];
+            this.reload();
+            setTimeout(() => {
+              this.btnAddTour.nativeElement.click();
+              this.router.navigate['/manage'];
+            }, 1000);
+
           } else {
             console.log("Something went wrong")
           }
@@ -97,6 +105,19 @@ export class ManagetoursComponent implements OnInit {
 
   onItemClick(tour) {
     this.selectedTour = tour;
+    console.log(this.selectedTour);
+  }
+
+  onClickStopSelling() {
+    console.log("Stop selling")
+    this.toursService.stopSelling(this.selectedTour._id).subscribe(data => {
+      console.log(data);
+      this.router.navigate(['/manage']);
+      this.reload()
+      setTimeout(() => {
+        this.router.navigate(['/manage']);
+      }, 300);
+    });
   }
 
   clearData() {

@@ -129,7 +129,7 @@
               <hr>
 
               <p><strong>Price</strong></p>
-              <p>{{selectedTour.pricing.fixed}}</p>
+              <p>PHP {{selectedTour.pricing.fixed}}</p>
               <hr>
 
               <p><strong>Trip Length in Days</strong></p>
@@ -159,11 +159,13 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button *ngIf="selectedTour.status === 'onsale'" (click)="onClickStopSelling()" type="button" class="btn btn-secondary btn-danger">Stop selling this package</button>
+              <button *ngIf="selectedTour.status === 'pending'" data-dismiss="modal" (click)="onClickStopSelling()" type="button" class="btn btn-secondary btn-danger">Discard Request</button>
             </div>
           </div>
-        </div>
       </div>
       <!-- end of modal -->
+        </div>
 
       <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1">{{tour.title}}</h5>
