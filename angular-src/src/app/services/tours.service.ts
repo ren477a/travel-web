@@ -51,6 +51,14 @@ export class ToursService {
       .map(res => res.json());
   }
 
+  stopSelling(id) {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint('api/tours/archive/' + id);
+    return this.http.put(ep, {headers: headers})
+      .map(res => res.json());
+  }
+
   prepEndpoint(ep) {
   	if(!this.isDev)
   		return ep;
