@@ -51,6 +51,30 @@ app.use('/api/tours', toursRoutes);
 app.use('/api/payment', paymentRoutes);
 app.use('/api/transaction', transactionRoutes);
 
+const upload = require('./config/upload');
+app.post('/upload', (req, res) => {
+  upload.single('avatar')(req, res, (err) => {
+    if(err){
+      res.json({
+        msg: err
+      });
+    } else {
+      if(req.file == undefined){
+        res.json({
+          msg: 'Error: No File Selected!'
+        });
+      } else {
+        res.json({
+          msg: 'File Uploaded!',
+          file: `${req.file.location}`
+        });
+      }
+    }
+  });
+});
+// app.post('/upload', upload.single('avatar'),  function(req, res) {
+//   res.send(req.file.originalname);
+// });
 // app.use(function(req, res, next) {
 // 	res.redirect('/#' + req.originalUrl);
 // });
