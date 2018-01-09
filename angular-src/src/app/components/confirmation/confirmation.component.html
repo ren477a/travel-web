@@ -1,10 +1,21 @@
-<div class="containter text-center" style="margin-top:20%">
-  <h2>Purchase successful. Thank you!</h2>
-  <form (submit)="onClickHere()">
+<div class="container inner-container " style="padding-top:5%">
+    <div class="containter text-center card card-body card-outline-secondary" style="margin-top:10%">
+      <h2>Purchase successful. Thank you!</h2>
+      <form (submit)="onClickHere()">
 
-    <h6 *ngIf="!this.canProceed">Please wait...</h6>
-    <button *ngIf="this.canProceed" class="btn btn-primary" type="submit">Click Here to see your vouchers</button>
+      <h6 *ngIf="!this.canProceed">Please wait...</h6>
+      <button *ngIf="this.canProceed" class="btn btn-primary" type="submit">Click Here to see your vouchers</button>
 
-  </form>
+      </form>
+    </div>
 
+
+</div>
+<div id="footer" class="container-fluid mt-5" style="bottom: 0">
+<div class="container">
+<footer>
+<p>© 2017 Travel Catalog Philippines
+</p>
+</footer>
+</div>
 </div>
