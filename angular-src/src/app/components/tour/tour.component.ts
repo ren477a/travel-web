@@ -34,7 +34,7 @@ export class TourComponent implements OnInit {
     );
     this.toursService.findTourById(this.tourId).subscribe(res => {
       this.tour = res.tour;
-      console.log(this.tour.sold);
+      console.log(this.tour);
       this.imgUrl = res.imgUrl;
     },
       err => {
