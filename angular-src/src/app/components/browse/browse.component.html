@@ -55,9 +55,9 @@
     <div class="col-lg-8 col-md-9 col-sm-8 col-xs-10">
       <div class="container m-2">
         <div class="row">
-          <div *ngFor="let tour of tours" class="col-lg-4 col-md-6 p-0 titulo">
+          <div *ngFor="let tour of tours; let i = index" class="col-lg-4 col-md-6 p-0 titulo">
             <div class="card text-justify mb-2 mt-2 ml-1 mr-1" style="max-width: 40rem;">
-              <img class="card-img-top" src="http://via.placeholder.com/300x200">
+              <img class="card-img-top" src="{{urls[i]}}">
               <div class="card-body">
                 <h5 class="card-title">
                   <a class="card-link title" [routerLink]="['/tour', tour._id]">{{ tour.title }}</a>

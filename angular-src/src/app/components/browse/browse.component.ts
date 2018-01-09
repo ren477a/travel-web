@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs/Subscription';
 export class BrowseComponent implements OnInit {
 
   tours: Array<any>;
+  urls: Array<String>;
   keyword: String;
   minPrice: Number;
   maxPrice: Number;
@@ -39,6 +40,7 @@ export class BrowseComponent implements OnInit {
     // }
     this.sub = this.toursService.findTours({title: this.keyword}, 1).subscribe(res => {
       this.tours = res.tours;
+      this.urls = res.urls;
       // this.pages = new Array(res.totalPages+1);
       // for(let i = 1; i <= this.pages.length; i++) {
       //   this.pages[i] = i;

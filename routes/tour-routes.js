@@ -86,7 +86,8 @@ router.post('/search', (req, res, next) => {
   let pageNum = req.body.pageNum;
   let totalPages = 1;
   console.log('skip ' + ((pageNum - 1) * 9));
-  if (query.title) {
+  console.log(query.title);
+  if (query.title != undefined) {
     query.title = {
       $regex: new RegExp('.*' + query.title + '.*')
     }
@@ -109,10 +110,17 @@ router.post('/search', (req, res, next) => {
     if (pageNum > totalPages) pageNum = totalPages;
     console.log(pageNum)
     Tour.find(query).limit(9).skip((pageNum - 1) * 9).then(tours => {
+      var arrayLength = tours.length;
+      console.log('length '+ arrayLength)
+      let urls = new Array(arrayLength);
+      for (var i = 0; i < arrayLength; i++) {
+         urls[i] = upload.getUrl(tours[i].img)
+      }
       res.json({
         tours: tours,
         pageNum: pageNum,
-        totalPages: totalPages
+        totalPages: totalPages,
+        urls: urls
       });
     });
   });
