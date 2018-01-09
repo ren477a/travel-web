@@ -82,11 +82,32 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/search', (req, res, next) => {
-  let query = req.body;
+  let query = req.body.query;
+  let pageNum = req.body.pageNum;
+  let totalPages = 1;
+  console.log('skip ' + ((pageNum - 1) * 9));
+
+  query.title = {
+    $regex: new RegExp('.*' + query.title + '.*')
+  }
   console.log(query);
-  Tour.find(query).then(tours => {
-    res.send(tours);
+  Tour.count(query, (err, c) => {
+    console.log(c);
+    totalPages = Math.ceil(c / 9);
+    console.log(totalPages);
+    console.log('total pages ' + totalPages);
+    console.log('pagenum ' + pageNum)
+    if (pageNum > totalPages) pageNum = totalPages;
+    console.log(pageNum)
+    Tour.find(query).limit(9).skip((pageNum - 1) * 9).then(tours => {
+      res.json({
+        tours: tours,
+        pageNum: pageNum,
+        totalPages: totalPages
+      });
+    });
   });
+
 });
 
 router.get('/featured', (req, res, next) => {
@@ -99,18 +120,18 @@ router.get('/:id', (req, res, next) => {
 
   Tour.findOne({ _id: req.params.id }).then(tour => {
     let url = upload.getUrl(tour.img);
-    res.json({tour: tour, imgUrl: url});
+    res.json({ tour: tour, imgUrl: url });
   });
 });
 
 router.put('/archive/:id', (req, res, next) => {
   var conditions = { _id: req.params.id }
-  , update = { status: 'notonsale' }
-  , options = { multi: true };
+    , update = { status: 'notonsale' }
+    , options = { multi: true };
 
   Tour.update(conditions, update, options, (err, numAffected) => {
     // numAffected is the number of updated documents
-    res.json({numAffected: numAffected});
+    res.json({ numAffected: numAffected });
   });
 });
 

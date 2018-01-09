@@ -76,19 +76,16 @@
           <br>
           <ul class="pagination pagination-md">
             <li class="page-item">
-              <a class="page-link" href="#">Previous</a>
+              <a (click)="previousPage()" class="page-link" >Previous</a>
             </li>
-            <li class="page-item">
-              <a class="page-link active" href="#">1</a>
+            <div *ngFor="let page of pages">
+              <li class="page-item">
+              <a (click)="toPage(page)" class="page-link" >{{page}}</a>
             </li>
+            </div>
+            
             <li class="page-item">
-              <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">Next</a>
+              <a (click)="nextPage()" class="page-link">Next</a>
             </li>
           </ul>
           <br>

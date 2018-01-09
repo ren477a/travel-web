@@ -27,11 +27,15 @@ export class ToursService {
       .map(res => res.json());
   }
 
-  findTours(query) {
+  findTours(query, pageNum) {
     let headers = new Headers();
+    let data = {
+      query: query,
+      pageNum: pageNum
+    }
     headers.append('Content-Type','application/json');
     let ep = this.prepEndpoint('api/tours/search');
-    return this.http.post(ep, query, {headers: headers})
+    return this.http.post(ep, data, {headers: headers})
       .map(res => res.json());
   }
 
