@@ -35,19 +35,20 @@
 
     <div class="form-group">
       <label for="dti">DTI Permit</label>
-      <input type="file" class="form-control-file" id="dti" aria-describedby="fileHelp">
+      <input (change)="getDtiFiles($event)" type="file" class="form-control-file" id="dti" aria-describedby="fileHelp">
       <small id="fileHelp" class="form-text text-muted">Please upload a scanned copy of your DTI permit.</small>
     </div>
     <div class="form-group">
       <label for="business-permit">Business Permit</label>
-      <input type="file" class="form-control-file" id="business-permit" aria-describedby="fileHelp">
+      <input (change)="getBusinessFiles($event)" type="file" class="form-control-file" id="business-permit" aria-describedby="fileHelp">
       <small id="fileHelp" class="form-text text-muted">Please upload a scanned copy of your business permit.</small>
     </div>
     <div class="form-group">
       <label for="bir">BIR Certificate of Registration</label>
-      <input type="file" class="form-control-file" id="bir" aria-describedby="fileHelp">
+      <input (change)="getBirFiles($event)" type="file" class="form-control-file" id="bir" aria-describedby="fileHelp">
       <small id="fileHelp" class="form-text text-muted">Please upload a scanned copy of your BIR Certificate of Registration.</small>
     </div>
     <button type="submit" class="btn btn-primary">Register</button>
+    <small>&nbsp;{{msg}}</small>
   </form>
 </div>
