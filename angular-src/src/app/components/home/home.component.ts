@@ -26,6 +26,10 @@ export class HomeComponent implements OnInit {
       this.urls = res.urls;
     });
   }
+  
+  onStartBrowsing() {
+    this.router.navigate(['/browse']);
+  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
