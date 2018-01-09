@@ -93,6 +93,7 @@ export class BrowseComponent implements OnInit {
   toPage(page) {
     this.activePage = page;
     if(this.activePage<0) this.activePage = 0;
+    if(this.activePage>=this.pages.length) this.activePage = this.pages.length;
     this.sub.unsubscribe();
     this.sub = this.toursService.findTours({title: this.keyword}, this.activePage).subscribe(res => {
       this.tours = res.tours;
