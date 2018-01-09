@@ -1,68 +1,78 @@
-<div class="container" style="margin-top: 50px">
-  <div class="card mb-3">
-    <img class="card-img-top" src="{{imgUrl}}" alt="Card image cap">
-    <div class="card-body">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8">
-            <div class="container m-0 p-0">
-              <div class="row">
-                <div class="col-md-12">
-                  <h3 class="card-title">{{ tour?.title }}</h3>
-                  <h6 class="card-subtitle mb-2 text-muted"> {{tour?.agency}}</h6>
-                  <p class="card-text text-justify">{{ tour?.description }}</p>
-                </div>
-              </div>
-              <hr>
-              <div class="row">
-                <div class="col-md-12">
-                  <h4>Itinerary</h4>
-                  <ul *ngFor="let i of tour?.itinerary">
-                    <li>{{ i }}</li>
-                  </ul>
-                </div>
-              </div>
+<div class="container" class="p-5" style="margin-top: 50px;">
+  <div class="row" id="color" >
+    <div class="col-sm-5">
+      <div class="card">
+        <img class="card-img-top img-fluid" src="{{imgUrl}}" alt="">
+          <div class="card-body">
+          <div class="col-md-12">
+            <h3 class="card-title">{{ tour?.title }}</h3>
+              <h6 class="card-subtitle mb-2 text-muted"> {{tour?.agency}}</h6>
+              <p class="card-text text-justify">{{ tour?.description }}</p>
+          </div>
+          </div>
+      </div>
+    </div>
+    <div class="col-sm-7">
+      <div class="card card-outline-secondary">
+        <div class="card-header">
+          <h6 style="float: left">Travel Package Summary<br><small class="card-subtitle text-muted">{{tour?.sold}} bought</small></h6>
+
+          <small style="float: right">Valid within {{tour?.validityInDays}} days after purchase.</small>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <h5>Itinerary</h5>
+                <p>
+                  {{tour?.itinerary}}
+                </p>
             </div>
           </div>
-          <div class="col-md-4">
-            <h5>
-              <strong>P{{ tour?.pricing.fixed }}</strong>
-              <small>per person</small>
-            </h5>
-            <form (submit)="onPurchaseClick()">
-              <div class="form-group">
-                <input type="number" min="0" [(ngModel)]="quantity" name="quantity" class="form-control" id="quantity" placeholder="Enter quantity">
-              </div>
-              <button type="submit" class="btn btn-primary btn-block">Purchase Now</button>
-            </form>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+            <h5>Inclusions</h5>
+            <div *ngFor="let inclusion of tour?.inclusions">
+              <p>{{ tour?.inclusion }}</p>
+            </div>
+            </div>
+            <div class="col-md-6">
+            <h5>Exclusions</h5>
+            <div *ngFor="let exclusion of tour?.exclusions">
+              <p>{{ tour?.exclusion }}</p>
+            </div>
+            </div>
           </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-md-6">
-            <h4>Inclusions</h4>
-            <ul *ngFor="let inclusion of tour?.inclusions">
-              <li>{{ inclusion }}</li>
-            </ul>
-          </div>
-          <div class="col-md-6">
-            <h4>Exclusions</h4>
-            <ul *ngFor="let exclusion of tour?.exclusions">
-              <li>{{ exclusion }}</li>
-            </ul>
-          </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-md-12">
-            <h4>Terms</h4>
+          <hr>
+          <div class="row">
+            <div class="col-md-12">
+            <h5>Terms and Conditions</h5>
             <p>{{ tour?.terms }}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="col-md-4" style="float: right">
+          <h5>
+            <strong>P{{ tour?.pricing.fixed }}</strong>
+            <small>per person</small>
+          </h5>
+          <form (submit)="onPurchaseClick()">
+            <div class="form-group">
+            <input type="number" min="0" [(ngModel)]="quantity" name="quantity" class="form-control" id="quantity" placeholder="Enter quantity">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Purchase Now</button>
+          </form>
           </div>
         </div>
       </div>
-      <p class="card-text">
-        <small class="text-muted">Last updated 3 mins ago</small>
-      </p>
     </div>
   </div>
+</div>
+<div id="footer" class="container-fluid mt-5">
+<div class="container">
+<footer>
+  <p>© 2017 Travel Catalog Philippines
+  </p>
+</footer>
+</div>
 </div>

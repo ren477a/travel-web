@@ -1,6 +1,7 @@
 const router = require('express').Router(); // eslint-disable-line new-cap
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 const Transaction = require('../models/transaction');
+const Tour = require('../models/tour');
 const voucher = require('voucher-code-generator');
 
 router.post('/charge', (req, res, next) => {
@@ -39,7 +40,15 @@ router.post('/transaction', (req, res, next) => {
             console.log(err);
             res.json({ success: false, transaction: null });
         } else {
-            res.json({ success: true, transaction: transaction });
+            var conditions = { _id: req.body.tourId }
+                , update = {$inc : {'sold' : 1}}
+                , options = { multi: true };
+
+            Tour.update(conditions, update, options, (err, numAffected) => {
+                // numAffected is the number of updated documents
+                res.json({ success: true, transaction: transaction });
+            });
+            
         }
     });
 });

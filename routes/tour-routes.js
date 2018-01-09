@@ -30,7 +30,8 @@ router.post('/', (req, res, next) => {
       }]
     },
     status: 'pending',
-    img: req.body.img
+    img: req.body.img,
+    sold: 0
   });
 
   Tour.addTour(newTour, (err, tour) => {
@@ -145,6 +146,7 @@ router.get('/featured', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
 
   Tour.findOne({ _id: req.params.id }).then(tour => {
+    console.log(tour);
     let url = upload.getUrl(tour.img);
     res.json({ tour: tour, imgUrl: url });
   });

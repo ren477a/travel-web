@@ -12,7 +12,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class TourComponent implements OnInit {
 
-  tour: Object;
+  tour: any;
   tourId: String;
   quantity: number;
   imgUrl: String;
@@ -34,6 +34,7 @@ export class TourComponent implements OnInit {
     );
     this.toursService.findTourById(this.tourId).subscribe(res => {
       this.tour = res.tour;
+      console.log(this.tour.sold);
       this.imgUrl = res.imgUrl;
     },
       err => {
