@@ -97,7 +97,7 @@ router.post('/search', (req, res, next) => {
   Tour.count(query, (err, c) => {
     console.log(c);
     totalPages = Math.ceil(c / 9);
-    if(totalPages == 0) {
+    if (totalPages == 0) {
       res.json({
         tours: [],
         pageNum: 1,
@@ -111,10 +111,10 @@ router.post('/search', (req, res, next) => {
     console.log(pageNum)
     Tour.find(query).limit(9).skip((pageNum - 1) * 9).then(tours => {
       var arrayLength = tours.length;
-      console.log('length '+ arrayLength)
+      console.log('length ' + arrayLength)
       let urls = new Array(arrayLength);
       for (var i = 0; i < arrayLength; i++) {
-         urls[i] = upload.getUrl(tours[i].img)
+        urls[i] = upload.getUrl(tours[i].img)
       }
       res.json({
         tours: tours,
@@ -129,7 +129,16 @@ router.post('/search', (req, res, next) => {
 
 router.get('/featured', (req, res, next) => {
   Tour.find().limit(9).then(tours => {
-    res.send(tours);
+    var arrayLength = tours.length;
+    console.log('length ' + arrayLength)
+    let urls = new Array(arrayLength);
+    for (var i = 0; i < arrayLength; i++) {
+      urls[i] = upload.getUrl(tours[i].img)
+    }
+    res.json({
+      tours: tours,
+      urls: urls
+    });
   });
 });
 
