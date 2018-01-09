@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { ToursService } from '../../services/tours.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 declare var jquery: any;   // not required
 declare var $: any;   // not required
@@ -35,6 +36,11 @@ export class ManagetoursComponent implements OnInit {
 
   msg: String;
 
+  activePage: number;
+  pages: Array<Number>;
+
+  sub: Subscription;
+
   constructor(
     private authService: AuthService,
     private toursService: ToursService,
@@ -44,20 +50,25 @@ export class ManagetoursComponent implements OnInit {
   ngOnInit() {
     this.showWithStatus = 'onsale';
     this.selectedTour = { pricing: { fixed: 0 } };
-    this.reload();
+    this.reload(1);
   }
 
-  reload() {
+  reload(pageNum) {
     const query = { agency: this.authService.getLoggedInAgency().agencyName, status: this.showWithStatus };
-    this.toursService.findTours(query).subscribe(res => {
-      this.tours = res;
+    this.sub = this.toursService.findTours(query, pageNum).subscribe(res => {
+      this.tours = res.tours;
+      this.pages = Array(res.totalPages).fill(1).map((x,i)=>i+1);
+      if(this.pages.length == 0) this.tours = [];
+      this.activePage = res.pageNum;
       console.log(this.tours);
     });
   }
 
   onChangeTab(status) {
     this.showWithStatus = status;
-    this.reload();
+    this.sub.unsubscribe();
+    this.reload(1);
+
   }
 
   getFiles(event) {
@@ -95,7 +106,7 @@ export class ManagetoursComponent implements OnInit {
           if (data.success) {
             console.log("Submit success");
             this.clearData();
-            this.reload();
+            this.reload(1);
             setTimeout(() => {
               this.btnAddTour.nativeElement.click();
               this.router.navigate['/manage'];
@@ -121,7 +132,7 @@ export class ManagetoursComponent implements OnInit {
     this.toursService.stopSelling(this.selectedTour._id).subscribe(data => {
       console.log(data);
       this.router.navigate(['/manage']);
-      this.reload()
+      this.reload(this.activePage);
       setTimeout(() => {
         this.router.navigate(['/manage']);
       }, 300);
@@ -140,5 +151,27 @@ export class ManagetoursComponent implements OnInit {
     this.terms = "";
     this.validityInDays = "";
     this.price = "";
+  }
+
+  nextPage() {
+    this.activePage++;
+    if(this.activePage>=this.pages.length) this.activePage = this.pages.length;
+    this.sub.unsubscribe();
+    this.reload(this.activePage);
+  }
+
+  previousPage() {
+    this.activePage--;
+    if(this.activePage<0) this.activePage = 0;
+    this.sub.unsubscribe();
+    this.reload(this.activePage);
+  }
+
+  toPage(page) {
+    this.activePage = page;
+    if(this.activePage<0) this.activePage = 0;
+    if(this.activePage>=this.pages.length) this.activePage = this.pages.length;
+    this.sub.unsubscribe();
+    this.reload(this.activePage);
   }
 }

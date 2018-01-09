@@ -114,9 +114,9 @@
 
   <!-- list group -->
   <div *ngFor="let tour of tours; let i = index" class="list-group">
-    <a (click)="onItemClick(tour)"  data-toggle="modal" data-target="#tourDetails" class="list-group-item list-group-item-action flex-column align-items-start">
-     
-  <!-- modal for tour details -->
+    <a (click)="onItemClick(tour)" data-toggle="modal" data-target="#tourDetails" class="list-group-item list-group-item-action flex-column align-items-start">
+
+      <!-- modal for tour details -->
       <div class="modal fade" id="tourDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
@@ -128,43 +128,63 @@
             </div>
             <div class="modal-body">
               <!-- IMAGE -->
-              
-              <p><strong>Status</strong></p>
+
+              <p>
+                <strong>Status</strong>
+              </p>
               <p *ngIf="selectedTour.status === 'onsale'" class="text-success">On Sale</p>
               <p *ngIf="selectedTour.status === 'pending'" class="text-warning">Pending</p>
               <p *ngIf="selectedTour.status === 'notonsale'" class="text-danger">Not on sale</p>
               <hr>
 
-              <p><strong>Type</strong></p>
+              <p>
+                <strong>Type</strong>
+              </p>
               <p>{{selectedTour.type}}</p>
               <hr>
 
-              <p><strong>Price</strong></p>
+              <p>
+                <strong>Price</strong>
+              </p>
               <p>PHP {{selectedTour.pricing.fixed}}</p>
               <hr>
 
-              <p><strong>Trip Length in Days</strong></p>
+              <p>
+                <strong>Trip Length in Days</strong>
+              </p>
               <p>{{selectedTour.duration}}</p>
               <hr>
 
-              <p><strong>Voucher Lifespan in Days</strong></p>
+              <p>
+                <strong>Voucher Lifespan in Days</strong>
+              </p>
               <p>{{selectedTour.validityInDays}}</p>
               <hr>
 
-              <p><strong>Description</strong></p>
+              <p>
+                <strong>Description</strong>
+              </p>
               <p>{{selectedTour.description}}</p>
               <hr>
 
-              <p><strong>Itinerary</strong></p>
+              <p>
+                <strong>Itinerary</strong>
+              </p>
               <p>{{selectedTour.itinerary}}</p>
               <hr>
-              <p><strong>Inclusions</strong></p>
+              <p>
+                <strong>Inclusions</strong>
+              </p>
               <p>{{selectedTour.inclusions}}</p>
               <hr>
-              <p><strong>Exclusions</strong></p>
+              <p>
+                <strong>Exclusions</strong>
+              </p>
               <p>{{selectedTour.exclusions}}</p>
               <hr>
-              <p><strong>Terms and Conditions</strong></p>
+              <p>
+                <strong>Terms and Conditions</strong>
+              </p>
               <p>{{selectedTour.terms}}</p>
               <hr>
             </div>
@@ -174,9 +194,9 @@
               <button *ngIf="selectedTour.status === 'pending'" data-dismiss="modal" (click)="onClickStopSelling()" type="button" class="btn btn-secondary btn-danger">Discard Request</button>
             </div>
           </div>
-      </div>
-      <!-- end of modal -->
         </div>
+        <!-- end of modal -->
+      </div>
 
       <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1">{{tour.title}}</h5>
@@ -187,6 +207,27 @@
       <small *ngIf="tour.status === 'pending'" class="text-warning">Pending</small>
       <small *ngIf="tour.status === 'notonsale'" class="text-muted">Not on sale</small>
     </a>
+  </div>
+
+  <div class="row">
+    <div class="center-div anchor">
+      <br>
+      <ul class="pagination pagination-md">
+        <li (click)="previousPage()" class="page-item">
+          <a class="page-link">Previous</a>
+        </li>
+        <div *ngFor="let page of pages">
+          <li (click)="toPage(page)" class="page-item">
+            <a class="page-link">{{page}}</a>
+          </li>
+        </div>
+
+        <li (click)="nextPage()" class="page-item">
+          <a class="page-link">Next</a>
+        </li>
+      </ul>
+      <br>
+    </div>
   </div>
 
   <!-- Modal -->

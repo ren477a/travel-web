@@ -86,14 +86,23 @@ router.post('/search', (req, res, next) => {
   let pageNum = req.body.pageNum;
   let totalPages = 1;
   console.log('skip ' + ((pageNum - 1) * 9));
-
-  query.title = {
-    $regex: new RegExp('.*' + query.title + '.*')
+  if (query.title) {
+    query.title = {
+      $regex: new RegExp('.*' + query.title + '.*')
+    }
   }
+
   console.log(query);
   Tour.count(query, (err, c) => {
     console.log(c);
     totalPages = Math.ceil(c / 9);
+    if(totalPages == 0) {
+      res.json({
+        tours: [],
+        pageNum: 1,
+        totalPages: totalPages
+      })
+    }
     console.log(totalPages);
     console.log('total pages ' + totalPages);
     console.log('pagenum ' + pageNum)
