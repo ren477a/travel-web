@@ -58,6 +58,7 @@ export class BrowseComponent implements OnInit {
       // for(let i = 1; i <= this.pages.length; i++) {
       //   this.pages[i] = i;
       // }
+      this.urls = res.urls;
       this.pages = Array(res.totalPages).fill(1).map((x,i)=>i+1);
       this.activePage = res.pageNum
     });
@@ -75,6 +76,7 @@ export class BrowseComponent implements OnInit {
     this.sub = this.toursService.findTours({title: this.keyword}, this.activePage).subscribe(res => {
       this.tours = res.tours;
       console.log(res.tours);
+      this.urls = res.urls;
       this.pages = Array(res.totalPages).fill(1).map((x,i)=>i+1);
       this.activePage = res.pageNum
     });
@@ -87,6 +89,7 @@ export class BrowseComponent implements OnInit {
     this.sub = this.toursService.findTours({title: this.keyword}, this.activePage).subscribe(res => {
       this.tours = res.tours;
       console.log(res.tours);
+      this.urls = res.urls;
       this.pages = Array(res.totalPages).fill(1).map((x,i)=>i+1);
       this.activePage = res.pageNum
     });
@@ -100,6 +103,7 @@ export class BrowseComponent implements OnInit {
     this.sub = this.toursService.findTours({title: this.keyword}, this.activePage).subscribe(res => {
       this.tours = res.tours;
       console.log(res.tours);
+      this.urls = res.urls;
       this.pages = Array(res.totalPages).fill(1).map((x,i)=>i+1);
       this.activePage = res.pageNum
     });
