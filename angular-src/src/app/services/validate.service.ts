@@ -10,7 +10,12 @@ export class ValidateService {
       user.lastname == undefined ||
       user.mobileNumber == undefined ||
       user.email == undefined ||
-      user.password == undefined) {
+      user.password == undefined ||
+      user.firstname == '' ||
+      user.lastname == '' ||
+      user.mobileNumber == '' ||
+      user.email == '' ||
+      user.password == '') {
     } else {
       return true;
     }
@@ -127,9 +132,20 @@ export class ValidateService {
       tours.validityInDays == undefined ||
       tours.type == undefined ||
       tours.itinerary == undefined ||
+      tours.description == undefined ||
       tours.inclusions == undefined ||
       tours.exclusions == undefined ||
-      tours.terms == undefined) {
+      tours.terms == undefined ||
+      tours.title == '' ||
+      tours.pricing.fixed == '' ||
+      tours.duration == '' ||
+      tours.validityInDays == '' ||
+      tours.type == '' ||
+      tours.itinerary == '' ||
+      tours.description == '' ||
+      tours.inclusions == '' ||
+      tours.exclusions == '' ||
+      tours.terms == '') {
       return "Please fill in all the fields."
     }
 
