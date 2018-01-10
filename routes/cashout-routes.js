@@ -44,11 +44,7 @@ router.post('/', (req, res, next) => {
                         let newCashout = new Cashout({
                             agencyId: req.body.agencyId,
                             agency: req.body.agency,
-                            bankAccount: {
-                                accountNumber: req.body.accountNumber,
-                                accountName: req.body.accountNumber,
-                                backName: req.body.bankAccount
-                            },
+                            bankAccount: req.body.bankAccount,
                             msg: '',
                             status: 'pending',
                             amount: req.body.amount,

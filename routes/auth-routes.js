@@ -136,6 +136,16 @@ router.get('/getusertype', passport.authenticate('jwt', {session:false}), (req, 
   });
 });
 
+router.get('/agency/:id', (req, res) => {
+  Agency.findOne({ _id: req.params.id }).then(agency => {
+    res.json({
+      _id: agency._id,
+      agencyName: agency.agencyName,
+      balance: agency.balance
+    })
+  });
+})
+
 router.get('/validate', (req, res, next) => {
   res.send('VALIDATE');
 });

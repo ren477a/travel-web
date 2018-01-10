@@ -29,8 +29,7 @@ const CashoutSchema = mongoose.Schema({
       }
   },
   msg: {
-    type: String,
-    required: true
+    type: String
   },
   status: {
     type: String,
