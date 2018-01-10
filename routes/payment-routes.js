@@ -61,15 +61,15 @@ router.post('/transaction', (req, res, next) => {
 
                     // Message
                     let output = `
-                    <p>You have a new contact request</p>
+                    <h1>Thank you for using TravelCatalog!</h1>
                     <h3>Transaction Receipt</h3>
                     <ul>  
                       <li>TR#: ${transaction._id}</li>
-                      <li>Name: ${transaction.tourTitle}</li>
-                      <li>Name: ${transaction.agency}</li>
-                      <li>Name: ${transaction.quantity}</li>
-                      <li>Name: ${transaction.pricePerItem}</li>
-                      <li>Name: ${transaction.total}</li>
+                      <li>Tour: ${transaction.tourTitle}</li>
+                      <li>Agency: ${transaction.agency}</li>
+                      <li>Quantity: ${transaction.quantity}</li>
+                      <li>Price per voucher: ${transaction.pricePerItem}</li>
+                      <li>Total Amount: ${transaction.total}</li>
                     </ul>
                     <h3>Vouchers</h3>
                     <ul>`;
