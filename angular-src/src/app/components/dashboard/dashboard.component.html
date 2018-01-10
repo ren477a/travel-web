@@ -7,9 +7,92 @@
           <h3 align="left">Transaction History</h3>
         </div>
         <div class="col">
-          <h3 align="right">Balance: {{agency?.balance | currency:'PHP':true:'1.2-2'}}
-            <button type="button" class="btn-lg btn-success ml-3">Cash Out</button>
-          </h3>
+          <div align="right">
+            <h3>Balance: {{agency?.balance | currency:'PHP':true:'1.2-2'}} </h3>
+            <button type="button" class="btn-lg btn-success ml-3" data-toggle="modal" data-target="#cashoutModal">Cash Out</button>
+            <!-- Checkout modal -->
+            <div class="modal fade" id="cashoutModal">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Cashout Request</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div align="left" class="modal-body">
+                    <p>
+                      <strong>Please note:</strong>
+                    </p>
+                    <ol>
+                      <li>Cashout processing takes 3 to 7 business days to complete.</li>
+                      <li>All your balance upon submission of this request will be transferred to your bank account.</li>
+                      <li>Please double check your bank account details to avoid incorrect deposits.</li>
+                    </ol>
+                    <hr>
+                    <p>
+                      <strong>Summary:</strong>
+                    </p>
+                    <p>
+                      <span>
+                        Balance:
+                      </span>
+                      <span class="float-right text-muted">
+                        {{agency?.balance | currency:'PHP':true:'1.2-2'}}
+                      </span>
+                    </p>
+                    <p>
+                      <span>
+                        Listing Fee (15%):
+                      </span>
+                      <span class="float-right text-danger">
+                        - {{agency?.balance * 0.15 | currency:'PHP':false:'1.2-2'}}
+                      </span>
+                    </p>
+                    <p>
+                      <span>
+                        Transfer Fee (5%):
+                      </span>
+                      <span class="float-right text-danger">- {{agency?.balance * 0.05 | currency:'PHP':true:'1.2-2'}}
+                      </span>
+                    </p>
+                    <p>
+                      <span>
+                        You will receive:
+                      </span>
+                      <span class="float-right text-muted">
+                        {{agency?.balance * 0.80 | currency:'PHP':true:'1.2-2'}}
+                      </span>
+                    </p>
+                    <hr>
+                    <form align="left">
+                      <div class="form-group">
+                        <label for="exampleSelect1">Bank</label>
+                        <select class="form-control" id="exampleSelect1">
+                          <option>BDO</option>
+                          <option>BPI</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Account Number</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="123-123-123">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Account Name</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Juan Dela Cruz">
+                      </div>
+
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button (click)="submitCashout()" type="button" class="btn btn-primary">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
 
         </div>
 
@@ -35,7 +118,7 @@
                 <td>{{tr.customerEmail}}</td>
                 <td>{{tr.tourTitle.substring(0, 20) + "..."}}</td>
                 <td>{{tr.quantity}}</td>
-                <td>{{tr.total  | currency:'PHP':true:'1.2-2'}}</td>
+                <td>{{tr.total | currency:'PHP':true:'1.2-2'}}</td>
                 <td>{{tr.claimed}}</td>
                 <td>
                   <button (click)="detailsClick(tr)" type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#myModal">More Details</button>
@@ -71,26 +154,38 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">TR# <span class="text-muted">{{selected?._id}}</span></h4>
+        <h4 class="modal-title">TR#
+          <span class="text-muted">{{selected?._id}}</span>
+        </h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
-        Date: <span class="text-muted">{{selected?.date | date:'dd/MM/yy HH:mm'}}</span>
-        <br> Claimed: <span class="text-muted">{{selected?.claimed}}</span>
-        <br> Customer_id: <span class="text-muted">{{selected?.customerId}}</span>
-        <br> Tour_id: <span class="text-muted">{{selected?.tourId}}</span>
-        <br> Tour Title: <span class="text-muted">{{selected?.tourTitle}}</span>
-        <br> Agency: <span class="text-muted">{{selected?.agency}}</span>
-        <br> Quantity: <span class="text-muted">{{selected?.quantity}}</span>
-        <br> Voucher codes: 
+        Date:
+        <span class="text-muted">{{selected?.date | date:'dd/MM/yy HH:mm'}}</span>
+        <br> Claimed:
+        <span class="text-muted">{{selected?.claimed}}</span>
+        <br> Customer_id:
+        <span class="text-muted">{{selected?.customerId}}</span>
+        <br> Tour_id:
+        <span class="text-muted">{{selected?.tourId}}</span>
+        <br> Tour Title:
+        <span class="text-muted">{{selected?.tourTitle}}</span>
+        <br> Agency:
+        <span class="text-muted">{{selected?.agency}}</span>
+        <br> Quantity:
+        <span class="text-muted">{{selected?.quantity}}</span>
+        <br> Voucher codes:
         <ul *ngFor="let c of selected?.voucherCodes">
-          <li><span class="text-muted">{{c}}</span></li>
+          <li>
+            <span class="text-muted">{{c}}</span>
+          </li>
         </ul>
         <span class="float-right">
-        <br> Total:
-        <b>{{selected?.total  | currency:'PHP':true:'1.2-2'}}</b></span>
+          <br> Total:
+          <b>{{selected?.total | currency:'PHP':true:'1.2-2'}}</b>
+        </span>
 
       </div>
 

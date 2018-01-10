@@ -12,6 +12,10 @@ export class DashboardComponent implements OnInit {
   transactions: Array<any>;
   selected: any;
 
+  bankName: String;
+  accountNumber: String;
+  accountName: String;
+
   constructor(
     private authService: AuthService,
     private transactionService: TransactionService
@@ -43,6 +47,24 @@ export class DashboardComponent implements OnInit {
       console.log(res);
       this.reload();
     });
+  }
+
+  submitCashout() {
+    let cashout = {
+      agencyId: this.agency._id,
+      agency: this.agency.agencyName,
+      backAccount: {
+        accountNumber: this.accountNumber,
+        accountName: this.accountName,
+        bankName: this.bankName
+      },
+      status: 'pending',
+      amount: this.agency.balance
+    }
+    this.transactionService.addCashout(cashout).subscribe(res => {
+      console.log(res);
+      this.reload();
+    })
   }
 
 }
