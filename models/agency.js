@@ -35,6 +35,10 @@ const AgencySchema = mongoose.Schema({
   },
   bir: {
     type: String
+  },
+  balance: {
+    type: Number,
+    default: 0
   }
 });
 
