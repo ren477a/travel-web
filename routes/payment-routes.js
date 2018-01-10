@@ -54,7 +54,7 @@ router.post('/transaction', (req, res, next) => {
                 console.log('Updating agency balance')
                 console.log(conditions2)
                 console.log("AGENCY " + req.body.agency)
-                Agency.update(conditions, update, options, (err, numAffected) => {
+                Agency.update(conditions2, update2, options2, (err, numAffected) => {
                     // numAffected is the number of updated documents
                     console.log(numAffected);
                     res.json({ success: true, transaction: transaction });
