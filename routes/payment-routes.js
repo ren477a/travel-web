@@ -41,18 +41,19 @@ router.post('/transaction', (req, res, next) => {
             console.log(err);
             res.json({ success: false, transaction: null });
         } else {
-            var conditions = { _id: req.body.tourId }
+            let conditions = { _id: req.body.tourId }
                 , update = { $inc: { 'sold': transaction.quantity } }
                 , options = { multi: true };
 
             console.log('Updating tour bought property')
             Tour.update(conditions, update, options, (err, numAffected) => {
                 // numAffected is the number of updated documents
-                var conditions2 = { agencyName: req.body.agency }
+                let conditions2 = { agencyName: req.body.agency }
                     , update2 = { $inc: { 'balance': transaction.total } }
                     , options2 = { multi: true };
                 console.log('Updating agency balance')
                 console.log(conditions2)
+                console.log("AGENCY " + req.body.agency)
                 Agency.update(conditions, update, options, (err, numAffected) => {
                     // numAffected is the number of updated documents
                     console.log(numAffected);
