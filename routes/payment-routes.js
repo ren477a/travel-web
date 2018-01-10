@@ -48,12 +48,14 @@ router.post('/transaction', (req, res, next) => {
             console.log('Updating tour bought property')
             Tour.update(conditions, update, options, (err, numAffected) => {
                 // numAffected is the number of updated documents
-                var conditions = { agencyName: req.body.agency }
-                    , update = { $inc: { 'balance': transaction.total } }
-                    , options = { multi: true };
+                var conditions2 = { agencyName: req.body.agency }
+                    , update2 = { $inc: { 'balance': transaction.total } }
+                    , options2 = { multi: true };
                 console.log('Updating agency balance')
+                console.log(conditions2)
                 Agency.update(conditions, update, options, (err, numAffected) => {
                     // numAffected is the number of updated documents
+                    console.log(numAffected);
                     res.json({ success: true, transaction: transaction });
                 });
             });
