@@ -37,6 +37,14 @@ export class TransactionService {
       .map(res => res.json());
   }
 
+  addCashout(cashout) {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint('api/cashout');
+    return this.http.post(ep, cashout, {headers: headers})
+      .map(res => res.json());
+  }
+
   prepEndpoint(ep) {
     if (!this.isDev)
       return ep;
