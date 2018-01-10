@@ -26,6 +26,10 @@ const TransactionSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  customerEmail: {
+    type: String,
+    required: true
+  },
   paymentType: {
     type: String,
     required: true
@@ -39,7 +43,8 @@ const TransactionSchema = mongoose.Schema({
     required: true
   },
   claimed: {
-      type: Boolean
+      type: Boolean,
+      default: false
   },
   date: {
     type: Date,
