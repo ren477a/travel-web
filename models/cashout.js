@@ -1,22 +1,21 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-const CheckoutSchema = mongoose.Schema({
+const CashoutSchema = mongoose.Schema({
   agencyId: {
     type: String
   },
   agency: {
     type: String
   },
-  dataRequested: {
+  dateRequested: {
     type: Date,
-    required: true
+    default: new Date.now
   },
   dateProcessed: {
-    type: Date,
-    required: true
+    type: Date
   },
-  bacnkAccount: { 
+  bankAccount: { 
       accountNumber :{
         type: String,
         required: true},
@@ -40,7 +39,12 @@ const CheckoutSchema = mongoose.Schema({
   amount: {
     type: Number,
     required: true
-  }
+  },
+  transactions: [String]
 });
 
-const Checkout = module.exports = mongoose.model('Checkout', CheckoutSchema);
+const Cashout = module.exports = mongoose.model('Cashout', CashoutSchema);
+
+module.exports.addCashout = function(newCashout, callback) {
+  newCashout.save(callback);
+};
