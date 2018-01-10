@@ -393,6 +393,7 @@ export class ValidateService {
         else{
           accs = false;
         }
+        
         if(!accs){
              return "Invalid account number";
            }
