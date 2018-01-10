@@ -60,16 +60,16 @@ router.post('/transaction', (req, res, next) => {
                     console.log(numAffected);
 
                     // Message
-                    const output = `
-                    <p>You have a new contact request</p>
+                    let output = `
+                    <h1>Thank you for using TravelCatalog!</h1>
                     <h3>Transaction Receipt</h3>
                     <ul>  
                       <li>TR#: ${transaction._id}</li>
-                      <li>Name: ${transaction.tourTitle}</li>
-                      <li>Name: ${transaction.agency}</li>
-                      <li>Name: ${transaction.quantity}</li>
-                      <li>Name: ${transaction.pricePerItem}</li>
-                      <li>Name: ${transaction.total}</li>
+                      <li>Tour: ${transaction.tourTitle}</li>
+                      <li>Agency: ${transaction.agency}</li>
+                      <li>Quantity: ${transaction.quantity}</li>
+                      <li>Price per voucher: ${transaction.pricePerItem}</li>
+                      <li>Total Amount: ${transaction.total}</li>
                     </ul>
                     <h3>Vouchers</h3>
                     <ul>`;
@@ -118,51 +118,6 @@ router.post('/transaction', (req, res, next) => {
         }
     });
 });
-
-router.get('/email', (req, res) => {
-    console.log("email")
-    const output = `
-    <p>You have a new contact request</p>
-    <h3>Contact Details</h3>
-    <ul>  
-      <li>Name: Ren</li>
-    </ul>
-    <h3>Message</h3>
-    <p>${req.body.message}</p>
-  `;
-    let transporter = nodemailer.createTransport({
-        host: process.env.EMAIL_HOST,
-        port: 587,
-        secure: false, // true for 465, false for other ports
-        auth: {
-            user: process.env.EMAIL, // generated ethereal user
-            pass: process.env.EMAIL_PASS  // generated ethereal password
-        },
-        tls: {
-            rejectUnauthorized: false
-        }
-    });
-
-    // setup email data with unicode symbols
-    let mailOptions = {
-        from: '"TourCatalog" <' + process.env.EMAIL + '>', // sender address
-        to: 'mercado.efrenjr@gmail.com', // list of receivers
-        subject: 'Tour Package Purchase', // Subject line
-        text: 'Hello world?', // plain text body
-        html: output // html body
-    };
-
-    // send mail
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return console.log(error);
-        }
-        console.log('Message sent: %s', info.messageId);
-        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
-        res.json({ success: true });
-    });
-})
 
 
 router.get('/', (req, res, next) => {
