@@ -9,7 +9,7 @@
         <div class="col">
           <div align="right">
             <h3>Balance: {{agency?.balance | currency:'PHP':true:'1.2-2'}} </h3>
-            <button type="button" class="btn-lg btn-success ml-3" data-toggle="modal" data-target="#cashoutModal">Cash Out</button>
+            <button #btnCashout type="button" class="btn-lg btn-success ml-3" data-toggle="modal" data-target="#cashoutModal">Cash Out</button>
             <!-- Checkout modal -->
             <div class="modal fade" id="cashoutModal">
               <div class="modal-dialog" role="document">
@@ -68,18 +68,18 @@
                     <form align="left">
                       <div class="form-group">
                         <label for="exampleSelect1">Bank</label>
-                        <select class="form-control" id="exampleSelect1">
+                        <select [(ngModel)]="bankName" name="bankName" class="form-control" id="exampleSelect1">
                           <option>BDO</option>
                           <option>BPI</option>
                         </select>
                       </div>
                       <div class="form-group">
                         <label for="exampleInputEmail1">Account Number</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="123-123-123">
+                        <input [(ngModel)]="accountNumber" name="accountNumber" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="123-123-123">
                       </div>
                       <div class="form-group">
                         <label for="exampleInputEmail1">Account Name</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Juan Dela Cruz">
+                        <input [(ngModel)]="accountName" name="accountName" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Juan Dela Cruz">
                       </div>
 
                     </form>

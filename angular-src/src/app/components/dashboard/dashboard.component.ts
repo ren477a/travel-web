@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { TransactionService } from '../../services/transaction.service';
+import { Subscription } from 'rxjs/Subscription';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  @ViewChild('btnCashout') btnCashout: ElementRef;
 
   agency: any;
   transactions: Array<any>;
@@ -16,6 +19,11 @@ export class DashboardComponent implements OnInit {
   accountNumber: String;
   accountName: String;
 
+  msg: String;
+
+  sub: Subscription;
+  sub2: Subscription;
+
   constructor(
     private authService: AuthService,
     private transactionService: TransactionService
@@ -24,14 +32,22 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.agency = this.authService.getLoggedInAgency();
     console.log(this.agency)
-    this.transactionService.findTransactionsByAgencyName(this.agency.agencyName).subscribe(res => {
+    this.sub = this.authService.findAgencyById(this.agency._id).subscribe(res => {
+      this.agency = res;
+    })
+    this.sub2 = this.transactionService.findTransactionsByAgencyName(this.agency.agencyName).subscribe(res => {
         this.transactions = res;
         this.selected = this.transactions[0];
       })
   }
 
   reload() {
-    this.transactionService.findTransactionsByAgencyName(this.agency.agencyName).subscribe(res => {
+    this.sub.unsubscribe();
+    this.sub2.unsubscribe();
+    this.sub = this.authService.findAgencyById(this.agency._id).subscribe(res => {
+      this.agency = res;
+    })
+    this.sub2 = this.transactionService.findTransactionsByAgencyName(this.agency.agencyName).subscribe(res => {
       this.transactions = res;
       this.selected = this.transactions[0];
     })
@@ -53,7 +69,7 @@ export class DashboardComponent implements OnInit {
     let cashout = {
       agencyId: this.agency._id,
       agency: this.agency.agencyName,
-      backAccount: {
+      bankAccount: {
         accountNumber: this.accountNumber,
         accountName: this.accountName,
         bankName: this.bankName
@@ -61,8 +77,11 @@ export class DashboardComponent implements OnInit {
       status: 'pending',
       amount: this.agency.balance
     }
+    this.msg = 'Submitting...'
+    console.log(cashout)
     this.transactionService.addCashout(cashout).subscribe(res => {
       console.log(res);
+      this.btnCashout.nativeElement.click();
       this.reload();
     })
   }
