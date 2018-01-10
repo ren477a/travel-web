@@ -49,6 +49,7 @@ export class PaymentService {
           pricePerItem: this.tour.pricing.fixed,
           total: resultObj.charge.amount / 100,
           customerId: this.user.id,
+          customerEmail: this.user.email,
           paymentType: "card",
           paymentId: resultObj.charge.id,
           voucherCodes: [],
