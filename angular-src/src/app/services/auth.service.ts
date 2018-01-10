@@ -79,7 +79,16 @@ export class AuthService {
   getLoggedInAgency() {
     this.loadToken();
     let token = this.jwtHelper.decodeToken(this.authToken);
+    delete token.data.agency.password;
     return token.data.agency;
+  }
+
+  findAgencyById(id) {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint('api/auth/agency/'+id);
+    return this.http.get(ep, {headers: headers})
+      .map(res => res.json());
   }
 
   // loggedOut() {
