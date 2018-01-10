@@ -17,8 +17,8 @@ router.post('/', (req, res, next) => {
         },
         msg: '',
         status: 'pending',
-        amount: req.body.amount,
-        transactions: req.body.transactions
+        amount: req.body.amount
+        //transactions: req.body.transactions
     });
   
     Cashout.addCashout(newCashout, (err, cashout) => {
