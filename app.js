@@ -26,6 +26,7 @@ const authRoutes = require('./routes/auth-routes');
 const toursRoutes = require('./routes/tour-routes');
 const paymentRoutes = require('./routes/payment-routes');
 const transactionRoutes = require('./routes/transaction-routes');
+const cashoutRoutes = require('./routes/cashout-routes');
 
 const port = process.env.PORT || 8080;
 
@@ -50,6 +51,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/tours', toursRoutes);
 app.use('/api/payment', paymentRoutes);
 app.use('/api/transaction', transactionRoutes);
+app.use('/api/cashout', cashoutRoutes);
 
 const upload = require('./config/upload');
 app.post('/upload', (req, res) => {

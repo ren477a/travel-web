@@ -10,7 +10,7 @@ const CashoutSchema = mongoose.Schema({
   },
   dateRequested: {
     type: Date,
-    default: new Date.now
+    default: Date.now
   },
   dateProcessed: {
     type: Date
