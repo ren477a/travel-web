@@ -1,9 +1,16 @@
 <div class="container" style="margin-top:100px">
+  <div #alertS class="alert alert-success" role="alert" style="display:none">
+    <strong>Well done!</strong> You successfully read this important alert message.
+  </div>
 
+  <div #alertD class="alert alert-danger" role="alert"  style="display:none">
+    <strong>Oh snap!</strong> Change a few things up and try submitting again.
+  </div>
+  
   <!-- ADD TOUR -->
   <!-- Button trigger modal -->
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-12">
       <div class="btn-group" data-toggle="buttons">
         <label (click)="onChangeTab('onsale')" class="btn btn-primary active">
           <input type="radio" name="options" id="option1" autocomplete="off" checked> On Sale
@@ -15,9 +22,7 @@
           <input type="radio" name="options" id="option3" autocomplete="off"> Archived
         </label>
       </div>
-    </div>
-    <div class="col-md-3">
-      <button type="button" #btnAddTour class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+      <button type="button" #btnAddTour class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModalLong">
         Add Tours
       </button>
     </div>
@@ -42,7 +47,7 @@
           <div class="modal-body">
 
             <div class="form-group">
-              <label for="exampleInputEmail1">Title</label>
+              <label for="exampleInputEmail1" required>Title</label>
               <input [(ngModel)]="title" name="title" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                 placeholder="Baguio City Tour 3D2N">
             </div>
@@ -107,6 +112,7 @@
               <label for="exampleInputFile">Tour Photo</label>
               <input (change)="getFiles($event)" name="photo" accept="image/*" type="file" class="form-control-file" id="photo" aria-describedby="fileHelp">
               <small id="fileHelp" class="form-text text-muted">This photo will be used as thumbnail and banner for your tour package.</small>
+              <small class="text-danger float-right">{{msg}}</small>
             </div>
           </div>
           <div class="modal-footer">

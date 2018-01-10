@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { ToursService } from '../../services/tours.service';
+import { ValidateService } from '../../services/validate.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -14,6 +15,8 @@ declare var $: any;   // not required
 })
 export class ManagetoursComponent implements OnInit {
   @ViewChild('btnAddTour') btnAddTour: ElementRef;
+  @ViewChild('alertS') alertS: ElementRef;
+  @ViewChild('alertD') alertD: ElementRef;
 
   showWithStatus: String;
 
@@ -44,6 +47,7 @@ export class ManagetoursComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private toursService: ToursService,
+    private validateService: ValidateService,
     private router: Router
   ) { }
 
@@ -57,8 +61,8 @@ export class ManagetoursComponent implements OnInit {
     const query = { agency: this.authService.getLoggedInAgency().agencyName, status: this.showWithStatus };
     this.sub = this.toursService.findTours(query, pageNum).subscribe(res => {
       this.tours = res.tours;
-      this.pages = Array(res.totalPages).fill(1).map((x,i)=>i+1);
-      if(this.pages.length == 0) this.tours = [];
+      this.pages = Array(res.totalPages).fill(1).map((x, i) => i + 1);
+      if (this.pages.length == 0) this.tours = [];
       this.activePage = res.pageNum;
       console.log(this.tours);
     });
@@ -77,49 +81,56 @@ export class ManagetoursComponent implements OnInit {
 
   onClickAddTour() {
     //TODO validation
+    const tour = {
+      title: this.title,
+      agency: this.authService.getLoggedInAgency().agencyName,
+      description: this.description,
+      duration: +this.duration,
+      type: this.type,
+      itinerary: this.itinerary,
+      inclusions: this.inclusions,
+      exclusions: this.exclusions,
+      terms: this.terms,
+      validityInDays: +this.validityInDays,
+      pricing: {
+        ptype: "fixed",
+        fixed: +this.price,
+        group: []
+      },
+      img: ''
+    }
+    console.log(tour)
+    let valid = this.validateService.validateTour(tour);
+    if (valid != "success") {
+      this.msg = valid;
+      return;
+    }
+    if (this.photo) {
+      this.toursService.uploadPhoto(this.photo).subscribe(res => {
+        console.log(res.msg);
+        if (res.file) {
+          tour.img = res.file;
 
-    let imgLoc: String;
-    this.toursService.uploadPhoto(this.photo).subscribe(res => {
-      console.log(res.msg);
-      if (res.file) {
-        imgLoc = res.file;
-        const tour = {
-          title: this.title,
-          agency: this.authService.getLoggedInAgency().agencyName,
-          description: this.description,
-          duration: +this.duration,
-          type: this.type,
-          itinerary: this.itinerary,
-          inclusions: this.inclusions,
-          exclusions: this.exclusions,
-          terms: this.terms,
-          validityInDays: +this.validityInDays,
-          pricing: {
-            ptype: "fixed",
-            fixed: +this.price,
-            group: []
-          },
-          img: imgLoc
+          console.log(tour.img);
+          this.toursService.addTour(tour).subscribe(data => {
+            if (data.success) {
+              console.log("Submit success");
+              this.clearData();
+              this.reload(1);
+              setTimeout(() => {
+                this.btnAddTour.nativeElement.click();
+                this.router.navigate['/manage'];
+              }, 1000);
+              this.showSuccess('You added a new tour.');
+            } else {
+              this.msg = "Something went wrong."
+            }
+          });
         }
-        console.log(imgLoc)
-        this.toursService.addTour(tour).subscribe(data => {
-          if (data.success) {
-            console.log("Submit success");
-            this.clearData();
-            this.reload(1);
-            setTimeout(() => {
-              this.btnAddTour.nativeElement.click();
-              this.router.navigate['/manage'];
-            }, 1000);
-
-          } else {
-            console.log("Something went wrong")
-          }
-        });
-      }
-
-    });
-
+      });
+    } else {
+      this.msg = 'Please add a photo.'
+    }
   }
 
   onItemClick(tour) {
@@ -155,23 +166,39 @@ export class ManagetoursComponent implements OnInit {
 
   nextPage() {
     this.activePage++;
-    if(this.activePage>=this.pages.length) this.activePage = this.pages.length;
+    if (this.activePage >= this.pages.length) this.activePage = this.pages.length;
     this.sub.unsubscribe();
     this.reload(this.activePage);
   }
 
   previousPage() {
     this.activePage--;
-    if(this.activePage<0) this.activePage = 0;
+    if (this.activePage < 0) this.activePage = 0;
     this.sub.unsubscribe();
     this.reload(this.activePage);
   }
 
   toPage(page) {
     this.activePage = page;
-    if(this.activePage<0) this.activePage = 0;
-    if(this.activePage>=this.pages.length) this.activePage = this.pages.length;
+    if (this.activePage < 0) this.activePage = 0;
+    if (this.activePage >= this.pages.length) this.activePage = this.pages.length;
     this.sub.unsubscribe();
     this.reload(this.activePage);
+  }
+
+  showDanger(msg) {
+    this.alertD.nativeElement.style.display = 'block';
+    this.alertD.nativeElement.innerHTML = "<strong>Oh snap!</strong> " + msg;
+    setTimeout(() => {
+      this.alertD.nativeElement.style.display = 'none';
+    }, 10000);
+  }
+
+  showSuccess(msg) {
+    this.alertS.nativeElement.style.display = 'block';
+    this.alertS.nativeElement.innerHTML = "<strong>Success!</strong> " + msg;
+    setTimeout(() => {
+      this.alertS.nativeElement.style.display = 'none';
+    }, 10000);
   }
 }

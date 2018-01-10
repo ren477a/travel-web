@@ -116,4 +116,95 @@ export class ValidateService {
     }
     return "success";
   }
+
+
+
+  validateTour(tours){
+
+    if (tours.title == undefined ||
+      tours.pricing.fixed == undefined ||
+      tours.duration == undefined ||
+      tours.validityInDays == undefined ||
+      tours.type == undefined ||
+      tours.itinerary == undefined ||
+      tours.inclusions == undefined ||
+      tours.exclusions == undefined ||
+      tours.terms == undefined) {
+      return "Please fill in all the fields."
+    }
+
+
+    //validation title
+     var isLetter = /^[a-zA-Z\s]*$/;
+     var title = tours.title;
+     if(!(title.length <= 50)){
+      return "Title: Maximum of 50 characters only.";
+    }
+
+  
+
+
+    //validation price
+    var price = tours.pricing.fixed;
+    var number = "^[0-9]";
+    if(isNaN(price)) {
+      return "Price: Invalid price."
+    }
+    
+    if(price > 100000 || price < 1) {
+      
+      return "Price: Value must be between 1 and 100000."
+    }
+
+
+
+    // validation Length in Days
+    var l = tours.duration;
+    if(isNaN(l)) {
+      return "Trip Length: Invalid trip length.";
+    }
+    if(l > 30 || l < 1) {
+      return "Trip Length: Value must be between 1 and 30."
+    }
+
+    var vd = tours.validityInDays;
+    if(isNaN(vd)) {
+      return "Voucher Lifespan: Invalid voucher lifespan.";
+    }
+    if(vd > 365 || vd < 7) {
+      return "Voucher Lifespan: Value must be between 7 and 30."
+    }
+
+
+
+
+    //validation description
+    var description = tours.description;
+    if(!(description.length <= 600)){
+      return "Description: Maximum of 600 characters only.";	
+    }
+
+    // validation Itenerary
+    var itenerary = tours.itinerary;
+    if(!(itenerary.length <= 600)){
+      return "Itinerary: Maximum of 600 characters only.";
+    }
+    // validation inclusions
+    var inclusions = tours.inclusions;
+    if(!(inclusions.length <= 600)){
+      return "Inclusions: Maximum of 600 characters only.";
+    }
+    //validation exclusion
+    var exclusions = tours.exclusions;
+    if(!(exclusions.length <= 600)){
+      return "Exclusions: Maximum of 600 characters only.";
+    }
+    //validation terms
+    var terms = tours.terms;
+    if(!(terms.length <= 600)){
+      return "Terms: Maximum of 600 characters only.";
+    }
+
+    return "success"
+  }
 }
