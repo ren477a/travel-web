@@ -18,7 +18,7 @@ router.get('/agency/:name', (req, res, next) => {
 
 router.put('/claim/:id', (req, res, next) => {
   var conditions = { _id: req.params.id }
-    , update = { claimed: true }
+    , update = { claimed: true, dateClaimed: new Date() }
     , options = { multi: true };
 
   Transaction.update(conditions, update, options, (err, numAffected) => {
