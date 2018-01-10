@@ -41,7 +41,7 @@ router.post('/transaction', (req, res, next) => {
             res.json({ success: false, transaction: null });
         } else {
             var conditions = { _id: req.body.tourId }
-                , update = {$inc : {'sold' : 1}}
+                , update = {$inc : {'sold' : 1*req.body.quantity}}
                 , options = { multi: true };
 
             Tour.update(conditions, update, options, (err, numAffected) => {
