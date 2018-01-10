@@ -2,6 +2,7 @@ const router = require('express').Router(); // eslint-disable-line new-cap
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 const Transaction = require('../models/transaction');
 const Tour = require('../models/tour');
+const Agency = require('../models/agency');
 const voucher = require('voucher-code-generator');
 
 router.post('/charge', (req, res, next) => {
@@ -34,21 +35,29 @@ router.post('/transaction', (req, res, next) => {
     });
     console.log(data);
     let newTransaction = new Transaction(data);
-
+    console.log('Adding transaction')
     Transaction.addTransaction(newTransaction, (err, transaction) => {
         if (err) {
             console.log(err);
             res.json({ success: false, transaction: null });
         } else {
             var conditions = { _id: req.body.tourId }
-                , update = {$inc : {'sold' : 1*req.body.quantity}}
+                , update = { $inc: { 'sold': transaction.quantity } }
                 , options = { multi: true };
 
+            console.log('Updating tour bought property')
             Tour.update(conditions, update, options, (err, numAffected) => {
                 // numAffected is the number of updated documents
-                res.json({ success: true, transaction: transaction });
+                var conditions = { agencyName: req.body.agency }
+                    , update = { $inc: { 'balance': transaction.total } }
+                    , options = { multi: true };
+                console.log('Updating agency balance')
+                Agency.update(conditions, update, options, (err, numAffected) => {
+                    // numAffected is the number of updated documents
+                    res.json({ success: true, transaction: transaction });
+                });
             });
-            
+
         }
     });
 });
