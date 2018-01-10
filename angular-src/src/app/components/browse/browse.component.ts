@@ -52,7 +52,10 @@ export class BrowseComponent implements OnInit {
 
   onSearch() {
     this.sub.unsubscribe();
-    this.sub = this.toursService.findTours({title: this.keyword}, 1).subscribe(res => {
+
+    this.sub = this.toursService.findTours({
+      title: this.keyword.toLowerCase()
+    }, 1).subscribe(res => {
       this.tours = res.tours;
       // this.pages = new Array(res.totalPages+1);
       // for(let i = 1; i <= this.pages.length; i++) {

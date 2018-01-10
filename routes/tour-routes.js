@@ -90,7 +90,7 @@ router.post('/search', (req, res, next) => {
   console.log(query.title);
   if (query.title != undefined) {
     query.title = {
-      $regex: new RegExp('.*' + query.title + '.*')
+      $regex: new RegExp('.*' + query.title + '.*', 'i')
     }
   }
 
