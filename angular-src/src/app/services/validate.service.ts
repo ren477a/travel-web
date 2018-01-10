@@ -223,4 +223,195 @@ export class ValidateService {
 
     return "success"
   }
+  validateRegisterAgency(agency){
+        
+        //validation agencyName
+         var isLetter1 = /^[a-zA-Z\s]*$/;
+         var agencyName = agency.agencyName;
+         var y = true;  
+         if(agencyName.length <= 50 && agencyName.length != 0){
+          for(let x = 0; x < agencyName.length; x++){
+            if(!(agencyName.charAt(x).match(isLetter1))){
+
+              y = false;
+            }
+          }
+        }
+        else{
+          y=false;
+        }
+
+         if(!y){
+           return "Agency name  must be Letters only and maximum of 50 letters only";
+        }
+
+
+
+        //validation Owner
+        var ownedBy= agency.ownedBy;
+        var z = true;  
+        if(ownedBy.length <= 30 && ownedBy.length != 0){
+          for(let x = 0; x < ownedBy.length; x++){
+            if(!(ownedBy.charAt(x).match(isLetter1))){
+              z = false;
+            }
+          }
+        }
+        else{
+          z = false;
+        }
+
+         if(!z){
+           return "Owner name must be Letters only and maximum of 30 letters only";
+        }
+
+
+
+        // validation password
+        var isLetter = "[a-zA-Z]";
+        var isCapitalLetter = false;
+        var isLowerLetter = false;
+        var isNumber = false;
+        var isSpecialCharacter = false;
+        var number = "^[0-9]";
+        var password = agency.password;
+        var pass = false;
+
+        if((password.length >= 8 && password.length <= 20) && password.length != 0){
+          pass = true;
+          for(let x = 0; x < password.length; x++){
+            if(password.charAt(x).match(isLetter)){
+              if(password.charAt(x) == password.charAt(x).toUpperCase())
+              {
+                isCapitalLetter = true;
+              }
+              if(password.charAt(x) == password.charAt(x).toLowerCase())
+              {
+                  isLowerLetter = true;
+              }
+                
+            }
+            else if  (password.charAt(x).match(number)){
+                isNumber = true;
+            }
+            else{
+              isSpecialCharacter = true;
+            }        
+          }
+        }
+
+        if(!(isCapitalLetter && isLowerLetter && isNumber && !isSpecialCharacter && pass)){
+          return "Password must contain 8 to 20 characters with: \nAtleast 1 Capital Letter \nAtleast 1 Number \nLetters";
+        }
+
+
+
+        //validation email
+        var email = agency.email;
+        if(!(email.length != 0)){
+          return "Invalid Email";
+        }
+        if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)))
+         { 
+            return "Invalid Email"; 
+         }
+         
+         //validation mobile number
+         var mobile = agency.mobileNumber.substr(agency.mobileNumber.indexOf("9"), agency.mobileNumber.length);
+         var mobs = true;
+         if(mobile.length == 10 && mobile.length != 0){
+           for(let x=0; x < mobile.length; x++){
+             if(!(mobile.charAt(x).match(number))) {
+              mobs = false;  
+             }
+           }
+        }
+        else{
+          mobs = false;
+        }
+        if(!mobs){
+             return "wrong input of Mobile Number";
+           }
+
+
+        //validation BIR
+        var bir = agency.bir;
+        if(bir.length == 0){
+          return "Please put your copy of BIR certificate of registration";
+        }
+        
+        //validation DTI 
+        var dti = agency.dti;
+        if(dti.length == 0){
+          return "Please put your copy of DTI permit";
+        }
+
+        //validation Business
+        var business = agency.business;
+        if(business.length == 0){
+          return "Please put your copy of Business Permit";
+        }
+
+        return "success";
+      }
+
+      validateCashout(checkout){
+
+        //validation account name
+         var number = "^[0-9]";
+         var isLetter = "[a-zA-Z]";
+         var bankName = checkout.bankName;
+         var accountName = checkout.accountName;
+         var accountNumber = checkout.accountNumber; 
+         var y = true;  
+         if(accountName.length != 0){
+          for(let x = 0; x < accountName.length; x++){
+            if(!(accountName.charAt(x).match(isLetter))){
+              y = false;
+            }
+          }
+        }
+        else{
+          y=false;
+        }
+
+         if(!y){
+           return "Invalid account name";
+        }
+
+         //validation account number
+         var accountNumber = checkout.accountNumber; 
+         var accs = true;
+         if(accountNumber.length != 0){
+           for(let x=0; x < accountNumber.length; x++){
+             if(!(accountNumber.charAt(x).match(number))) {
+              accs = false;  
+
+             }
+           }
+        }
+        else{
+          accs = false;
+        }
+        
+        if(!accs){
+             return "Invalid account number";
+           }
+        else{
+          switch(bankName){
+            case "BDO":
+              if(!(accountNumber.length == 12)){
+                return "Invalid account number";
+              }
+              break;
+            case "BPI":
+              if(!(accountNumber.length == 16)){
+                return "Invalid account number";
+              }
+              break;
+          }
+        }
+        return "success";
+
+      }
 }
