@@ -1,139 +1,58 @@
 <div class="container-fluid" stle="margin-top: 70px">
-	<div class="col-sm-12  col-md-12  pt-3">
-		<h1 align="left">AgencyName</h1>
-		  <div class="card">
-		  <div class="card-header row">
-			<div class="col">
-				<h3 align="left">Transaction History</h3>
-			</div>
-			<div class="col">
-				<h3 align="right">Balance: Php500,000<button type="button" class="btn-lg btn-success ml-3">Cash Out</button></h3>
-				
-		  </div>
-		  
-          <div class="table-responsive card-body">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Trans_id</th>
-                  <th>Customer_id</th>
-                  <th>Tour Title</th>
-                  <th>Quantity</th>
-                  <th>Payment Type</th>
-				  <th>Voucher Code</th>
-				  <th>Claimed</th>
-				  <th>Date</th>
-				  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-				  <td>Jerime</td>
-				  <td>Mendez</td>
-				  <td>Moreno</td>
-				  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">View Details</button></td>
-                </tr>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-				  <td>Jerime</td>
-				  <td>Mendez</td>
-				  <td>Moreno</td>
-				  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">View Details</button></td>
-                </tr>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-				  <td>Jerime</td>
-				  <td>Mendez</td>
-				  <td>Moreno</td>
-				  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">View Details</button></td>
-                </tr>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-				  <td>Jerime</td>
-				  <td>Mendez</td>
-				  <td>Moreno</td>
-				  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">View Details</button></td>
-                </tr>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-				  <td>Jerime</td>
-				  <td>Mendez</td>
-				  <td>Moreno</td>
-				  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">View Details</button></td>
-                </tr>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-				  <td>Jerime</td>
-				  <td>Mendez</td>
-				  <td>Moreno</td>
-				  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">View Details</button></td>
-                </tr>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-				  <td>Jerime</td>
-				  <td>Mendez</td>
-				  <td>Moreno</td>
-				  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">View Details</button></td>
-                </tr>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-				  <td>Jerime</td>
-				  <td>Mendez</td>
-				  <td>Moreno</td>
-				  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">View Details</button></td>
-                </tr>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-				  <td>Jerime</td>
-				  <td>Mendez</td>
-				  <td>Moreno</td>
-				  <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">View Details</button></td>
-                </tr>
-                
-              </tbody>
-            </table>
-          </div>
-        </div>					
-	</div>
-				
-</div>		
+  <div class="col-sm-12  col-md-12  pt-3">
+    <h2 class="page-header" align="left">{{agency?.agencyName}}</h2>
+    <div class="card">
+      <div class="card-header row">
+        <div class="col">
+          <h3 align="left">Transaction History</h3>
+        </div>
+        <div class="col">
+          <h3 align="right">Balance: Php500,000
+            <button type="button" class="btn-lg btn-success ml-3">Cash Out</button>
+          </h3>
+
+        </div>
+
+        <div class="table-responsive card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>TR#</th>
+                <th>Date of Purchase</th>
+                <th>Customer</th>
+                <th>Tour</th>
+                <th>Quantity</th>
+                <th>Total (PHP)</th>
+                <th>Claimed</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let tr of transactions; let i = index">
+              <tr>
+                <td>{{ "..."+tr._id.substring(tr._id.length-6)}}</td>
+                <td>{{tr.date | date:'dd/MM/yy HH:mm'}}</td>
+                <td>{{tr.customerEmail}}</td>
+                <td>{{tr.tourTitle.substring(0, 20) + "..."}}</td>
+                <td>{{tr.quantity}}</td>
+                <td>{{tr.total}}</td>
+                <td>{{tr.claimed}}</td>
+                <td>
+                  <button (click)="detailsClick(tr)" type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#myModal">More Details</button>
+                </td>
+
+                <td>
+                  <button (click)="markClick(tr._id)" *ngIf="!tr.claimed" type="button" class="btn btn-primary btn-sm">Mark as claimed</button>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
 <div id="footer" class="container-fluid mt-5" style="bottom: 0">
   <div class="container">
@@ -152,22 +71,27 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Transaction ID</h4>
+        <h4 class="modal-title">TR# <span class="text-muted">{{selected?._id}}</span></h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
-        Date:	<br>
-		Claimed: Y/N	<br>
-		Customer_id:	<br>
-		Tour Title:		<br>
-		Agency: 		<br>
-		Quantity:		<br>
-		Payment Type:		<br>
-		Voucher codes: [ABCDE, FGHI, JKLMN]		<br>
-		Total:     <b>  Php 1,000</b>
-		
+        Date: <span class="text-muted">{{selected?.date | date:'dd/MM/yy HH:mm'}}</span>
+        <br> Claimed: <span class="text-muted">{{selected?.claimed}}</span>
+        <br> Customer_id: <span class="text-muted">{{selected?.customerId}}</span>
+        <br> Tour_id: <span class="text-muted">{{selected?.tourId}}</span>
+        <br> Tour Title: <span class="text-muted">{{selected?.tourTitle}}</span>
+        <br> Agency: <span class="text-muted">{{selected?.agency}}</span>
+        <br> Quantity: <span class="text-muted">{{selected?.quantity}}</span>
+        <br> Voucher codes: 
+        <ul *ngFor="let c of selected?.voucherCodes">
+          <li><span class="text-muted">{{c}}</span></li>
+        </ul>
+        <span class="float-right">
+        <br> Total:
+        <b> PHP {{selected?.total}}</b></span>
+
       </div>
 
       <!-- Modal footer -->

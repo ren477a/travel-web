@@ -46,9 +46,16 @@ const TransactionSchema = mongoose.Schema({
       type: Boolean,
       default: false
   },
+  cashedOut: {
+    type: Boolean,
+    default: false
+  },
   date: {
     type: Date,
     default: Date.now
+  },
+  dateClaimed: {
+    type: Date
   }
 });
 
