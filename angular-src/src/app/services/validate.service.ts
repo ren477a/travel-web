@@ -386,7 +386,7 @@ export class ValidateService {
            for(let x=0; x < accountNumber.length; x++){
              if(!(accountNumber.charAt(x).match(number))) {
               accs = false;  
-              
+
              }
            }
         }
@@ -410,7 +410,6 @@ export class ValidateService {
               break;
           }
         }
-
         return "success";
 
       }
