@@ -60,7 +60,7 @@ router.post('/transaction', (req, res, next) => {
                     console.log(numAffected);
 
                     // Message
-                    const output = `
+                    let output = `
                     <p>You have a new contact request</p>
                     <h3>Transaction Receipt</h3>
                     <ul>  
