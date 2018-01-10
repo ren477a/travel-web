@@ -7,7 +7,7 @@
           <h3 align="left">Transaction History</h3>
         </div>
         <div class="col">
-          <h3 align="right">Balance: Php500,000
+          <h3 align="right">Balance: {{agency?.balance | currency:'PHP':true:'1.2-2'}}
             <button type="button" class="btn-lg btn-success ml-3">Cash Out</button>
           </h3>
 
@@ -35,7 +35,7 @@
                 <td>{{tr.customerEmail}}</td>
                 <td>{{tr.tourTitle.substring(0, 20) + "..."}}</td>
                 <td>{{tr.quantity}}</td>
-                <td>{{tr.total}}</td>
+                <td>{{tr.total  | currency:'PHP':true:'1.2-2'}}</td>
                 <td>{{tr.claimed}}</td>
                 <td>
                   <button (click)="detailsClick(tr)" type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#myModal">More Details</button>
@@ -90,7 +90,7 @@
         </ul>
         <span class="float-right">
         <br> Total:
-        <b> PHP {{selected?.total}}</b></span>
+        <b>{{selected?.total  | currency:'PHP':true:'1.2-2'}}</b></span>
 
       </div>
 

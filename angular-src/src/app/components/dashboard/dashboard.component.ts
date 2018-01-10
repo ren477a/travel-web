@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.agency = this.authService.getLoggedInAgency();
+    console.log(this.agency)
     this.transactionService.findTransactionsByAgencyName(this.agency.agencyName).subscribe(res => {
         this.transactions = res;
         this.selected = this.transactions[0];
