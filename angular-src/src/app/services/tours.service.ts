@@ -29,6 +29,17 @@ export class ToursService {
 
   findTours(query, pageNum) {
     let headers = new Headers();
+    if(query.sortBy) {
+      if(query.sortBy === 'Price lowest to highest') {
+        query.sortBy = {col:'price', asc: 1}
+      } else if(query.sortBy === 'Price highest to lowest') {
+        query.sortBy = {col:'price', asc: -1}
+      } else if(query.sortBy === 'Alphabetical Order') {
+        query.sortBy = {col:'title', asc: 1}
+      } else if(query.sortBy === 'Newest First') {
+        query.sortBy = undefined;
+      }
+    }
     let data = {
       query: query,
       pageNum: pageNum

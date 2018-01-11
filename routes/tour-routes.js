@@ -94,6 +94,17 @@ router.post('/search', (req, res, next) => {
     }
   }
 
+  if(query.minPrice && query.maxPrice) {
+    query['pricing.fixed'] = { $gte: query.minPrice, $lte: query.maxPrice }
+    delete query.minPrice;
+    delete query.maxPrice;
+  }
+  console.log(query)
+
+  let sortBy = query.sortBy;
+  if(sortBy) {
+      delete query.sortBy;
+  }
   console.log(query);
   Tour.count(query, (err, c) => {
     console.log(c);
@@ -110,7 +121,17 @@ router.post('/search', (req, res, next) => {
     console.log('pagenum ' + pageNum)
     if (pageNum > totalPages) pageNum = totalPages;
     console.log(pageNum)
-    Tour.find(query).limit(9).skip((pageNum - 1) * 9).then(tours => {
+    let promise = Tour.find(query).limit(9).skip((pageNum - 1) * 9);
+    console.log(sortBy)
+    if(sortBy) {
+      if(sortBy.col === 'price') {
+        console.log({'pricing.fixed': sortBy.asc});
+        promise = promise.sort({'pricing.fixed': sortBy.asc});
+      } else if (sortBy.col === 'title') {
+        promise = promise.sort({title: sortBy.asc});
+      }
+    }
+    promise.then(tours => {
       var arrayLength = tours.length;
       console.log('length ' + arrayLength)
       let urls = new Array(arrayLength);

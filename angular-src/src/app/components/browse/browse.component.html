@@ -21,30 +21,11 @@
             </div>
             <hr>
             <p class="card-text mt-2 mb-0">Sort By</p>
-
-            <div class="form-check">
-              <div>
-                <label class="form-check-label mb-1">
-                  <input class="form-check-input mb-1" [ngModel]="sortBy" type="radio" name="sortBy" id="exampleRadios1" value="option1" checked> Price lowest to Highest
-                </label>
-              </div>
-              <div>
-                <label class="form-check-label mb-1">
-                  <input class="form-check-input mb-1" [ngModel]="sortBy" type="radio" name="sortBy" id="exampleRadios2" value="option2"> Price highest to lowest
-                </label>
-              </div>
-              <div>
-                <label class="form-check-label mb-1">
-                  <input class="form-check-input mb-1" [ngModel]="sortBy" type="radio" name="sortBy" id="exampleRadios3" value="option3"> Alphabetical Order
-                </label>
-              </div>
-              <div>
-                <label class="form-check-label mb-1">
-                  <input class="form-check-input mb-1" [ngModel]="sortBy" type="radio" name="sortBy" id="exampleRadios4" value="option4"> Newest First
-                </label>
-              </div>
-            </div>
-
+            <select [(ngModel)]="sortBy" name="sortBy" class="form-control mb-2" id="exampleFormControlSelect1">
+              <option>Price lowest to highest</option>
+              <option>Price highest to lowest</option>
+              <option>Alphabetical Order</option>
+            </select>
 
             <button type="submit" class="btn btn-lg btn-primary btn-block button">Search</button>
           </form>

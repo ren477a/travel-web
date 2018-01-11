@@ -54,7 +54,10 @@ export class BrowseComponent implements OnInit {
     this.sub.unsubscribe();
 
     this.sub = this.toursService.findTours({
-      title: this.keyword.toLowerCase()
+      title: this.keyword.toLowerCase(),
+      minPrice: this.minPrice,
+      maxPrice: this.maxPrice,
+      sortBy: this.sortBy //date //price //alphabetical
     }, 1).subscribe(res => {
       this.tours = res.tours;
       // this.pages = new Array(res.totalPages+1);
@@ -70,13 +73,19 @@ export class BrowseComponent implements OnInit {
     console.log(this.keyword);
     console.log(this.minPrice);
     console.log(this.maxPrice);
+    console.log(this.sortBy);
   }
 
   nextPage() {
     this.activePage++;
     if(this.activePage>=this.pages.length) this.activePage = this.pages.length;
     this.sub.unsubscribe();
-    this.sub = this.toursService.findTours({title: this.keyword}, this.activePage).subscribe(res => {
+    this.sub = this.toursService.findTours({
+      title: this.keyword.toLowerCase(),
+      minPrice: this.minPrice,
+      maxPrice: this.maxPrice,
+      sortBy: this.sortBy //date //price //alphabetical
+    }, this.activePage).subscribe(res => {
       this.tours = res.tours;
       console.log(res.tours);
       this.urls = res.urls;
@@ -89,7 +98,12 @@ export class BrowseComponent implements OnInit {
     this.activePage--;
     if(this.activePage<0) this.activePage = 0;
     this.sub.unsubscribe();
-    this.sub = this.toursService.findTours({title: this.keyword}, this.activePage).subscribe(res => {
+    this.sub = this.toursService.findTours({
+      title: this.keyword.toLowerCase(),
+      minPrice: this.minPrice,
+      maxPrice: this.maxPrice,
+      sortBy: this.sortBy //date //price //alphabetical
+    }, this.activePage).subscribe(res => {
       this.tours = res.tours;
       console.log(res.tours);
       this.urls = res.urls;
@@ -103,7 +117,12 @@ export class BrowseComponent implements OnInit {
     if(this.activePage<0) this.activePage = 0;
     if(this.activePage>=this.pages.length) this.activePage = this.pages.length;
     this.sub.unsubscribe();
-    this.sub = this.toursService.findTours({title: this.keyword}, this.activePage).subscribe(res => {
+    this.sub = this.toursService.findTours({
+      title: this.keyword.toLowerCase(),
+      minPrice: this.minPrice,
+      maxPrice: this.maxPrice,
+      sortBy: this.sortBy //date //price //alphabetical
+    }, this.activePage).subscribe(res => {
       this.tours = res.tours;
       console.log(res.tours);
       this.urls = res.urls;
