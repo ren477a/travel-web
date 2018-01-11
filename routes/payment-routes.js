@@ -96,7 +96,7 @@ router.post('/transaction', (req, res, next) => {
 
                     // setup email data with unicode symbols
                     let mailOptions = {
-                        from: '"TourCatalog" <' + process.env.EMAIL + '>', // sender address
+                        from: '"TravelCatalog" <' + process.env.EMAIL + '>', // sender address
                         to: transaction.customerEmail, // list of receivers
                         subject: 'Tour Package Purchase', // Subject line
                         text: 'Hello world?', // plain text body
