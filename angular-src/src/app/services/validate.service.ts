@@ -28,7 +28,7 @@ export class ValidateService {
 
   validation(user) {
     //validation firstname
-    var isLetter = "[a-zA-Z]";
+    var isLetter =  /^[a-zA-Z\s]*$/;
     var firstname = user.firstname;
     var y = true;
     if (firstname.length <= 30) {
@@ -87,7 +87,7 @@ export class ValidateService {
     }
 
     // validation password
-    var isLetter = "[a-zA-Z]";
+    var isLetter1 = "[a-zA-Z]";
     var isCapitalLetter = false;
     var isLowerLetter = false;
     var isNumber = false;
@@ -99,7 +99,7 @@ export class ValidateService {
     if (password.length >= 8 && password.length <= 20) {
       pass = true;
       for (let x = 0; x < password.length; x++) {
-        if (password.charAt(x).match(isLetter)) {
+        if (password.charAt(x).match(isLetter1)) {
           if (password.charAt(x) == password.charAt(x).toUpperCase()) {
             isCapitalLetter = true;
           }
@@ -359,7 +359,7 @@ export class ValidateService {
 
         //validation account name
          var number = "^[0-9]";
-         var isLetter = "[a-zA-Z]";
+         var isLetter =  /^[a-zA-Z\s]*$/;
          var bankName = checkout.bankName;
          var accountName = checkout.accountName;
          var accountNumber = checkout.accountNumber; 
