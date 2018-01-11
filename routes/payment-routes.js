@@ -68,8 +68,8 @@ router.post('/transaction', (req, res, next) => {
                       <li>Tour: ${transaction.tourTitle}</li>
                       <li>Agency: ${transaction.agency}</li>
                       <li>Quantity: ${transaction.quantity}</li>
-                      <li>Price per voucher: ${transaction.pricePerItem}</li>
-                      <li>Total Amount: ${transaction.total}</li>
+                      <li>Price per voucher: PHP ${transaction.pricePerItem}</li>
+                      <li>Total Amount: PHP ${transaction.total}</li>
                     </ul>
                     <h3>Vouchers</h3>
                     <ul>`;
@@ -96,7 +96,7 @@ router.post('/transaction', (req, res, next) => {
 
                     // setup email data with unicode symbols
                     let mailOptions = {
-                        from: '"TourCatalog" <' + process.env.EMAIL + '>', // sender address
+                        from: '"TravelCatalog" <' + process.env.EMAIL + '>', // sender address
                         to: transaction.customerEmail, // list of receivers
                         subject: 'Tour Package Purchase', // Subject line
                         text: 'Hello world?', // plain text body
