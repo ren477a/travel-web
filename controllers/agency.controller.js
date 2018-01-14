@@ -1,5 +1,6 @@
 const Agency = require('../models/agency')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 exports.register = async (req, res) => {
     try {
@@ -21,7 +22,30 @@ exports.register = async (req, res) => {
 }
 
 exports.login = async (req, res) => {
-
+    try {
+        let agency = await Agency.findOne({ email: req.body.email })
+        if(!agency) {
+            res.status(500).json({ error: 'Agency not found'})
+        } else if (agency.length == 0) {
+            res.status(204).json({ success: false, msg: 'Agency not found.' })
+        } else {
+            bcrypt.compare(req.body.password, agency.password, (err, isMatch) => {
+                if (isMatch) {
+                    const token = jwt.sign(
+                        { data: { agency: agency } },
+                        process.env.JWT_SECRET,
+                        { expiresIn: 3600 }
+                    )
+                    res.json({ success: true, token: 'JWT ' + token })
+                } else {
+                    res.json({ success: false, msg: 'Email and password does not match.' })
+                }
+            })
+        }
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ error: err })
+    }
 }
 
 exports.delete = async (req, res) => {

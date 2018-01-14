@@ -1,5 +1,5 @@
 const User = require('../models/user')
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 exports.register = async (req, res) => {
@@ -24,16 +24,12 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
     try {
         let user = await User.findOne({ email: req.body.email })
-        console.log(user)
         if(!user) {
             res.status(500).json({ error: 'User not found'})
         } else if (user.length == 0) {
             res.status(204).json({ success: false, msg: 'User not found.' })
         } else {
-            console.log(req.body.password, user.password)
             bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
-                
-                console.log(isMatch)
                 if (isMatch) {
                     const token = jwt.sign(
                         { data: { user: user } },
