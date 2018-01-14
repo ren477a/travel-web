@@ -1,5 +1,15 @@
 const Cashout = require('../models/cashout')
 
+exports.create = async (req, res) => {
+  let cashout = new Cashout(req.body)
+  try {
+      let t = await cashout.save(req.body)
+      res.json({ cashout: t })
+  } catch (err) {
+      res.status(500).json({ error: err })
+  }
+}
+
 exports.delete = async (req, res) => {
     let cashout = await Cashout.findByIdAndRemove(req.params.id)
 
