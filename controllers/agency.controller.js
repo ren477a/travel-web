@@ -4,7 +4,8 @@ const jwt = require('jsonwebtoken')
 
 exports.register = async (req, res) => {
     try {
-        let count = await Agency.count({ email: req.body.email })
+        let count = await Agency.count(
+            { $or: [{ email: req.body.email }, { agencyName: req.body.agencyName }]})
         if (count === 0) {
             let body = req.body
             const salt = await bcrypt.genSalt(10)
