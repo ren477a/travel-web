@@ -80,9 +80,9 @@ exports.readAll = async (req, res) => {
         }
         let tours
         if (req.query.page) {
-            tours = await Tour.find(query).limit(9).skip((req.query.page - 1) * 9).lean()
+            tours = await Tour.find(query).sort(req.query.sort).limit(9).skip((req.query.page - 1) * 9).lean()
         } else {
-            tours = await Tour.find(query).lean()
+            tours = await Tour.find(query).sort(req.query.sort).lean()
         }
 
         if (!tours) {

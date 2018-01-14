@@ -55,6 +55,10 @@ const TourSchema = mongoose.Schema({
   img:  {
     type: String,
     required: true
+  },
+  date: {
+    type: Date,
+    default: Date.now
   }
 });
 
