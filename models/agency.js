@@ -43,29 +43,3 @@ const AgencySchema = mongoose.Schema({
 });
 
 const Agency = module.exports = mongoose.model('Agency', AgencySchema);
-
-module.exports.addAgency = function(newAgency, callback) {
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(newAgency.password, salt, (err, hash) => {
-      if(err) throw err;
-      newAgency.password = hash;
-      newAgency.save(callback);
-    });
-  });
-};
-
-module.exports.getAgencyById = function(id, callback) {
-  Agency.findById(id, callback);
-};
-
-module.exports.getAgencyByEmail = function(email, callback) {
-  const query = { email: email };
-  Agency.findOne(query, callback);
-};
-
-module.exports.comparePassword = function(candidatePassword, hash, callback) {
-  bcrypt.compare(candidatePassword, hash, (err, isMatch) => {
-    if(err) throw err;
-    callback(null, isMatch);
-  });
-};
