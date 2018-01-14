@@ -8,7 +8,9 @@ const mongoose = require('mongoose');
 // Environment Variables
 require('dotenv').config();
 
-mongoose.connect(process.env.DB_CONN_STRING);
+mongoose.connect(process.env.DB_CONN_STRING, {
+  useMongoClient: true
+});
 
 // On Connection
 mongoose.connection.on('connected', () => {
@@ -23,6 +25,7 @@ mongoose.connection.on('error', (err) => {
 const app = express();
 
 const authRoutes = require('./routes/auth-routes');
+const agencyRoutes = require('./routes/agency-routes');
 const toursRoutes = require('./routes/tour-routes');
 const paymentRoutes = require('./routes/payment-routes');
 const transactionRoutes = require('./routes/transaction-routes');
@@ -48,6 +51,7 @@ require('./config/passport')(passport);
 
 // ROUTES
 app.use('/api/auth', authRoutes);
+app.use('/api/agencies', agencyRoutes);
 app.use('/api/tours', toursRoutes);
 app.use('/api/payment', paymentRoutes);
 app.use('/api/transaction', transactionRoutes);
