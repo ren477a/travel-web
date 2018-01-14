@@ -9,6 +9,8 @@ const Agency = require('../models/agency')
 
 router.post('/user/register', userController.register);
 
+router.post('/user/login', userController.login)
+
 router.post('/register/agency', (req, res, next) => {
   console.log('register agency');
   //TODO check first if user already exists before registering

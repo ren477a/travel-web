@@ -1,5 +1,6 @@
 const User = require('../models/user')
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken')
 
 exports.register = async (req, res) => {
     try {
@@ -7,7 +8,7 @@ exports.register = async (req, res) => {
         if (count === 0) {
             let body = req.body;
             const salt = await bcrypt.genSalt(10);
-            const hash  = await bcrypt.hash(body.password, salt)
+            const hash = await bcrypt.hash(body.password, salt)
             body.password = hash
             let user = new User(body)
             let u = await user.save()
@@ -21,7 +22,34 @@ exports.register = async (req, res) => {
 }
 
 exports.login = async (req, res) => {
-
+    try {
+        let user = await User.findOne({ email: req.body.email })
+        console.log(user)
+        if(!user) {
+            res.status(500).json({ error: 'User not found'})
+        } else if (user.length == 0) {
+            res.status(204).json({ success: false, msg: 'User not found.' })
+        } else {
+            console.log(req.body.password, user.password)
+            bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
+                
+                console.log(isMatch)
+                if (isMatch) {
+                    const token = jwt.sign(
+                        { data: { user: user } },
+                        process.env.JWT_SECRET,
+                        { expiresIn: 3600 }
+                    )
+                    res.json({ success: true, token: 'JWT ' + token })
+                } else {
+                    res.json({ success: false, msg: 'Email and password does not match.' })
+                }
+            })
+        }
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ error: err })
+    }
 }
 
 exports.delete = async (req, res) => {
