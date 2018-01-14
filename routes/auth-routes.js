@@ -1,29 +1,13 @@
-const router = require('express').Router();
-const passport = require('passport');
-const jwt = require('jsonwebtoken');
+const router = require('express').Router()
+const passport = require('passport')
+const jwt = require('jsonwebtoken')
 
-const User = require('../models/user');
-const Agency = require('../models/agency');
+const userController = require('../controllers/user.controller')
 
-router.post('/register', (req, res, next) => {
-  console.log('register');
-  //TODO check first if user already exists before registering
-  let newUser = new User({
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    mobileNumber: req.body.mobileNumber,
-    email: req.body.email,
-    password: req.body.password
-  });
+const User = require('../models/user')
+const Agency = require('../models/agency')
 
-  User.addUser(newUser, (err, user) => {
-    if(err) {
-      res.json({success: false, msg:'Failed to register user'});
-    } else {
-      res.json({success: true, msg:'User registered'});
-    }
-  });
-});
+router.post('/user/register', userController.register);
 
 router.post('/register/agency', (req, res, next) => {
   console.log('register agency');
