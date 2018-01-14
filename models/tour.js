@@ -40,16 +40,9 @@ const TourSchema = mongoose.Schema({
     type: Number,
     required: true
   },
-  pricing: {
-    ptype: {
-      type: String,
-      required: true
-    },
-    fixed: Number,
-    group: [{
-          persons: Number,
-          price: Number
-        }]
+  price: {
+    type: Number,
+    required: true
   },
   status: {
     type: String,
@@ -67,29 +60,8 @@ const TourSchema = mongoose.Schema({
 
 const Tour = module.exports = mongoose.model('Tour', TourSchema);
 
-module.exports.addTour = function(newTour, callback) {
-  newTour.save(callback);
-};
 
-module.exports.getAllTours = function() {
 
-};
-
-module.exports.getMostRecent = function(resultCount, pageNum) {
-
-};
-
-module.exports.getFeatured = function() {
-
-};
-
-module.exports.getTours = function(query, resultCount, pageNum) {
-  // query can have:
-  // price range
-  // destination
-  // duration
-
-};
 
 
 // module.exports.getUserById = function(id, callback) {
