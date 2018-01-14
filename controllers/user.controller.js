@@ -6,8 +6,9 @@ exports.register = async (req, res) => {
         let count = await User.count({ email: req.body.email })
         if (count === 0) {
             let body = req.body;
-            const salt = bcrypt.genSalt(10);
-            body.password = bcrypt.hash(body.password)
+            const salt = await bcrypt.genSalt(10);
+            const hash  = await bcrypt.hash(body.password, salt)
+            body.password = hash
             let user = new User(body)
             let u = await user.save()
             res.json({ user: u })
