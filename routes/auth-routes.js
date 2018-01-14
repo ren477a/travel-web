@@ -3,13 +3,18 @@ const passport = require('passport')
 const jwt = require('jsonwebtoken')
 
 const userController = require('../controllers/user.controller')
+const agencyController = require('../controllers/agency.controller')
 
 const User = require('../models/user')
 const Agency = require('../models/agency')
 
-router.post('/user/register', userController.register);
+router.post('/user/register', userController.register)
 
 router.post('/user/login', userController.login)
+
+router.post('/agency/register', agencyController.register)
+
+router.post('/agency/login', agencyController.login)
 
 router.post('/register/agency', (req, res, next) => {
   console.log('register agency');
