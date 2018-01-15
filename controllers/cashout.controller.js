@@ -1,4 +1,44 @@
 const Cashout = require('../models/cashout')
+const Transactions = require('../models/transaction')
+const Agency = require('../models/agency')
+
+exports.issueCashout = async (req, res) => {
+    // Get all uncashed for agency
+    let transactions = await Transactions.find(
+        { agency: req.body.agency, cashedOut: false },
+        '_id total'
+    )
+    if(!transactions || transactions.length == 0) {
+        res.status(400).json({ error: 'No uncashed transactions for given agency'})
+    } else {
+        // Update transactions cashedout = true
+        let conditions = { _id: {$in: transactions} }
+        let update = { cashedOut: true }
+        let options = { multi: true }
+        let affected = await Transactions.update(conditions, update, options)
+        // Subtract to total balance
+        let sum = 0
+        for(t of transactions) {
+            sum += t.total
+        }
+        let updatedAgency = await Agency.findByIdAndUpdate(
+            req.body.agencyId,
+            { $inc: {'balance': -sum} }
+        )
+        // Create new cashout
+        // Add to db
+        let newCashout = new Cashout({
+            agencyId: req.body.agencyId,
+            agency: req.body.agency,
+            bankAccount: req.body.bankAccount,
+            amount: req.body.amount,
+            transactions: transactions
+        });
+        let cashout = await newCashout.save()
+        res.send(cashout)
+    }
+
+}
 
 exports.create = async (req, res) => {
   let cashout = new Cashout(req.body)
