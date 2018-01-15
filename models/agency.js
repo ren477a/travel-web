@@ -39,6 +39,10 @@ const AgencySchema = mongoose.Schema({
   balance: {
     type: Number,
     default: 0
+  },
+  role: {
+    type: String,
+    default: 'agency'
   }
 });
 
