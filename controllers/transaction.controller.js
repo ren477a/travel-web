@@ -38,6 +38,20 @@ exports.update = async (req, res) => {
     }
 }
 
+exports.claim = async (req, res) => {
+    try {
+        let transaction = await Transaction.findByIdAndUpdate(req.params.id, { claimed: true }, { new: true })
+
+        if (!transaction) {
+            res.status(400).json({ error: 'No transaction with the given ID' })
+        } else {
+            res.json({ transaction: transaction })
+        }
+    } catch (err) {
+        err => res.status(500).json({ error: err })
+    }
+}
+
 exports.read = async (req, res) => {
     try {
         let transaction = await Transaction.findById(req.params.id)
@@ -52,10 +66,38 @@ exports.read = async (req, res) => {
     }
 }
 
+exports.findByCustomerId = async (req, res) => {
+    try {
+        let transaction = await Transaction.find({ customerId: req.params.customerId})
+
+        if (!transaction) {
+            res.status(400).json({ error: 'No transaction with the given ID' })
+        } else {
+            res.json({ transaction: transaction })
+        }
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
+}
+
+exports.findByAgency = async (req, res) => {
+    try {
+        let transaction = await Transaction.find({ agency: req.params.agency})
+
+        if (!transaction) {
+            res.status(400).json({ error: 'No transaction with the given ID' })
+        } else {
+            res.json({ transaction: transaction })
+        }
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
+}
+
 exports.readAll = async (req, res) => {
     try {
         let transactions = await Transaction.find({})
-        res.json({ transactions: transactions })
+        res.send(transactions)
     } catch (err) {
         res.status(500).json({ error: err })
     }
