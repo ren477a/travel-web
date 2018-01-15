@@ -33,7 +33,7 @@ const CashoutSchema = mongoose.Schema({
   },
   status: {
     type: String,
-    required: true
+    default: 'pending'
   },
   amount: {
     type: Number,
@@ -43,7 +43,3 @@ const CashoutSchema = mongoose.Schema({
 });
 
 const Cashout = module.exports = mongoose.model('Cashout', CashoutSchema);
-
-module.exports.addCashout = function(newCashout, callback) {
-  newCashout.save(callback);
-};
