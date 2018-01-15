@@ -25,7 +25,7 @@ router.post('/charge', (req, res, next) => {
     });
 });
 
-router.post('/transaction', (req, res, next) => {
+router.post('/transaction', async (req, res, next) => {
     let prefix = req.body.tourId.substr(req.body.tourId.length - 4) + "-";
     let data = req.body;
     data.voucherCodes = voucher.generate({
@@ -34,33 +34,20 @@ router.post('/transaction', (req, res, next) => {
         charset: 'alphanumeric',
         prefix: prefix
     });
-    console.log(data);
     let newTransaction = new Transaction(data);
-    console.log('Adding transaction')
-    Transaction.addTransaction(newTransaction, (err, transaction) => {
-        if (err) {
-            console.log(err);
-            res.json({ success: false, transaction: null });
-        } else {
-            let conditions = { _id: req.body.tourId }
-                , update = { $inc: { 'sold': transaction.quantity } }
-                , options = { multi: true };
-
-            console.log('Updating tour bought property')
-            Tour.update(conditions, update, options, (err, numAffected) => {
-                // numAffected is the number of updated documents
-                let conditions2 = { agencyName: req.body.agency }
-                    , update2 = { $inc: { 'balance': transaction.total } }
-                    , options2 = { multi: true };
-                console.log('Updating agency balance')
-                console.log(conditions2)
-                console.log("AGENCY " + req.body.agency)
-                Agency.update(conditions2, update2, options2, (err, numAffected) => {
-                    // numAffected is the number of updated documents
-                    console.log(numAffected);
-
-                    // Message
-                    let output = `
+    let transaction = await newTransaction.save()
+    console.log(transaction)
+    // Update tour sold
+    let updatedTour = await Tour.findByIdAndUpdate(req.body.tourId, { $inc: { 'sold': transaction.quantity } })
+    console.log(updatedTour)
+    // Add balance to agency
+    let agency = await Agency.findOneAndUpdate(
+        { agencyName: req.body.agency },
+        { $inc: { 'balance': transaction.total } }
+    )
+    console.log(agency)
+    // Send email
+    let output = `
                     <h1>Thank you for using TravelCatalog!</h1>
                     <h3>Transaction Receipt</h3>
                     <ul>  
@@ -73,50 +60,39 @@ router.post('/transaction', (req, res, next) => {
                     </ul>
                     <h3>Vouchers</h3>
                     <ul>`;
-                    
-                    for(v of transaction.voucherCodes) {
-                        output += `<li>${v}</li>`;
-                    }
-                    output += '</ul>';
+
+    for (v of transaction.voucherCodes) {
+        output += `<li>${v}</li>`;
+    }
+    output += '</ul>';
 
 
-                    // EMAIL
-                    let transporter = nodemailer.createTransport({
-                        host: process.env.EMAIL_HOST,
-                        port: 587,
-                        secure: false, // true for 465, false for other ports
-                        auth: {
-                            user: process.env.EMAIL, // generated ethereal user
-                            pass: process.env.EMAIL_PASS  // generated ethereal password
-                        },
-                        tls: {
-                            rejectUnauthorized: false
-                        }
-                    });
-
-                    // setup email data with unicode symbols
-                    let mailOptions = {
-                        from: '"TravelCatalog" <' + process.env.EMAIL + '>', // sender address
-                        to: transaction.customerEmail, // list of receivers
-                        subject: 'Tour Package Purchase', // Subject line
-                        text: 'Hello world?', // plain text body
-                        html: output // html body
-                    };
-
-                    // send mail
-                    transporter.sendMail(mailOptions, (error, info) => {
-                        if (error) {
-                            return console.log(error);
-                        }
-                        console.log('Message sent: %s', info.messageId);
-                        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
-                        res.json({ success: true, transaction: transaction });
-                    });
-                });
-            });
+    // EMAIL
+    let transporter = nodemailer.createTransport({
+        host: process.env.EMAIL_HOST,
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+            user: process.env.EMAIL, // generated ethereal user
+            pass: process.env.EMAIL_PASS  // generated ethereal password
+        },
+        tls: {
+            rejectUnauthorized: false
         }
     });
+
+    // setup email data with unicode symbols
+    let mailOptions = {
+        from: '"TravelCatalog" <' + process.env.EMAIL + '>', // sender address
+        to: transaction.customerEmail, // list of receivers
+        subject: 'Tour Package Purchase', // Subject line
+        text: 'Hello world?', // plain text body
+        html: output // html body
+    };
+
+    let mailInfo = transporter.sendMail(mailOptions)
+    res.json({mailInfo: mailInfo})
+
 });
 
 
