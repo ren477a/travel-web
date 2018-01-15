@@ -54,7 +54,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/agencies', agencyRoutes);
 app.use('/api/tours', toursRoutes);
 app.use('/api/payment', paymentRoutes);
-app.use('/api/transaction', transactionRoutes);
+app.use('/api/transactions', transactionRoutes);
 app.use('/api/cashout', cashoutRoutes);
 
 const upload = require('./config/upload');
