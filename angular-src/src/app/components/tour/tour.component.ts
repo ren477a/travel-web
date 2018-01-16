@@ -15,7 +15,6 @@ export class TourComponent implements OnInit {
   tour: any;
   tourId: String;
   quantity: number;
-  imgUrl: String;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,9 +32,7 @@ export class TourComponent implements OnInit {
       }
     );
     this.toursService.findTourById(this.tourId).subscribe(res => {
-      this.tour = res.tour;
-      console.log(this.tour);
-      this.imgUrl = res.imgUrl;
+      this.tour = res.tour
     },
       err => {
         console.log(err);
