@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   tours: Array<any>;
-  urls: Array<String>;
   private subscription: ISubscription;
 
   constructor(
@@ -23,7 +22,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.subscription = this.toursService.findFeatured().subscribe(res => {
       this.tours = res.tours;
-      this.urls = res.urls;
     });
   }
   

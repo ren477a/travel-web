@@ -92,7 +92,7 @@ exports.readAll = async (req, res) => {
             await Promise.all(tours.map(async (tour) => {
                 tour.img = await upload.getUrl(tour.img)
             }))
-            res.send(tours)
+            res.json({tours: tours, totalPages: totalPages})
         }
     } catch (err) {
         err => res.status(500).json({ error: err })
