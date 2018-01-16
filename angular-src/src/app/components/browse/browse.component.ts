@@ -11,7 +11,6 @@ import { Subscription } from 'rxjs/Subscription';
 export class BrowseComponent implements OnInit {
 
   tours: Array<any>;
-  urls: Array<String>;
   keyword: String;
   minPrice: Number;
   maxPrice: Number;
@@ -31,22 +30,10 @@ export class BrowseComponent implements OnInit {
 
   ngOnInit() {
     if(!this.keyword) this.keyword = '';
-    // let regex = new RegExp('.*'+this.keyword+'.*', "i")
-    // let query = {
-    //   title: { $regex: regex, $options: 'i'},
-    //   agency: { $regex: regex, $options: 'i'},
-    //   description: { $regex: regex, $options: 'i'},
-    //   itinerary: { $regex: regex, $options: 'i'}
-    // }
-    this.sub = this.toursService.findTours({title: this.keyword}, 1).subscribe(res => {
+    this.sub = this.toursService.findTours({key: this.keyword}, 1).subscribe(res => {
       this.tours = res.tours;
-      this.urls = res.urls;
-      // this.pages = new Array(res.totalPages+1);
-      // for(let i = 1; i <= this.pages.length; i++) {
-      //   this.pages[i] = i;
-      // }
       this.pages = Array(res.totalPages).fill(1).map((x,i)=>i+1);
-      this.activePage = res.pageNum;
+      this.activePage = 1;
     });
   }
 
@@ -54,9 +41,9 @@ export class BrowseComponent implements OnInit {
     this.sub.unsubscribe();
 
     this.sub = this.toursService.findTours({
-      title: this.keyword.toLowerCase(),
-      minPrice: this.minPrice,
-      maxPrice: this.maxPrice,
+      key: this.keyword.toLowerCase(),
+      min: this.minPrice,
+      max: this.maxPrice,
       sortBy: this.sortBy //date //price //alphabetical
     }, 1).subscribe(res => {
       this.tours = res.tours;
@@ -64,9 +51,8 @@ export class BrowseComponent implements OnInit {
       // for(let i = 1; i <= this.pages.length; i++) {
       //   this.pages[i] = i;
       // }
-      this.urls = res.urls;
       this.pages = Array(res.totalPages).fill(1).map((x,i)=>i+1);
-      this.activePage = res.pageNum
+      this.activePage = 1
     });
     console.log(this.pages);
     console.log("search");
@@ -81,16 +67,14 @@ export class BrowseComponent implements OnInit {
     if(this.activePage>=this.pages.length) this.activePage = this.pages.length;
     this.sub.unsubscribe();
     this.sub = this.toursService.findTours({
-      title: this.keyword.toLowerCase(),
-      minPrice: this.minPrice,
-      maxPrice: this.maxPrice,
+      key: this.keyword.toLowerCase(),
+      min: this.minPrice,
+      max: this.maxPrice,
       sortBy: this.sortBy //date //price //alphabetical
     }, this.activePage).subscribe(res => {
       this.tours = res.tours;
       console.log(res.tours);
-      this.urls = res.urls;
       this.pages = Array(res.totalPages).fill(1).map((x,i)=>i+1);
-      this.activePage = res.pageNum
     });
   }
 
@@ -99,16 +83,14 @@ export class BrowseComponent implements OnInit {
     if(this.activePage<0) this.activePage = 0;
     this.sub.unsubscribe();
     this.sub = this.toursService.findTours({
-      title: this.keyword.toLowerCase(),
-      minPrice: this.minPrice,
-      maxPrice: this.maxPrice,
+      key: this.keyword.toLowerCase(),
+      min: this.minPrice,
+      max: this.maxPrice,
       sortBy: this.sortBy //date //price //alphabetical
     }, this.activePage).subscribe(res => {
       this.tours = res.tours;
       console.log(res.tours);
-      this.urls = res.urls;
       this.pages = Array(res.totalPages).fill(1).map((x,i)=>i+1);
-      this.activePage = res.pageNum
     });
   }
 
@@ -118,16 +100,14 @@ export class BrowseComponent implements OnInit {
     if(this.activePage>=this.pages.length) this.activePage = this.pages.length;
     this.sub.unsubscribe();
     this.sub = this.toursService.findTours({
-      title: this.keyword.toLowerCase(),
-      minPrice: this.minPrice,
-      maxPrice: this.maxPrice,
+      key: this.keyword.toLowerCase(),
+      min: this.minPrice,
+      max: this.maxPrice,
       sortBy: this.sortBy //date //price //alphabetical
     }, this.activePage).subscribe(res => {
       this.tours = res.tours;
       console.log(res.tours);
-      this.urls = res.urls;
       this.pages = Array(res.totalPages).fill(1).map((x,i)=>i+1);
-      this.activePage = res.pageNum
     });
   }
 }
