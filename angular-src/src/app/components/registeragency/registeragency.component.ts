@@ -45,10 +45,13 @@ export class RegisteragencyComponent implements OnInit {
 
   onRegisterClick() {
     console.log("register agency")
-
     let dtiStr: String;
     let businessStr: String;
     let birStr: String;
+    if(!this.dti || !this.bir || !this.bir) {
+      this.msg = 'Please upload required documents.'
+      return
+    } 
     this.msg = 'Uploading dti file...';
     this.toursService.uploadPhoto(this.dti).subscribe(res => {
       if (res.file) {
@@ -78,9 +81,8 @@ export class RegisteragencyComponent implements OnInit {
                 }
 
                 //Validate Here
-                console.log(agency);
                 this.authService.registerAgency(agency).subscribe(data => {
-                  if (data.success) {
+                  if (data.agency) {
                     console.log("Agency registered");
                     this.router.navigate(['/login/agency']);
                   } else {
