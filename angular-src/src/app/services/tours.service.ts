@@ -27,37 +27,41 @@ export class ToursService {
       .map(res => res.json());
   }
 
+  // Done
   findTours(query, pageNum) {
     let headers = new Headers();
     if(query.sortBy) {
       if(query.sortBy === 'Price lowest to highest') {
-        query.sortBy = {col:'price', asc: 1}
+        query.sort = 'price'
       } else if(query.sortBy === 'Price highest to lowest') {
-        query.sortBy = {col:'price', asc: -1}
+        query.sort = '-price'
       } else if(query.sortBy === 'Alphabetical Order') {
-        query.sortBy = {col:'title', asc: 1}
+        query.sort = 'title'
       } else if(query.sortBy === 'Newest First') {
-        query.sortBy = undefined;
+        query.sort = '-date';
       }
     }
-    let data = {
-      query: query,
-      pageNum: pageNum
-    }
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/tours/search');
-    return this.http.post(ep, data, {headers: headers})
-      .map(res => res.json());
-  }
-
-  findFeatured() {
-    let headers = new Headers();
-    headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/tours/featured');
+    let qStr = '?page='+pageNum
+    if(query.key) qStr += '&key=' + query.key
+    if(query.min && query.max) qStr += '&min='+query.min+'&max='+query.max
+    if(query.type) qStr += '&type=' + query.type
+    if(query.sort) qStr += '&sort=' + query.sort
+    let ep = this.prepEndpoint(`api/tours${qStr}`);
     return this.http.get(ep, {headers: headers})
       .map(res => res.json());
   }
 
+  // Done
+  findFeatured() {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint('api/tours?page=1');
+    return this.http.get(ep, {headers: headers})
+      .map(res => res.json());
+  }
+
+  // Done
   findTourById(id) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
@@ -66,11 +70,23 @@ export class ToursService {
       .map(res => res.json());
   }
 
+  findByAgency(id) {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint('api/tours/' + id);
+    return this.http.get(ep, {headers: headers})
+      .map(res => res.json());
+  }
+
+  //
   stopSelling(id) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/tours/archive/' + id);
-    return this.http.put(ep, {headers: headers})
+    let body = {
+      status: 'notonsale'
+    }
+    let ep = this.prepEndpoint('api/tours/' + id);
+    return this.http.put(ep, body, {headers: headers})
       .map(res => res.json());
   }
 

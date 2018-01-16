@@ -21,7 +21,7 @@ export class AuthService {
   registerUser(user){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/auth/register');
+    let ep = this.prepEndpoint('api/auth/user/register');
     return this.http.post(ep, user,{headers: headers})
       .map(res => res.json());
   }
@@ -29,7 +29,7 @@ export class AuthService {
   registerAgency(agency){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/auth/register/agency');
+    let ep = this.prepEndpoint('api/auth/agency/register');
     return this.http.post(ep, agency,{headers: headers})
       .map(res => res.json());
   }
@@ -37,7 +37,7 @@ export class AuthService {
   authenticateUser(user) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/auth/authenticate');
+    let ep = this.prepEndpoint('api/auth/user/login');
     return this.http.post(ep, user,{headers: headers})
       .map(res => res.json());
   }
@@ -45,7 +45,7 @@ export class AuthService {
   authenticateAgency(agency) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/auth/authenticate/agency');
+    let ep = this.prepEndpoint('api/auth/agency/login');
     return this.http.post(ep, agency,{headers: headers})
       .map(res => res.json());
   }
@@ -73,7 +73,7 @@ export class AuthService {
   getUserType() {
     this.loadToken();
     let token = this.jwtHelper.decodeToken(this.authToken);
-    return token.data.type;
+    return token.data;
   }
 
   getLoggedInAgency() {
@@ -91,21 +91,14 @@ export class AuthService {
       .map(res => res.json());
   }
 
-  // loggedOut() {
-  //   this.programmingFail();
-  //   if(this.userType === undefined) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
 
   userLoggedIn() {
     console.log()
-    return tokenNotExpired() && this.getUserType() === 'user';
+    return tokenNotExpired() && this.getUserType().user;
   }
 
   agencyLoggedIn() {
-    return tokenNotExpired() && this.getUserType() === 'agency';    
+    return tokenNotExpired() && this.getUserType().agency;    
   }
 
   loggedIn() {
