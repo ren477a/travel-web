@@ -14,7 +14,7 @@ export class TransactionService {
   findTransactionsByCustomerId(customerId) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/transaction/customer/' + customerId);
+    let ep = this.prepEndpoint('api/transactions/customer/' + customerId);
     return this.http.get(ep, {headers: headers})
       .map(res => res.json());
   }
@@ -24,7 +24,7 @@ export class TransactionService {
     console.log(agencyName);
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/transaction/agency/' + agencyName);
+    let ep = this.prepEndpoint('api/transactions/agency/' + agencyName);
     return this.http.get(ep, {headers: headers})
       .map(res => res.json());
   }
@@ -32,7 +32,7 @@ export class TransactionService {
   claim(id) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/transaction/claim/' + id);
+    let ep = this.prepEndpoint('api/transactions/claim/' + id);
     return this.http.put(ep, {headers: headers})
       .map(res => res.json());
   }
