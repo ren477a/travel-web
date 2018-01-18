@@ -36,7 +36,7 @@ exports.login = async (req, res) => {
                         process.env.JWT_SECRET,
                         { expiresIn: 3600 }
                     )
-                    res.json({ success: true, token: 'JWT ' + token })
+                    res.json({ success: true, token: 'JWT ' + token, user: user })
                 } else {
                     res.json({ success: false, msg: 'Email and password does not match.' })
                 }
