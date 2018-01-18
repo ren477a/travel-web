@@ -68,12 +68,12 @@ exports.read = async (req, res) => {
 
 exports.findByCustomerId = async (req, res) => {
     try {
-        let transaction = await Transaction.find({ customerId: req.params.customerId})
+        let transactions = await Transaction.find({ customerId: req.params.customerId})
 
-        if (!transaction) {
+        if (!transactions) {
             res.status(400).json({ error: 'No transaction with the given ID' })
         } else {
-            res.json({ transaction: transaction })
+            res.json({ transactions: transactions })
         }
     } catch (err) {
         res.status(500).json({ error: err })

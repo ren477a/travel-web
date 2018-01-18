@@ -25,7 +25,7 @@ export class UseraccountComponent implements OnInit {
     let user = this.authService.getLoggedInUser();
     if(user) {
       this.transactionService.findTransactionsByCustomerId(user.id).subscribe(res => {
-        this.userTransactions = res;
+        this.userTransactions = res.transactions;
       });
     }
   }
