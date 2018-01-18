@@ -46,7 +46,7 @@ export class PaymentService {
           tourTitle: this.tour.title,
           agency: this.tour.agency,
           quantity: this.quantity,
-          pricePerItem: this.tour.pricing.fixed,
+          pricePerItem: this.tour.price,
           total: resultObj.charge.amount / 100,
           customerId: this.user.id,
           customerEmail: this.user.email,

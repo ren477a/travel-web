@@ -127,7 +127,7 @@ export class ValidateService {
   validateTour(tours){
 
     if (tours.title == undefined ||
-      tours.pricing.fixed == undefined ||
+      tours.price == undefined ||
       tours.duration == undefined ||
       tours.validityInDays == undefined ||
       tours.type == undefined ||
@@ -137,7 +137,7 @@ export class ValidateService {
       tours.exclusions == undefined ||
       tours.terms == undefined ||
       tours.title == '' ||
-      tours.pricing.fixed == '' ||
+      tours.price == '' ||
       tours.duration == '' ||
       tours.validityInDays == '' ||
       tours.type == '' ||
@@ -161,7 +161,7 @@ export class ValidateService {
 
 
     //validation price
-    var price = tours.pricing.fixed;
+    var price = tours.price;
     var number = "^[0-9]";
     if(isNaN(price)) {
       return "Price: Invalid price."
