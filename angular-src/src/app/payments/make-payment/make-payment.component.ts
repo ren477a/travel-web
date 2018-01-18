@@ -38,7 +38,7 @@ export class MakePaymentComponent implements OnInit {
 
   ngOnInit() {
     this.isDev = true; //Change on prod
-    this.amount = this.quantity * this.tour.pricing.fixed * 100;
+    this.amount = this.quantity * this.tour.price * 100;
     this.handler = StripeCheckout.configure({
       key: this.stripeKey,
       image: '../../../../assets/travel.png',
