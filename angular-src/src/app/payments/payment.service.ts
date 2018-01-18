@@ -48,13 +48,14 @@ export class PaymentService {
           quantity: this.quantity,
           pricePerItem: this.tour.price,
           total: resultObj.charge.amount / 100,
-          customerId: this.user.id,
+          customerId: this.user._id,
           customerEmail: this.user.email,
           paymentType: "card",
           paymentId: resultObj.charge.id,
           voucherCodes: [],
           claimed: false
         }
+        console.log(data)
         let ep = this.prepEndpoint('api/payment/transaction');
         this.http.post(ep, data).subscribe(res => {
           console.log(res);

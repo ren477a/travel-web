@@ -24,7 +24,8 @@ export class UseraccountComponent implements OnInit {
   ngOnInit() {
     let user = this.authService.getLoggedInUser();
     if(user) {
-      this.transactionService.findTransactionsByCustomerId(user.id).subscribe(res => {
+      this.transactionService.findTransactionsByCustomerId(user._id).subscribe(res => {
+        console.log(user)
         this.userTransactions = res.transactions;
       });
     }
