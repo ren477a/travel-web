@@ -92,11 +92,7 @@ export class ManagetoursComponent implements OnInit {
       exclusions: this.exclusions,
       terms: this.terms,
       validityInDays: +this.validityInDays,
-      pricing: {
-        ptype: "fixed",
-        fixed: +this.price,
-        group: []
-      },
+      price: +this.price,
       img: ''
     }
     console.log(tour)
