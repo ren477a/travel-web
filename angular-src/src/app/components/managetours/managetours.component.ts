@@ -58,18 +58,21 @@ export class ManagetoursComponent implements OnInit {
   }
 
   reload(pageNum) {
+    console.log(pageNum)
     const query = { agency: this.authService.getLoggedInAgency().agencyName, status: this.showWithStatus };
+    console.log(query)
     this.sub = this.toursService.findTours(query, pageNum).subscribe(res => {
       this.tours = res.tours;
       this.pages = Array(res.totalPages).fill(1).map((x, i) => i + 1);
       if (this.pages.length == 0) this.tours = [];
-      this.activePage = res.pageNum;
+      this.activePage = pageNum;
       console.log(this.tours);
     });
   }
 
   onChangeTab(status) {
     this.showWithStatus = status;
+    console.log(this.showWithStatus)
     this.sub.unsubscribe();
     this.reload(1);
 

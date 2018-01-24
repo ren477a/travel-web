@@ -47,6 +47,9 @@ export class ToursService {
     if(query.min && query.max) qStr += '&min='+query.min+'&max='+query.max
     if(query.type) qStr += '&type=' + query.type
     if(query.sort) qStr += '&sort=' + query.sort
+    if(query.agency) qStr += '&agency=' + encodeURIComponent(query.agency)
+    if(query.status) qStr += '&status=' + query.status
+    console.log(qStr)
     let ep = this.prepEndpoint(`api/tours${qStr}`);
     return this.http.get(ep, {headers: headers})
       .map(res => res.json());

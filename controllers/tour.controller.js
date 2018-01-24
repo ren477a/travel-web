@@ -28,10 +28,12 @@ exports.read = async (req, res) => {
 exports.readAll = async (req, res) => {
     try {
         let query
-        if (req.query.key === undefined &&
+        if ((req.query.key === undefined &&
             req.query.min === undefined &&
             req.query.max === undefined &&
-            req.query.type === undefined) {
+            req.query.type === undefined) &&
+            (req.query.agency === undefined &&
+            req.query.status === undefined)) {
             // RETURN ALL
             query = {};
         } else {
@@ -60,7 +62,7 @@ exports.readAll = async (req, res) => {
                 }
             }
 
-            // TYPE
+            // TYPEz    
             if (req.query.type !== undefined) {
                 let type = req.query.type;
                 if (type === 'International' || type === 'Local') {
@@ -69,7 +71,18 @@ exports.readAll = async (req, res) => {
                     res.status(400).send({ error: 'Invalid type' })
                 }
             }
+            console.log(query)
+            if(req.query.agency !== undefined) {
+                query['$and'].push({agency: req.query.agency})
+                console.log(2)
+            } 
+            console.log(3)
+
+            if(req.query.status !== undefined) {
+                query['$and'].push({status: req.query.status})
+            }
         }
+        console.log(req.query)
         console.log(query);
 
         // PAGINATE
