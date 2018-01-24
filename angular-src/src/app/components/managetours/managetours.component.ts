@@ -109,7 +109,7 @@ export class ManagetoursComponent implements OnInit {
 
           console.log(tour.img);
           this.toursService.addTour(tour).subscribe(data => {
-            if (data.success) {
+            if (data.tour) {
               console.log("Submit success");
               this.clearData();
               this.reload(1);
