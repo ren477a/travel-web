@@ -87,7 +87,7 @@ exports.findByAgency = async (req, res) => {
         if (!transaction) {
             res.status(400).json({ error: 'No transaction with the given ID' })
         } else {
-            res.json({ transaction: transaction })
+            res.json({ transactions: transaction })
         }
     } catch (err) {
         res.status(500).json({ error: err })

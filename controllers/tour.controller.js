@@ -4,7 +4,7 @@ const upload = require('../config/upload')
 exports.create = async (req, res) => {
     let tour = new Tour(req.body)
     try {
-        let t = await tour.save(req.body)
+        let t = await tour.save(tour)
         res.json({ tour: t })
     } catch (err) {
         res.status(500).json({ error: err })

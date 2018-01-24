@@ -33,10 +33,11 @@ export class DashboardComponent implements OnInit {
     this.agency = this.authService.getLoggedInAgency();
     console.log(this.agency)
     this.sub = this.authService.findAgencyById(this.agency._id).subscribe(res => {
-      this.agency = res;
+      this.agency = res.agency;
     })
+    
     this.sub2 = this.transactionService.findTransactionsByAgencyName(this.agency.agencyName).subscribe(res => {
-        this.transactions = res;
+        this.transactions = res.transactions;
         this.selected = this.transactions[0];
       })
   }
@@ -45,10 +46,10 @@ export class DashboardComponent implements OnInit {
     this.sub.unsubscribe();
     this.sub2.unsubscribe();
     this.sub = this.authService.findAgencyById(this.agency._id).subscribe(res => {
-      this.agency = res;
+      this.agency = res.agency;
     })
     this.sub2 = this.transactionService.findTransactionsByAgencyName(this.agency.agencyName).subscribe(res => {
-      this.transactions = res;
+      this.transactions = res.transactions;
       this.selected = this.transactions[0];
     })
   }
