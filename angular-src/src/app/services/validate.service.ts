@@ -21,6 +21,27 @@ export class ValidateService {
     }
   }
 
+  validationSearch(searchParams){
+
+    //validation account name
+    var y = true;
+    var min = parseInt(searchParams.min);
+    var max = parseInt(searchParams.max);
+    if(min < 0 || max < 0 ){
+       y = false;
+    }
+    else if (max < min){
+       y = false;
+    }
+        
+
+    if(!y){
+          
+      return "Invalid Minimum or Maximum";
+    }
+      return "success";
+  }
+
   validateEmail(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
