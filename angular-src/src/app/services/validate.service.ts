@@ -354,14 +354,14 @@ export class ValidateService {
         return "success";
       }
 
-      validateCashout(checkout){
+      validateCashout(cashout){
 
         //validation account name
          var number = "^[0-9]";
          var isLetter =  /^[a-zA-Z\s]*$/;
-         var bankName = checkout.bankName;
-         var accountName = checkout.accountName;
-         var accountNumber = checkout.accountNumber; 
+         var bankName = cashout.bankAccount.bankName;
+         var accountName = cashout.bankAccount.accountName;
+         var accountNumber = cashout.bankAccount.accountNumber; 
          var y = true;  
          if(accountName.length != 0){
           for(let x = 0; x < accountName.length; x++){
@@ -378,8 +378,7 @@ export class ValidateService {
            return "Invalid account name";
         }
 
-         //validation account number
-         var accountNumber = checkout.accountNumber; 
+         //validation account number 
          var accs = true;
          if(accountNumber.length != 0){
            for(let x=0; x < accountNumber.length; x++){
@@ -397,18 +396,11 @@ export class ValidateService {
              return "Invalid account number";
            }
         else{
-          switch(bankName){
-            case "BDO":
-              if(!(accountNumber.length == 12)){
-                return "Invalid account number";
-              }
-              break;
-            case "BPI":
-              if(!(accountNumber.length == 16)){
-                return "Invalid account number";
-              }
-              break;
+          if(!(accountNumber.length >= 10 && accountNumber.length <= 16)){
+            console.log("nani");
+            return "Invalid account number"
           }
+          
         }
         return "success";
 

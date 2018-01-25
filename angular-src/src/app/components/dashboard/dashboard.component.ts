@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { TransactionService } from '../../services/transaction.service';
 import { Subscription } from 'rxjs/Subscription';
+import { ValidateService } from '../../services/validate.service';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -25,6 +27,7 @@ export class DashboardComponent implements OnInit {
   sub2: Subscription;
 
   constructor(
+    private validateService: ValidateService,
     private authService: AuthService,
     private transactionService: TransactionService
   ) { }
@@ -67,6 +70,7 @@ export class DashboardComponent implements OnInit {
   }
 
   submitCashout() {
+
     let cashout = {
       agencyId: this.agency._id,
       agency: this.agency.agencyName,
@@ -78,13 +82,27 @@ export class DashboardComponent implements OnInit {
       status: 'pending',
       amount: this.agency.balance
     }
-    this.msg = 'Submitting...'
-    console.log(cashout)
-    this.transactionService.addCashout(cashout).subscribe(res => {
-      console.log(res);
-      this.btnCashout.nativeElement.click();
-      this.reload();
-    })
+
+     if (!this.validateService.validateCashout(cashout)) {
+      this.msg = "Please fill in all the fields.";
+      return false;
+    }
+    let resultCashout = this.validateService.validateCashout(cashout);
+    if(resultCashout==="success"){
+        this.msg = "";
+        this.msg = 'Submitting...'
+        console.log(cashout)
+        this.transactionService.addCashout(cashout).subscribe(res => {
+          console.log(res);
+          this.btnCashout.nativeElement.click();
+          this.reload();
+        })
+    } else{
+      this.msg = resultCashout;
+    }
+
+
+   
   }
 
 }
