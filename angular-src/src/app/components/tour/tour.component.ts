@@ -15,6 +15,7 @@ export class TourComponent implements OnInit {
   tour: any;
   tourId: String;
   quantity: number;
+  msg: String;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,8 +45,15 @@ export class TourComponent implements OnInit {
     let user = this.authService.getLoggedInUser();
     if (user) {
       if (this.quantity) {
-        this.paymentService.submitPayment(this.tour, this.authService.getLoggedInUser(), this.quantity);
-        this.router.navigate(['/checkout']);
+        if(this.quantity > 0 && this.quantity <= 20){
+          this.msg = "";
+          this.paymentService.submitPayment(this.tour, this.authService.getLoggedInUser(), this.quantity);
+          this.router.navigate(['/checkout']);
+        } else{
+          this.msg = "Invalid quantity.";
+        }
+      } else{
+          this.msg = "Invalid quantity.";
       }
 
     } else {
