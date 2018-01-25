@@ -44,58 +44,77 @@ export class RegisteragencyComponent implements OnInit {
   }
 
   onRegisterClick() {
+
     console.log("register agency")
-    let dtiStr: String;
-    let businessStr: String;
-    let birStr: String;
+    let dtiStr: string;
+    let businessStr: string;
+    let birStr: string;
     if(!this.dti || !this.bir || !this.bir) {
       this.msg = 'Please upload required documents.'
       return
     } 
-    this.msg = 'Uploading dti file...';
-    this.toursService.uploadPhoto(this.dti).subscribe(res => {
-      if (res.file) {
+    let agency = {
+      agencyName: this.agencyName,
+      ownedBy: this.ownedBy,
+      mobileNumber: this.mobileNumber,
+      email: this.email,
+      password: this.password,
+      address: this.address,
+      dti: '',
+      business: '',
+      bir: ''
+    }
 
-        this.msg = 'Uploading business file...';
-        dtiStr = res.file;
+     if (!this.validateService.validateRegisterAgency(agency)) {
+      this.msg = "Please fill in all the fields.";
+      return false;
+    }
 
-        this.toursService.uploadPhoto(this.business).subscribe(res => {
-          if (res.file) {
-            this.msg = 'Uploading bir file...';
-            businessStr = res.file;
-            this.toursService.uploadPhoto(this.bir).subscribe(res => {
-              if (res.file) {
-                this.msg = 'All files uploaded. Please wait...';
-                birStr = res.file;
-                console.log("register btn pressed");
-                const agency = {
-                  agencyName: this.agencyName,
-                  ownedBy: this.ownedBy,
-                  mobileNumber: this.mobileNumber,
-                  email: this.email,
-                  password: this.password,
-                  address: this.address,
-                  dti: dtiStr,
-                  business: businessStr,
-                  bir: birStr
+    let resultAgency = this.validateService.validateRegisterAgency(agency);
+
+    console.log(resultAgency);
+    if(resultAgency==="success"){
+      this.msg = "";
+      this.msg = 'Uploading dti file...';
+      this.toursService.uploadPhoto(this.dti).subscribe(res => {
+        if (res.file) {
+
+          this.msg = 'Uploading business file...';
+          dtiStr = res.file;
+
+          this.toursService.uploadPhoto(this.business).subscribe(res => {
+            if (res.file) {
+              this.msg = 'Uploading bir file...';
+              businessStr = res.file;
+              this.toursService.uploadPhoto(this.bir).subscribe(res => {
+                if (res.file) {
+                  this.msg = 'All files uploaded. Please wait...';
+                  birStr = res.file;
+                  console.log("register btn pressed");
+                  agency.dti = dtiStr
+                  agency.business = businessStr
+                  agency.bir = birStr
+
+                  //Validate Here
+                  this.authService.registerAgency(agency).subscribe(data => {
+                    if (data.agency) {
+                      console.log("Agency registered");
+                      this.router.navigate(['/login/agency']);
+                    } else {
+                      console.log("Something went wrong");
+                      this.router.navigate(['/register/agency']);
+                    }
+                  });
                 }
+              })
+            }
+          })
+        }
+      })
+    } else{
+      this.msg = resultAgency;
+    }
 
-                //Validate Here
-                this.authService.registerAgency(agency).subscribe(data => {
-                  if (data.agency) {
-                    console.log("Agency registered");
-                    this.router.navigate(['/login/agency']);
-                  } else {
-                    console.log("Something went wrong");
-                    this.router.navigate(['/register/agency']);
-                  }
-                });
-              }
-            })
-          }
-        })
-      }
-    })
   }
 
 }

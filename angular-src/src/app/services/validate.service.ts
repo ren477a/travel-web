@@ -286,6 +286,32 @@ export class ValidateService {
            return "Owner name must be Letters only and maximum of 30 letters only";
         }
 
+         //validation mobile number
+         var mobile = agency.mobileNumber.substr(agency.mobileNumber.indexOf("9"), agency.mobileNumber.length);
+         var mobs = true;
+         if(mobile.length == 10 && mobile.length != 0){
+           for(let x=0; x < mobile.length; x++){
+             if(!(mobile.charAt(x).match(number))) {
+              mobs = false;  
+             }
+           }
+        }
+        else{
+          mobs = false;
+        }
+        if(!mobs){
+             return "wrong input of Mobile Number";
+           }
+
+        //validation email
+        var email = agency.email;
+        if(!(email.length != 0)){
+          return "Invalid Email";
+        }
+        if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)))
+         { 
+            return "Invalid Email"; 
+         }
 
 
         // validation password
@@ -323,54 +349,6 @@ export class ValidateService {
 
         if(!(isCapitalLetter && isLowerLetter && isNumber && !isSpecialCharacter && pass)){
           return "Password must contain 8 to 20 characters with: \nAtleast 1 Capital Letter \nAtleast 1 Number \nLetters";
-        }
-
-
-
-        //validation email
-        var email = agency.email;
-        if(!(email.length != 0)){
-          return "Invalid Email";
-        }
-        if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)))
-         { 
-            return "Invalid Email"; 
-         }
-         
-         //validation mobile number
-         var mobile = agency.mobileNumber.substr(agency.mobileNumber.indexOf("9"), agency.mobileNumber.length);
-         var mobs = true;
-         if(mobile.length == 10 && mobile.length != 0){
-           for(let x=0; x < mobile.length; x++){
-             if(!(mobile.charAt(x).match(number))) {
-              mobs = false;  
-             }
-           }
-        }
-        else{
-          mobs = false;
-        }
-        if(!mobs){
-             return "wrong input of Mobile Number";
-           }
-
-
-        //validation BIR
-        var bir = agency.bir;
-        if(bir.length == 0){
-          return "Please put your copy of BIR certificate of registration";
-        }
-        
-        //validation DTI 
-        var dti = agency.dti;
-        if(dti.length == 0){
-          return "Please put your copy of DTI permit";
-        }
-
-        //validation Business
-        var business = agency.business;
-        if(business.length == 0){
-          return "Please put your copy of Business Permit";
         }
 
         return "success";
