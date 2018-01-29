@@ -41,6 +41,10 @@ export class TourComponent implements OnInit {
       });
   }
 
+  isUserLoggedIn():boolean {
+    return this.authService.userLoggedIn()
+  }
+
   onPurchaseClick() {
     let user = this.authService.getLoggedInUser();
     if (user) {

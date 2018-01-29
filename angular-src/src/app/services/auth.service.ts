@@ -59,10 +59,9 @@ export class AuthService {
   }
 
   getLoggedInUser() {
-    const user = JSON.parse(localStorage.getItem('user'))
-    if(tokenNotExpired())
-      return user;
-    return undefined;
+    let token = this.jwtHelper.decodeToken(this.authToken);
+    delete token.data.user.password;
+    return token.data.user;
   }
 
   loadToken() {
@@ -86,7 +85,7 @@ export class AuthService {
   findAgencyById(id) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/auth/agency/'+id);
+    let ep = this.prepEndpoint('api/agencies/'+id);
     return this.http.get(ep, {headers: headers})
       .map(res => res.json());
   }
