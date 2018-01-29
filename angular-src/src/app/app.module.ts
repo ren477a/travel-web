@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { AlertModule } from 'ngx-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -18,6 +18,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 
 import { ValidateService } from './services/validate.service';
+import { GuardService } from './services/guard.service';
 import { AuthService } from './services/auth.service';
 import { ToursService } from './services/tours.service';
 import { TourComponent } from './components/tour/tour.component';
@@ -35,8 +36,8 @@ const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'browse', component: BrowseComponent },
   { path: 'useraccount', component: UseraccountComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'manage', component: ManagetoursComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [GuardService], data: { expectedRole: 'agency' } },
+  { path: 'manage', component: ManagetoursComponent, canActivate: [GuardService], data: { expectedRole: 'agency' } },
   { path: 'register', component: RegisterComponent },
   { path: 'register/agency', component: RegisteragencyComponent },
   { path: 'confirmation', component: ConfirmationComponent, pathMatch: 'full' },
@@ -44,7 +45,7 @@ const appRoutes: Routes = [
   { path: 'login/agency', component: LoginagencyComponent },
   { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
   { path: 'tour/:id', component: TourComponent, pathMatch: 'full' },
-  { path: 'checkout', component: CheckoutComponent, pathMatch: 'full' },
+  { path: 'checkout', component: CheckoutComponent, canActivate: [GuardService], data: { expectedRole: 'agency' }},
   { path: '**', component: PagenotfoundComponent, pathMatch: 'full' }
 ];
 
@@ -80,7 +81,8 @@ const appRoutes: Routes = [
     ValidateService,
     AuthService,
     ToursService,
-    TransactionService
+    TransactionService,
+    GuardService
   ],
   bootstrap: [AppComponent]
 })
