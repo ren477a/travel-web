@@ -20,6 +20,7 @@ export class GuardService implements CanActivate {
     const expectedRole = route.data.expectedRole
     let role
     if(!this.auth.loggedIn()) {
+      this.router.navigate['/404']
       return false
     }
     if(this.auth.getUserType().user !== undefined) {
