@@ -35,7 +35,7 @@ import { LoginagencyComponent } from './components/loginagency/loginagency.compo
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'browse', component: BrowseComponent },
-  { path: 'useraccount', component: UseraccountComponent },
+  { path: 'useraccount', component: UseraccountComponent, canActivate: [GuardService], data: { expectedRole: 'user' } },
   { path: 'dashboard', component: DashboardComponent, canActivate: [GuardService], data: { expectedRole: 'agency' } },
   { path: 'manage', component: ManagetoursComponent, canActivate: [GuardService], data: { expectedRole: 'agency' } },
   { path: 'register', component: RegisterComponent },
