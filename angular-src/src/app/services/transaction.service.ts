@@ -11,10 +11,12 @@ export class TransactionService {
     this.isDev = false; //false when deployed
   }
 
-  findTransactionsByCustomerId(customerId) {
+  findTransactionsByCustomerId(customerId, pageNum) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     let ep = this.prepEndpoint('api/transactions/customer/' + customerId);
+    ep += '?page='+pageNum
+    console.log(ep)
     return this.http.get(ep, {headers: headers})
       .map(res => res.json());
   }

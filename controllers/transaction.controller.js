@@ -68,12 +68,23 @@ exports.read = async (req, res) => {
 
 exports.findByCustomerId = async (req, res) => {
     try {
-        let transactions = await Transaction.find({ customerId: req.params.customerId})
+        let count = await Transaction.count({ customerId: req.params.customerId});
+        totalPages = Math.ceil(count / 9);
+        if (totalPages == 0) {
+            res.status(204).send();
+        }
+        let transactions
+        console.log(req.query.page)
+        if (req.query.page) {
+            transactions = await Transaction.find({ customerId: req.params.customerId}).limit(9).skip((req.query.page - 1) * 9).lean()
+        } else {
+            transactions = await Transaction.find({ customerId: req.params.customerId}).lean()
+        }
 
         if (!transactions) {
             res.status(400).json({ error: 'No transaction with the given ID' })
         } else {
-            res.json({ transactions: transactions })
+            res.json({ transactions: transactions, totalPages: totalPages })
         }
     } catch (err) {
         res.status(500).json({ error: err })
@@ -82,6 +93,7 @@ exports.findByCustomerId = async (req, res) => {
 
 exports.findByAgency = async (req, res) => {
     try {
+        
         let transaction = await Transaction.find({ agency: req.params.agency})
 
         if (!transaction) {
