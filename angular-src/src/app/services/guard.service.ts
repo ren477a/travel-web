@@ -19,6 +19,9 @@ export class GuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot): boolean {
     const expectedRole = route.data.expectedRole
     let role
+    if(!this.auth.loggedIn()) {
+      return false
+    }
     if(this.auth.getUserType().user !== undefined) {
       role = 'user'
     } else if (this.auth.getUserType().agency != undefined) {
