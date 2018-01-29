@@ -27,12 +27,11 @@ export class BrowseComponent implements OnInit {
     private router: Router,
     private validateService: ValidateService
   ) {
-    this.pages = Array(5).fill(1).map((x,i)=>i);
   }
 
   ngOnInit() {
     if(!this.keyword) this.keyword = '';
-    this.sub = this.toursService.findTours({key: this.keyword}, 1).subscribe(res => {
+    this.sub = this.toursService.findTours({key: this.keyword, status: 'onsale'}, 1).subscribe(res => {
       this.tours = res.tours;
       this.pages = Array(res.totalPages).fill(1).map((x,i)=>i+1);
       this.activePage = 1;
@@ -82,7 +81,8 @@ export class BrowseComponent implements OnInit {
       key: this.keyword.toLowerCase(),
       min: this.minPrice,
       max: this.maxPrice,
-      sortBy: this.sortBy //date //price //alphabetical
+      sortBy: this.sortBy, //date //price //alphabetical
+      status: 'onsale'
     }, this.activePage).subscribe(res => {
       this.tours = res.tours;
       console.log(res.tours);
@@ -98,7 +98,8 @@ export class BrowseComponent implements OnInit {
       key: this.keyword.toLowerCase(),
       min: this.minPrice,
       max: this.maxPrice,
-      sortBy: this.sortBy //date //price //alphabetical
+      sortBy: this.sortBy, //date //price //alphabetical
+      status: 'onsale'
     }, this.activePage).subscribe(res => {
       this.tours = res.tours;
       console.log(res.tours);
@@ -115,7 +116,8 @@ export class BrowseComponent implements OnInit {
       key: this.keyword.toLowerCase(),
       min: this.minPrice,
       max: this.maxPrice,
-      sortBy: this.sortBy //date //price //alphabetical
+      sortBy: this.sortBy, //date //price //alphabetical
+      status: 'onsale'
     }, this.activePage).subscribe(res => {
       this.tours = res.tours;
       console.log(res.tours);

@@ -89,7 +89,7 @@ exports.readAll = async (req, res) => {
         let count = await Tour.count(query);
         totalPages = Math.ceil(count / 9);
         if (totalPages == 0) {
-            res.status(204).send();
+            res.json({tours: [], totalPages:0});
         }
         let tours
         if (req.query.page) {
