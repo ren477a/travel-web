@@ -18,6 +18,8 @@ router.get('/:id', tourController.read)
 
 router.put('/:id', tourController.update)
 
+router.delete('/:id', tourController.delete)
+
 router.post('/upload', tourController.upload)
 
 module.exports = router
