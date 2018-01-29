@@ -46,6 +46,7 @@ const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
   { path: 'tour/:id', component: TourComponent, pathMatch: 'full' },
   { path: 'checkout', component: CheckoutComponent, canActivate: [GuardService], data: { expectedRole: 'agency' }},
+  { path: '404', component: PagenotfoundComponent },
   { path: '**', component: PagenotfoundComponent, pathMatch: 'full' }
 ];
 

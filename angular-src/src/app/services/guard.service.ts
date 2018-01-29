@@ -26,7 +26,7 @@ export class GuardService implements CanActivate {
     }
     console.log(role)
     if(!this.auth.loggedIn() || role !== expectedRole) {
-      this.router.navigate['/']
+      this.router.navigate['/404']
       return false
     } 
     return true
