@@ -45,7 +45,8 @@ export class BrowseComponent implements OnInit {
       key: this.keyword.toLowerCase(),
       min: this.minPrice,
       max: this.maxPrice,
-      sortBy: this.sortBy //date //price //alphabetical
+      sortBy: this.sortBy, //date //price //alphabetical
+      status: 'onsale'
     }
     let validationResult = this.validateService.validationSearch(searchParams);
     if(validationResult==="success"){
