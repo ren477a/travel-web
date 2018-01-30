@@ -35,7 +35,9 @@ export class LoginagencyComponent implements OnInit {
   			this.msg = data.msg;
   			this.router.navigate(['login/agency']);
   		}
-  	});
+  	}, error => {
+			this.msg = JSON.parse(error._body).error
+		});
 
 
   }
