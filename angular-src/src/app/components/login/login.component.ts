@@ -35,7 +35,9 @@ export class LoginComponent implements OnInit {
   			this.msg = data.msg;
   			this.router.navigate(['login']);
   		}
-  	});
+  	}, error => {
+			this.msg = JSON.parse(error._body).err
+		});
 
 
   }

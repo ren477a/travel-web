@@ -25,7 +25,7 @@ exports.login = async (req, res) => {
     try {
         let user = await User.findOne({ email: req.body.email })
         if(!user) {
-            res.status(500).json({ error: 'User not found'})
+            res.status(500).json({ err: 'User not found'})
         } else if (user.length == 0) {
             res.status(204).json({ success: false, msg: 'User not found.' })
         } else {
