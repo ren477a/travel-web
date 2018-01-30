@@ -77,34 +77,14 @@ export class BrowseComponent implements OnInit {
     this.activePage++;
     if(this.activePage>=this.pages.length) this.activePage = this.pages.length;
     this.sub.unsubscribe();
-    this.sub = this.toursService.findTours({
-      key: this.keyword.toLowerCase(),
-      min: this.minPrice,
-      max: this.maxPrice,
-      sortBy: this.sortBy, //date //price //alphabetical
-      status: 'onsale'
-    }, this.activePage).subscribe(res => {
-      this.tours = res.tours;
-      console.log(res.tours);
-      this.pages = Array(res.totalPages).fill(1).map((x,i)=>i+1);
-    });
+    this.fetchData()
   }
 
   previousPage() {
     this.activePage--;
     if(this.activePage<0) this.activePage = 0;
     this.sub.unsubscribe();
-    this.sub = this.toursService.findTours({
-      key: this.keyword.toLowerCase(),
-      min: this.minPrice,
-      max: this.maxPrice,
-      sortBy: this.sortBy, //date //price //alphabetical
-      status: 'onsale'
-    }, this.activePage).subscribe(res => {
-      this.tours = res.tours;
-      console.log(res.tours);
-      this.pages = Array(res.totalPages).fill(1).map((x,i)=>i+1);
-    });
+    this.fetchData()
   }
 
   toPage(page) {
@@ -112,6 +92,10 @@ export class BrowseComponent implements OnInit {
     if(this.activePage<0) this.activePage = 0;
     if(this.activePage>=this.pages.length) this.activePage = this.pages.length;
     this.sub.unsubscribe();
+    this.fetchData();
+  }
+
+  fetchData() {
     this.sub = this.toursService.findTours({
       key: this.keyword.toLowerCase(),
       min: this.minPrice,
@@ -123,5 +107,9 @@ export class BrowseComponent implements OnInit {
       console.log(res.tours);
       this.pages = Array(res.totalPages).fill(1).map((x,i)=>i+1);
     });
+  }
+
+  isActivePage(i) {
+    return i === this.activePage
   }
 }

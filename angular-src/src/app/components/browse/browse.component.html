@@ -62,8 +62,8 @@
               <a (click)="previousPage()" class="page-link" >Previous</a>
             </li>
             <div *ngFor="let page of pages">
-              <li class="page-item">
-              <a (click)="toPage(page)" class="page-link" >{{page}}</a>
+              <li class="page-item" [class.active]="isActivePage(page)">
+              <a  (click)="toPage(page)" class="page-link" >{{page}}</a>
             </li>
             </div>
             
