@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ToursService } from '../../services/tours.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -10,6 +10,8 @@ import { ValidateService } from '../../services/validate.service';
   styleUrls: ['./browse.component.css']
 })
 export class BrowseComponent implements OnInit {
+  @ViewChild('btnPrev') btnPrev: ElementRef;
+  @ViewChild('btnNext') btnNext: ElementRef;
 
   tours: Array<any>;
   keyword: String;
@@ -82,14 +84,14 @@ export class BrowseComponent implements OnInit {
 
   previousPage() {
     this.activePage--;
-    if(this.activePage<0) this.activePage = 0;
+    if(this.activePage<=0) this.activePage = 1;
     this.sub.unsubscribe();
     this.fetchData()
   }
 
   toPage(page) {
     this.activePage = page;
-    if(this.activePage<0) this.activePage = 0;
+    if(this.activePage<=0) this.activePage = 1;
     if(this.activePage>=this.pages.length) this.activePage = this.pages.length;
     this.sub.unsubscribe();
     this.fetchData();
