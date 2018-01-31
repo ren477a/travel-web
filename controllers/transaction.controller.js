@@ -76,9 +76,9 @@ exports.findByCustomerId = async (req, res) => {
         let transactions
         console.log(req.query.page)
         if (req.query.page) {
-            transactions = await Transaction.find({ customerId: req.params.customerId}).limit(9).skip((req.query.page - 1) * 9).lean()
+            transactions = await Transaction.find({ customerId: req.params.customerId}).limit(9).skip((req.query.page - 1) * 9).sort('-date').lean()
         } else {
-            transactions = await Transaction.find({ customerId: req.params.customerId}).lean()
+            transactions = await Transaction.find({ customerId: req.params.customerId}).sort('-date').lean()
         }
 
         if (!transactions) {
