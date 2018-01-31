@@ -30,7 +30,7 @@ module.exports = function (passport) {
           return done(err, false);
         }
         // Check if User is found
-        if (user) {
+        if (agency) {
           return done(null, {agency:agency, type:'agency'});
         } else {
           return done(null, false);
