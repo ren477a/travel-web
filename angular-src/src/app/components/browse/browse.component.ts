@@ -30,6 +30,7 @@ export class BrowseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.pages = []
     if(!this.keyword) this.keyword = '';
     this.sub = this.toursService.findTours({key: this.keyword, status: 'onsale'}, 1).subscribe(res => {
       this.tours = res.tours;
