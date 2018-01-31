@@ -32,12 +32,17 @@ exports.login = async (req, res) => {
         } else {
             bcrypt.compare(req.body.password, agency.password, (err, isMatch) => {
                 if (isMatch) {
-                    const token = jwt.sign(
-                        { data: { agency: agency } },
-                        process.env.JWT_SECRET,
-                        { expiresIn: 3600 }
-                    )
-                    res.json({ success: true, token: 'JWT ' + token })
+                    if(agency.status === 'approved') {
+                        const token = jwt.sign(
+                            { data: { agency: agency } },
+                            process.env.JWT_SECRET,
+                            { expiresIn: 3600 }
+                        )
+                        res.json({ success: true, token: 'JWT ' + token })
+                    } else {
+                        res.json({success: false, msg: 'Your registered account is not yet approved.'})
+                    }
+                    
                 } else {
                     res.json({ success: false, msg: 'Email and password does not match.' })
                 }
