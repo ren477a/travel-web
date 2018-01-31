@@ -93,8 +93,13 @@ exports.findByCustomerId = async (req, res) => {
 
 exports.findByAgency = async (req, res) => {
     try {
-        
-        let transaction = await Transaction.find({ agency: req.params.agency})
+        let query = { $and: [{ agency: req.params.agency }] };
+        if (req.query.key !== undefined) {
+            let keyRegEx = new RegExp('.*' + req.query.key + '.*', 'i');
+            query['$and'].push({ $or: [{tourTitle: keyRegEx }, { customerEmail: keyRegEx }, { paymentId: keyRegEx }] });
+        }
+        console.log(query)
+        let transaction = await Transaction.find(query).sort('-date')
 
         if (!transaction) {
             res.status(400).json({ error: 'No transaction with the given ID' })

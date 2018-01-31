@@ -8,7 +8,7 @@
   </div>
   
   <div class="col-sm-12  col-md-12  pt-3">
-    <h2 class="page-header" align="left">{{agency?.agencyName}}</h2>
+    <h2 class="page-header pt-3 pb-3" align="left">{{agency?.agencyName}}</h2>
     <div *ngIf="pendingCashout" #alertD class="alert alert-warning" role="alert">
         <strong>Pending Cashout Request</strong> 
         <p class="m-0 p-0">Date Requested: {{pendingCashout?.dateRequested | date:'dd/MM/yy HH:mm'}}</p>
@@ -20,11 +20,16 @@
     <div class="card">
       <div class="card-header row">
         <div class="col">
-          <h3 align="left">Transaction History</h3>
+          <h3 align="left" class="mb-4">Transaction History</h3>
+          <form class="form-inline">
+              <label class="sr-only" for="inlineFormInputName2">Name</label>
+              <input [(ngModel)]="key" name="key" type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Keyword">
+              <button (click)="reload()" type="submit" class="btn btn-primary mb-2">Search</button>
+            </form>
         </div>
         <div class="col">
           <div align="right">
-            <h3>Balance: {{agency?.balance | currency:'PHP':true:'1.2-2'}} </h3>
+            <h3 class="mb-4">Balance: {{agency?.balance | currency:'PHP':true:'1.2-2'}} </h3>
             <button #btnCashout [disabled]="!canCashout()" type="button" class="btn btn-lg btn-success ml-3" data-toggle="modal" data-target="#cashoutModal">Cash Out</button>
             <!-- Checkout modal -->
             <div class="modal fade" id="cashoutModal">

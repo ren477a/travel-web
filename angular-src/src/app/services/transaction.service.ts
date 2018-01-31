@@ -21,12 +21,16 @@ export class TransactionService {
       .map(res => res.json());
   }
 
-  findTransactionsByAgencyName(agencyName) {
+  findTransactionsByAgencyName(agencyName, key?) {
     agencyName = encodeURIComponent(agencyName.trim())
     console.log(agencyName);
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     let ep = this.prepEndpoint('api/transactions/agency/' + agencyName);
+    if(key) {
+      ep += '?key=' + key
+    }
+    console.log(ep)
     return this.http.get(ep, {headers: headers})
       .map(res => res.json());
   }
