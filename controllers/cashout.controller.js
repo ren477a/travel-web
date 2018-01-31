@@ -102,8 +102,20 @@ exports.readAll = async (req, res) => {
             query.status = req.query.status
         }
         console.log(query)
-        let cashouts = await Cashout.find(query)
-        res.json({ cashouts: cashouts })
+        let count = await Cashout.count(query);
+        totalPages = Math.ceil(count / 9);
+        if (totalPages == 0) {
+            res.json({cashout: [], totalPages:0});
+        }
+
+        let cashout
+        if(req.query.page) {
+            cashout = await Cashout.find(query).limit(9).skip((req.query.page - 1) * 9).lean()
+        } else {
+            cashout = await Cashout.find(query).lean()
+        }
+        
+        res.json({ cashout: cashout, totalPages: totalPages })
     } catch (err) {
         res.status(500).json({ error: err })
     }
