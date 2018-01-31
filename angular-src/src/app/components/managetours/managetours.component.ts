@@ -52,6 +52,7 @@ export class ManagetoursComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.pages = []
     this.showWithStatus = 'onsale';
     this.selectedTour = { pricing: { fixed: 0 } };
     this.reload(1);
@@ -172,14 +173,14 @@ export class ManagetoursComponent implements OnInit {
 
   previousPage() {
     this.activePage--;
-    if (this.activePage < 0) this.activePage = 0;
+    if (this.activePage <= 0) this.activePage = 1;
     this.sub.unsubscribe();
     this.reload(this.activePage);
   }
 
   toPage(page) {
     this.activePage = page;
-    if (this.activePage < 0) this.activePage = 0;
+    if (this.activePage <= 0) this.activePage = 1;
     if (this.activePage >= this.pages.length) this.activePage = this.pages.length;
     this.sub.unsubscribe();
     this.reload(this.activePage);

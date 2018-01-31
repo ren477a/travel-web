@@ -227,8 +227,8 @@
     <div class="center-div anchor">
       <br>
       <ul class="pagination pagination-md">
-        <li (click)="previousPage()" class="page-item">
-          <a class="page-link">Previous</a>
+        <li class="page-item">
+          <a [class.disabled]="activePage===1" (click)="previousPage()" class="btn page-link">Previous</a>
         </li>
         <div *ngFor="let page of pages">
           <li (click)="toPage(page)" class="page-item">
@@ -237,7 +237,7 @@
         </div>
 
         <li (click)="nextPage()" class="page-item">
-          <a class="page-link">Next</a>
+          <a [class.disabled]="activePage===pages.length" (click)="nextPage()" class="btn page-link">Next</a>
         </li>
       </ul>
       <br>
