@@ -1,6 +1,7 @@
 const Agency = require('../models/agency')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const upload = require('../config/upload')
 
 exports.register = async (req, res) => {
     try {
@@ -113,9 +114,16 @@ exports.readAll = async (req, res) => {
 
         let agency
         if(req.query.page) {
-            agency = await Agency.find(query).limit(9).skip((req.query.page - 1) * 9)
+            agency = await Agency.find(query).limit(9).skip((req.query.page - 1) * 9).lean()
         } else {
-            agency = await Agency.find(query)
+            agency = await Agency.find(query).lean()
+        }
+        if(agency) {
+            await Promise.all(agency.map(async (agency) => {
+                agency.bir = await upload.getUrl(agency.bir)
+                agency.dti = await upload.getUrl(agency.dti)
+                agency.business = await upload.getUrl(agency.business)
+            }))
         }
         res.json({ agency: agency, totalPages: totalPages })
     } catch (err) {
