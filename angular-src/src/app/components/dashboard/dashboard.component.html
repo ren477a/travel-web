@@ -1,4 +1,13 @@
+
+
 <div class="container-fluid" stle="margin-top: 70px">
+    <div #alertS class="alert alert-success" role="alert" style="display:none; margin-top:75px">
+        <strong>Well done!</strong> You successfully read this important alert message.
+      </div>
+      
+      <div #alertD class="alert alert-danger" role="alert" style="display:none; margin-top:75px">
+        <strong>Oh snap!</strong> Change a few things up and try submitting again.
+      </div>
   <div class="col-sm-12  col-md-12  pt-3">
     <h2 class="page-header" align="left">{{agency?.agencyName}}</h2>
     <div class="card">
@@ -9,7 +18,7 @@
         <div class="col">
           <div align="right">
             <h3>Balance: {{agency?.balance | currency:'PHP':true:'1.2-2'}} </h3>
-            <button #btnCashout type="button" class="btn-lg btn-success ml-3" data-toggle="modal" data-target="#cashoutModal">Cash Out</button>
+            <button #btnCashout [disabled]="!canCashout()" type="button" class="btn btn-lg btn-success ml-3" data-toggle="modal" data-target="#cashoutModal">Cash Out</button>
             <!-- Checkout modal -->
             <div class="modal fade" id="cashoutModal">
               <div class="modal-dialog" role="document">
@@ -75,16 +84,18 @@
                       </div>
                       <div class="form-group">
                         <label for="exampleInputEmail1">Account Number</label>
-                        <input [(ngModel)]="accountNumber" name="accountNumber" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="123-123-123">
+                        <input [(ngModel)]="accountNumber" name="accountNumber" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                          placeholder="123-123-123">
                       </div>
                       <div class="form-group">
                         <label for="exampleInputEmail1">Account Name</label>
-                        <input [(ngModel)]="accountName" name="accountName" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Juan Dela Cruz">
+                        <input [(ngModel)]="accountName" name="accountName" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                          placeholder="Juan Dela Cruz">
                       </div>
 
                     </form>
                   </div>
-                   <small class="text-danger">{{msg}}</small>
+                  <small class="text-danger">{{msg}}</small>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button (click)="submitCashout()" type="button" class="btn btn-primary">Submit</button>

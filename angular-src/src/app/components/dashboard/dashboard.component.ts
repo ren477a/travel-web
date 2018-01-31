@@ -12,6 +12,8 @@ import { ValidateService } from '../../services/validate.service';
 })
 export class DashboardComponent implements OnInit {
   @ViewChild('btnCashout') btnCashout: ElementRef;
+  @ViewChild('alertS') alertS: ElementRef;
+  @ViewChild('alertD') alertD: ElementRef;
 
   agency: any;
   transactions: Array<any>;
@@ -69,6 +71,13 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  canCashout() {
+    if(this.agency.balance < 3000) {
+      return false
+    }
+    return true
+  }
+
   submitCashout() {
 
     let cashout = {
@@ -94,15 +103,29 @@ export class DashboardComponent implements OnInit {
         console.log(cashout)
         this.transactionService.addCashout(cashout).subscribe(res => {
           console.log(res);
+          this.showSuccess('Cashout request submitted.')
           this.btnCashout.nativeElement.click();
           this.reload();
         })
     } else{
       this.msg = resultCashout;
     }
+  }
 
+  showDanger(msg) {
+    this.alertD.nativeElement.style.display = 'block';
+    this.alertD.nativeElement.innerHTML = "<strong>Oh snap!</strong> " + msg;
+    setTimeout(() => {
+      this.alertD.nativeElement.style.display = 'none';
+    }, 10000);
+  }
 
-   
+  showSuccess(msg) {
+    this.alertS.nativeElement.style.display = 'block';
+    this.alertS.nativeElement.innerHTML = "<strong>Success!</strong> " + msg;
+    setTimeout(() => {
+      this.alertS.nativeElement.style.display = 'none';
+    }, 10000);
   }
 
 }
