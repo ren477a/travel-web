@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   agency: any;
   transactions: Array<any>;
   selected: any;
+  pendingCashout: any
 
   bankName: String;
   accountNumber: String;
@@ -40,11 +41,15 @@ export class DashboardComponent implements OnInit {
     this.sub = this.authService.findAgencyById(this.agency._id).subscribe(res => {
       this.agency = res.agency;
     })
-    
+
     this.sub2 = this.transactionService.findTransactionsByAgencyName(this.agency.agencyName).subscribe(res => {
-        this.transactions = res.transactions;
-        this.selected = this.transactions[0];
-      })
+      this.transactions = res.transactions;
+      this.selected = this.transactions[0];
+    })
+    this.transactionService.findPendingCashout(this.agency.agencyName).subscribe(res => {
+      this.pendingCashout = res.cashouts[0]
+      console.log(this.pendingCashout)
+    })
   }
 
   reload() {
@@ -60,7 +65,7 @@ export class DashboardComponent implements OnInit {
   }
 
   detailsClick(tr) {
-    this.selected=tr;
+    this.selected = tr;
   }
 
   markClick(id) {
@@ -72,7 +77,10 @@ export class DashboardComponent implements OnInit {
   }
 
   canCashout() {
-    if(this.agency.balance < 3000) {
+    if (this.agency.balance < 3000) {
+      return false
+    }
+    if(this.pendingCashout !== undefined) {
       return false
     }
     return true
@@ -92,22 +100,26 @@ export class DashboardComponent implements OnInit {
       amount: this.agency.balance
     }
 
-     if (!this.validateService.validateCashout(cashout)) {
+    if (!this.validateService.validateCashout(cashout)) {
       this.msg = "Please fill in all the fields.";
       return false;
     }
     let resultCashout = this.validateService.validateCashout(cashout);
-    if(resultCashout==="success"){
-        this.msg = "";
-        this.msg = 'Submitting...'
-        console.log(cashout)
-        this.transactionService.addCashout(cashout).subscribe(res => {
-          console.log(res);
-          this.showSuccess('Cashout request submitted.')
-          this.btnCashout.nativeElement.click();
-          this.reload();
-        })
-    } else{
+    if (resultCashout === "success") {
+      this.msg = "";
+      this.msg = 'Submitting...'
+      console.log(cashout)
+      this.transactionService.addCashout(cashout).subscribe(res => {
+        console.log(res);
+        this.showSuccess('Cashout request submitted.')
+        this.btnCashout.nativeElement.click();
+        this.reload();
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000)
+        
+      })
+    } else {
       this.msg = resultCashout;
     }
   }

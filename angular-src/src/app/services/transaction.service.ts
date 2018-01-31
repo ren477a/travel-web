@@ -47,6 +47,14 @@ export class TransactionService {
       .map(res => res.json());
   }
 
+  findPendingCashout(agency) {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    let ep = this.prepEndpoint(`api/cashout?agency=${encodeURIComponent(agency)}&status=pending`);
+    return this.http.get(ep, {headers: headers})
+      .map(res => res.json());
+  }
+
   prepEndpoint(ep) {
     if (!this.isDev)
       return ep;

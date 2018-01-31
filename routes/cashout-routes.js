@@ -7,4 +7,6 @@ const jwt = require('jsonwebtoken');
 // new checkout
 router.post('/', cashoutController.issueCashout);
 
+router.get('/', cashoutController.readAll);
+
 module.exports = router;

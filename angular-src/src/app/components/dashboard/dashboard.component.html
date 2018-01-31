@@ -1,15 +1,22 @@
-
-
 <div class="container-fluid" stle="margin-top: 70px">
-    <div #alertS class="alert alert-success" role="alert" style="display:none; margin-top:75px">
-        <strong>Well done!</strong> You successfully read this important alert message.
-      </div>
-      
-      <div #alertD class="alert alert-danger" role="alert" style="display:none; margin-top:75px">
-        <strong>Oh snap!</strong> Change a few things up and try submitting again.
-      </div>
+  <div #alertS class="alert alert-success" role="alert" style="display:none; margin-top:75px">
+    <strong>Well done!</strong> You successfully read this important alert message.
+  </div>
+
+  <div #alertD class="alert alert-danger" role="alert" style="display:none; margin-top:75px">
+    <strong>Oh snap!</strong> Change a few things up and try submitting again.
+  </div>
+  
   <div class="col-sm-12  col-md-12  pt-3">
     <h2 class="page-header" align="left">{{agency?.agencyName}}</h2>
+    <div *ngIf="pendingCashout" #alertD class="alert alert-warning" role="alert">
+        <strong>Pending Cashout Request</strong> 
+        <p class="m-0 p-0">Date Requested: {{pendingCashout?.dateRequested | date:'dd/MM/yy HH:mm'}}</p>
+        <p class="m-0 p-0">Amount: {{pendingCashout?.amount | currency:'PHP':true:'1.2-2'}}</p>
+        <p class="m-0 p-0">{{pendingCashout?.bankAccount.bankName}}</p>
+        <p class="m-0 p-0">{{pendingCashout?.bankAccount.accountName}}</p>
+        <p class="m-0 p-0">{{pendingCashout?.bankAccount.accountNumber}}</p>
+      </div>
     <div class="card">
       <div class="card-header row">
         <div class="col">

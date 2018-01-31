@@ -94,7 +94,15 @@ exports.read = async (req, res) => {
 
 exports.readAll = async (req, res) => {
     try {
-        let cashouts = await Cashout.find({})
+        let query = {}
+        if(req.query.agency) {
+            query.agency = req.query.agency
+        }
+        if(req.query.status) {
+            query.status = req.query.status
+        }
+        console.log(query)
+        let cashouts = await Cashout.find(query)
         res.json({ cashouts: cashouts })
     } catch (err) {
         res.status(500).json({ error: err })
