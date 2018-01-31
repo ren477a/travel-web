@@ -118,12 +118,14 @@ exports.readAll = async (req, res) => {
         } else {
             agency = await Agency.find(query).lean()
         }
-        if(agency) {
+        
+        if(agency !== undefined) {
             await Promise.all(agency.map(async (agency) => {
                 agency.bir = await upload.getUrl(agency.bir)
                 agency.dti = await upload.getUrl(agency.dti)
                 agency.business = await upload.getUrl(agency.business)
             }))
+            console.log(agency)
         }
         res.json({ agency: agency, totalPages: totalPages })
     } catch (err) {
