@@ -1,6 +1,7 @@
 <div class="container-fluid fonty pt-5 pb-5" style="margin-top: 50px;">
-  <div class="row">
-    <div class="col-lg-4 col-md-3 col-sm-4 col-xs-2">
+  <div class="row pl-5 pr-5">
+    <!-- SEARCH -->
+    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-2">
       <div class="card text-justify mb-2 mt-3 ml-1 mr-1" style="max-width: 40rem;" id="sidebar">
         <div class="card-body">
           <form (submit)="onSearch()">
@@ -35,7 +36,10 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-8 col-md-9 col-sm-8 col-xs-10">
+    <!-- END OF SEARCH -->
+
+    <!-- CARDS -->
+    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-10">
       <div class="container m-2">
         <div class="row">
           <div *ngFor="let tour of tours; let i = index" class="col-lg-4 col-md-6 p-0 titulo">
