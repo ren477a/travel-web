@@ -59,7 +59,7 @@ export class ToursService {
   findFeatured() {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    let ep = this.prepEndpoint('api/tours?page=1');
+    let ep = this.prepEndpoint('api/tours?page=1&status=onsale');
     return this.http.get(ep, {headers: headers})
       .map(res => res.json());
   }
