@@ -1,27 +1,32 @@
 <div class="container" style="padding-top:7%">
-    <form (submit)="onAcceptButtonClick()">
-      <div class="card card-outline-secondary">
-        <div class="card-header">
-          <h2>Terms and Conditions</h2>
-        </div>
-        <div class="card-body">
-        <p>Herp derpsum sherper ner merpus le herpem herpy me merp perp der! Terp derp herpler ler me? Sherp perper me derp herp
-            merp herpsum. Le merp derp terp berps ter. Herpderpsmer ner, herp me serp. Herp derperker sherlamer me le herpsum tee
-            derpy berp derps. Sherp perp berps me herp pee dee berp, derpus merpus. Le derpy dee me. Derpler herpler terp derpy
-            serp me? Terpus ter berps ler perp. Ter derpsum sherlamer herp dee le merpus. Derp der sherp pee. Tee ner me perp derpsum
-            perper dee ler derp? Mer sherper derperker terp pee nerpy derps herderder. Derpler berps terpus herpy ler, le derp!
-            Perper berps derp, herp berp. Perp herpsum, derpy derperker sherper le merp nerpy herpderpsmer herpy.</p>
-          
-        </div>
+  <form (submit)="onAcceptButtonClick()">
+    <div class="card card-outline-secondary">
+      <div class="card-header">
+        <h2>Terms and Conditions</h2>
       </div>
-      <app-make-payment [quantity]="quantity" [tour]="tour" [user]="user"></app-make-payment>
-    </form>
-  </div>
-<div id="footer" class="container-fluid mt-5" style="bottom: 0">
-<div class="container">
-<footer>
-  <p>© 2017 Travel Catalog Philippines
-  </p>
-</footer>
+      <div class="card-body">
+        <p>Herp derpsum sherper ner merpus le herpem herpy me merp perp der! Terp derp herpler ler me? Sherp perper me derp
+          herp merp herpsum. Le merp derp terp berps ter. Herpderpsmer ner, herp me serp. Herp derperker sherlamer me le
+          herpsum tee derpy berp derps. Sherp perp berps me herp pee dee berp, derpus merpus. Le derpy dee me. Derpler herpler
+          terp derpy serp me? Terpus ter berps ler perp. Ter derpsum sherlamer herp dee le merpus. Derp der sherp pee. Tee
+          ner me perp derpsum perper dee ler derp? Mer sherper derperker terp pee nerpy derps herderder. Derpler berps terpus
+          herpy ler, le derp! Perper berps derp, herp berp. Perp herpsum, derpy derperker sherper le merp nerpy herpderpsmer
+          herpy.
+        </p>
+      </div>
+      <div align="right" class="card-footer text-muted">
+        <app-make-payment [quantity]="quantity" [tour]="tour" [user]="user"></app-make-payment>
+      </div>
+    </div>
+
+
+  </form>
 </div>
+<div id="footer" class="container-fluid mt-5" style="bottom: 0">
+  <div class="container">
+    <footer>
+      <p>© 2017 Travel Catalog Philippines
+      </p>
+    </footer>
+  </div>
 </div>
