@@ -28,7 +28,7 @@
     <br>
     <ul class="pagination pagination-md">
       <li class="page-item">
-        <a (click)="previousPage()" class="page-link">Previous</a>
+        <a [class.disabled]="activePage===1" (click)="previousPage()" class="btn page-link">Previous</a>
       </li>
       <div *ngFor="let page of pages; let i = index">
         <li class="page-item" [class.active]="isActivePage(i)">
@@ -36,7 +36,7 @@
         </li>
       </div>
       <li class="page-item">
-        <a (click)="nextPage()" class="page-link">Next</a>
+        <a [class.disabled]="activePage===pages.length" (click)="nextPage()" class="btn page-link">Next</a>
       </li>
     </ul>
     <br>

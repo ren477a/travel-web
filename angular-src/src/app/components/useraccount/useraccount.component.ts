@@ -49,7 +49,7 @@ export class UseraccountComponent implements OnInit {
 
   previousPage() {    
     this.activePage--
-    if(this.activePage<0) this.activePage = 0;
+    if(this.activePage<=0) this.activePage = 1;
     this.fetchData()
   }
 
