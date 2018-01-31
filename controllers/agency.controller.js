@@ -98,8 +98,19 @@ exports.read = async (req, res) => {
 
 exports.readAll = async (req, res) => {
     try {
-        let agency = await Agency.find({})
-        res.json({ agency: agency })
+        let count = await Agency.count({}});
+        totalPages = Math.ceil(count / 9);
+        if (totalPages == 0) {
+            res.json({tours: [], totalPages:0});
+        }
+
+        let agency
+        if(req.query.page) {
+            agency = await Agency.find({}).limit(9).skip((req.query.page - 1) * 9)
+        } else {
+            agency = await Agency.find({})
+        }
+        res.json({ agency: agency, totalPages: totalPages })
     } catch (err) {
         res.status(500).json({ error: err })
     }
