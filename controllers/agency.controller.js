@@ -98,7 +98,7 @@ exports.read = async (req, res) => {
 
 exports.readAll = async (req, res) => {
     try {
-        let count = await Agency.count({}});
+        let count = await Agency.count({});
         totalPages = Math.ceil(count / 9);
         if (totalPages == 0) {
             res.json({tours: [], totalPages:0});
