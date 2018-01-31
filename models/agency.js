@@ -43,6 +43,10 @@ const AgencySchema = mongoose.Schema({
   role: {
     type: String,
     default: 'agency'
+  },
+  status: {
+    type: String,
+    default: 'pending'
   }
 });
 
