@@ -10,8 +10,6 @@ import { ValidateService } from '../../services/validate.service';
   styleUrls: ['./browse.component.css']
 })
 export class BrowseComponent implements OnInit {
-  @ViewChild('btnPrev') btnPrev: ElementRef;
-  @ViewChild('btnNext') btnNext: ElementRef;
 
   tours: Array<any>;
   keyword: String;
