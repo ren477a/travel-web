@@ -103,12 +103,12 @@ exports.readAll = async (req, res) => {
             query.status = req.query.status
         }
 
-
+        console.log(query)
 
         let count = await Agency.count(query);
         totalPages = Math.ceil(count / 9);
         if (totalPages == 0) {
-            res.json({tours: [], totalPages:0});
+            res.json({agency: [], totalPages:0});
         }
 
         let agency
