@@ -92,8 +92,21 @@ exports.read = async (req, res) => {
 
 exports.readAll = async (req, res) => {
     try {
-        let users = await User.find({}).exec();
-        res.json({ users: users });
+
+        let count = await User.count({});
+        totalPages = Math.ceil(count / 9);
+        if (totalPages == 0) {
+            res.json({users: [], totalPages:0});
+        }
+
+        let users
+        if(req.query.page) {
+            users = await User.find({}).limit(9).skip((req.query.page - 1) * 9).lean()
+        } else {
+            users = await User.find({}).lean()
+        }
+        res.json({ users: users, totalPages: totalPages })
+
     } catch (err) {
         res.status(500).json({ error: err })
     }
