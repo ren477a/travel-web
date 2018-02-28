@@ -24,7 +24,7 @@ exports.test = async (req, res) => {
 exports.dailySales = async (req, res) => {
   //let transactions = req.body.transactions
   let day = req.body.day
-  console.log(day)
+  console.log(typeof day)
 
   let transactions = await Transaction.find({
     date: day
