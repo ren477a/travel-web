@@ -23,14 +23,15 @@ exports.test = async (req, res) => {
 
 exports.dailySales = async (req, res) => {
   //let transactions = req.body.transactions
-  let day = req.body.day
-  console.log(typeof day)
+  let day = new Date(req.body.day)
+  console.log(day)
 
   let transactions = await Transaction.find({
-    date: day
+    date: {
+      '$gte': ISODate(req.body.day)
+    }
   })
 
-  console.log(transactions[0])
   let html = fs.readFileSync('./temp/daily-sales.html', 'utf8');
   html = html.replace("$DATE", dateFormat(Date.now(), "dddd, mmmm dS, yyyy, h:MM:ss TT"))
   let tbody = ''
