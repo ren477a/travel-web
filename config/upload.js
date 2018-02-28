@@ -49,7 +49,7 @@ function checkFileType(file, cb) {
 }
 
 //var upload = multer({ dest: 'uploads/' });
-module.exports.s3 = this.s3;
+module.exports.s3 = s3;
 module.exports = upload;
 
 module.exports.getUrl = function(key) {
