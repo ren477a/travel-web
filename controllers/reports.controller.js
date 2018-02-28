@@ -28,7 +28,7 @@ exports.dailySales = async (req, res) => {
 
   let transactions = await Transaction.find({
     date: {
-      '$gte': ISODate(req.body.day)
+      '$gte': day
     }
   })
 
