@@ -1,6 +1,8 @@
-var fs = require('fs');
-var pdf = require('html-pdf');
-var dateFormat = require('dateformat');
+const fs = require('fs');
+const pdf = require('html-pdf');
+const dateFormat = require('dateformat');
+const Transaction = require('../models/transaction')
+const upload = require('../config/upload')
 
 var options = {
   format: 'Letter',
@@ -20,7 +22,14 @@ exports.test = async (req, res) => {
 }
 
 exports.dailySales = async (req, res) => {
-  let transactions = req.body.transactions
+  //let transactions = req.body.transactions
+  let day = req.body.day
+  console.log(day)
+
+  let transactions = await Transaction.find({
+    date: day
+  })
+
   console.log(transactions[0])
   let html = fs.readFileSync('./temp/daily-sales.html', 'utf8');
   html = html.replace("$DATE", dateFormat(Date.now(), "dddd, mmmm dS, yyyy, h:MM:ss TT"))
