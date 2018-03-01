@@ -5,14 +5,23 @@
         <h2>Terms and Conditions</h2>
       </div>
       <div class="card-body">
-        <p>Herp derpsum sherper ner merpus le herpem herpy me merp perp der! Terp derp herpler ler me? Sherp perper me derp
-          herp merp herpsum. Le merp derp terp berps ter. Herpderpsmer ner, herp me serp. Herp derperker sherlamer me le
-          herpsum tee derpy berp derps. Sherp perp berps me herp pee dee berp, derpus merpus. Le derpy dee me. Derpler herpler
-          terp derpy serp me? Terpus ter berps ler perp. Ter derpsum sherlamer herp dee le merpus. Derp der sherp pee. Tee
-          ner me perp derpsum perper dee ler derp? Mer sherper derperker terp pee nerpy derps herderder. Derpler berps terpus
-          herpy ler, le derp! Perper berps derp, herp berp. Perp herpsum, derpy derperker sherper le merp nerpy herpderpsmer
-          herpy.
-        </p>
+        <ul>
+          <li>
+            Once a purchase is made, your credit card will be charged and there is no refund.
+          </li>
+          <li>
+            A voucher once redeemed, becomes void for further use and cannot be refunded.
+          </li>
+          <li>
+            The validity of vouchers cannot be extended or change.
+          </li>
+          <li>
+            Vouchers will be valid for redemption {{tour.validityInDays}} days from the date of purchase.
+          </li>
+          <li>
+            Vouchers are non-transferable, can only be redeemed by the customers they are issued to and no cash alternative is available.
+          </li>
+        </ul>
       </div>
       <div align="right" class="card-footer text-muted">
         <app-make-payment [quantity]="quantity" [tour]="tour" [user]="user"></app-make-payment>
