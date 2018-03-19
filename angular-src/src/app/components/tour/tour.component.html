@@ -7,7 +7,10 @@
           <div class="col-md-12">
             <h3 class="card-title">{{ tour?.title }}</h3>
               <h6 class="card-subtitle mb-2 text-muted"> {{tour?.agency}}</h6>
-              <p class="card-text text-justify">{{ tour?.description }}</p>
+              
+              <div *ngFor="let description of descriptions">
+                  <p class="card-text text-justify">{{ description }}<br></p>
+              </div>
           </div>
           </div>
       </div>
@@ -34,14 +37,14 @@
           <div class="row">
             <div class="col-md-6">
             <h5>Inclusions</h5>
-            <div *ngFor="let inclusion of tour?.inclusions">
-              <p>{{ inclusion }}</p>
+            <div *ngFor="let inclusion of inclusions">
+              <li>{{ inclusion }}</li>
             </div>
             </div>
             <div class="col-md-6">
             <h5>Exclusions</h5>
-            <div *ngFor="let exclusion of tour?.exclusions">
-              <p>{{ exclusion }}</p>
+            <div *ngFor="let exclusion of exclusions">
+              <li>{{ exclusion }}</li>
             </div>
             </div>
           </div>
@@ -49,7 +52,9 @@
           <div class="row">
             <div class="col-md-12">
             <h5>Terms and Conditions</h5>
-            <p>{{ tour?.terms }}</p>
+            <ol>
+              <li *ngFor="let term of terms">{{term}}</li>
+            </ol>
             </div>
           </div>
           <hr>

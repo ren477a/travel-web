@@ -17,6 +17,10 @@ export class TourComponent implements OnInit {
   quantity: number;
   msg: String;
   itinerary: any;
+  inclusions: any;
+  exclusions: any;
+  descriptions: any;
+  terms: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,6 +40,10 @@ export class TourComponent implements OnInit {
     this.toursService.findTourById(this.tourId).subscribe(res => {
       this.tour = res.tour
       this.itinerary = this.tour.itinerary[0].split("\n")
+      this.inclusions = this.tour.inclusions[0].split("\n")
+      this.exclusions = this.tour.exclusions[0].split("\n")
+      this.terms = this.tour.terms.split("\n")
+      this.descriptions = this.tour.description.split("\n")
     },
       err => {
         console.log(err);
