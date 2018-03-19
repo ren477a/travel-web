@@ -23,9 +23,11 @@
           <div class="row">
             <div class="col-md-12">
               <h5>Itinerary</h5>
-                <p>
-                  {{tour?.itinerary}}
-                </p>
+                <div *ngFor="let x of itinerary">
+                  <br *ngIf="x.startsWith('Day')">
+                  <li *ngIf="!x.startsWith('Day')">{{x}}</li>
+                  <li *ngIf="x.startsWith('Day')"><strong>{{x}}</strong></li>
+                </div>
             </div>
           </div>
           <hr>

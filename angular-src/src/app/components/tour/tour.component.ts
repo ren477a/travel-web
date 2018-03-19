@@ -16,6 +16,7 @@ export class TourComponent implements OnInit {
   tourId: String;
   quantity: number;
   msg: String;
+  itinerary: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +35,7 @@ export class TourComponent implements OnInit {
     );
     this.toursService.findTourById(this.tourId).subscribe(res => {
       this.tour = res.tour
+      this.itinerary = this.tour.itinerary[0].split("\n")
     },
       err => {
         console.log(err);
